@@ -51,9 +51,9 @@ interface StatCardProps {
 }
 
 const TONE_CLASSES: Record<StatCardTone, string> = {
-  rose: 'from-rose-500/80 via-rose-300/70 to-rose-200/20 dark:from-rose-400/70 dark:via-rose-500/30 dark:to-rose-500/5',
-  teal: 'from-teal-500/80 via-teal-300/70 to-teal-200/20 dark:from-teal-400/70 dark:via-teal-500/30 dark:to-teal-500/5',
-  gray: 'from-muted-foreground/50 via-muted-foreground/20 to-transparent dark:from-muted-foreground/40 dark:via-muted-foreground/20',
+  rose: 'from-fuchsia-500/80 via-violet-400/60 to-violet-200/10 dark:from-fuchsia-400/60 dark:via-violet-500/30 dark:to-violet-500/5',
+  teal: 'from-cyan-500/80 via-teal-400/60 to-emerald-200/10 dark:from-cyan-400/60 dark:via-teal-500/30 dark:to-teal-500/5',
+  gray: 'from-blue-500/40 via-indigo-400/20 to-transparent dark:from-blue-400/30 dark:via-indigo-500/15',
 }
 
 const LINE_TONE_CLASSES: Record<StatCardTone, string> = {
@@ -209,7 +209,7 @@ export function StatCard(props: StatCardProps) {
   const sparklineVariant = props.sparklineVariant ?? 'bars'
 
   return (
-    <div className='group flex min-h-32 flex-col justify-between gap-3'>
+    <div className='group flex min-h-32 flex-col justify-between gap-3 hover-lift'>
       <div className='flex items-start justify-between gap-1'>
         <div className='text-muted-foreground flex items-center gap-1.5 text-xs font-medium sm:gap-2'>
           <Icon
@@ -237,7 +237,7 @@ export function StatCard(props: StatCardProps) {
         </div>
       ) : (
         <div className='flex flex-col gap-1'>
-          <div className='text-foreground font-mono text-2xl font-semibold tracking-tight break-all tabular-nums'>
+          <div className='text-foreground font-mono text-2xl font-semibold tracking-tight break-all tabular-nums gradient-text'>
             {props.value}
           </div>
           <p className='text-muted-foreground/60 text-xs leading-relaxed'>

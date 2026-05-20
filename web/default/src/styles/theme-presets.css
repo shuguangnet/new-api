@@ -291,6 +291,45 @@ For commercial licensing, please contact support@quantumnous.com
   --sidebar-ring: oklch(0.6359 0.1699 307.95);
 }
 
+/* ── Nebula ──────────────────────────────────────────────────────────── */
+/* Deep-space inspired palette: deep blue + indigo gradients (light),
+   nebula purple + neon blue + magenta accents (dark). */
+[data-theme-preset='nebula'] {
+  --primary: oklch(0.45 0.2 270);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.55 0.15 250);
+  --secondary-foreground: oklch(0.98 0 0);
+  --ring: oklch(0.45 0.2 270);
+  --chart-1: oklch(0.45 0.2 250);
+  --chart-2: oklch(0.5 0.2 270);
+  --chart-3: oklch(0.55 0.22 290);
+  --chart-4: oklch(0.5 0.22 310);
+  --chart-5: oklch(0.55 0.2 330);
+  --sidebar-primary: oklch(0.45 0.2 270);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.45 0.2 270);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-ring: oklch(0.45 0.2 270);
+  --radius: 0.75rem;
+}
+.dark [data-theme-preset='nebula'] {
+  --primary: oklch(0.72 0.18 280);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.55 0.15 260);
+  --secondary-foreground: oklch(0.98 0 0);
+  --ring: oklch(0.72 0.18 280);
+  --chart-1: oklch(0.55 0.2 250);
+  --chart-2: oklch(0.6 0.2 270);
+  --chart-3: oklch(0.65 0.2 290);
+  --chart-4: oklch(0.6 0.22 310);
+  --chart-5: oklch(0.65 0.22 340);
+  --sidebar-primary: oklch(0.72 0.18 280);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.72 0.18 280);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-ring: oklch(0.72 0.18 280);
+}
+
 /* ── Semantic surface bridge ──────────────────────────────────────────── */
 /* Color presets should tint the surfaces most components actually use, not
  * only primary buttons. These derived tokens keep the app theme-aware without

@@ -62,8 +62,8 @@ export function AppSidebar() {
   }, [configFilteredNavGroups, userRole])
 
   return (
-    <Sidebar collapsible={collapsible} variant={variant}>
-      <SidebarContent className='py-2'>
+    <Sidebar collapsible={collapsible} variant={variant} className="sidebar-glass border-r-0">
+      <SidebarContent className='py-3 gap-1'>
         {currentNavGroups.map((props) => {
           const key = props.id || props.title
           return <NavGroup key={key} {...props} />

@@ -57,7 +57,7 @@ function FooterLinkItem(props: { link: FooterLink }) {
         href={props.link.href}
         target='_blank'
         rel='noopener noreferrer'
-        className='text-muted-foreground hover:text-foreground text-sm transition-colors duration-200'
+        className='text-muted-foreground hover:bg-gradient-to-r hover:from-violet-400/10 hover:to-blue-400/10 hover:text-foreground rounded-md px-1.5 py-0.5 text-sm transition-all duration-200'
       >
         {label}
       </a>
@@ -67,7 +67,7 @@ function FooterLinkItem(props: { link: FooterLink }) {
   return (
     <Link
       to={props.link.href}
-      className='text-muted-foreground hover:text-foreground text-sm transition-colors duration-200'
+      className='text-muted-foreground hover:bg-gradient-to-r hover:from-violet-400/10 hover:to-blue-400/10 hover:text-foreground rounded-md px-1.5 py-0.5 text-sm transition-all duration-200'
     >
       {label}
     </Link>
@@ -172,7 +172,7 @@ export function Footer(props: FooterProps) {
     return (
       <footer
         className={cn(
-          'border-border/40 relative z-10 border-t',
+          'relative z-10 border-t border-border/40 bg-gradient-to-b from-background via-background to-muted/30 dark:from-background dark:via-background dark:to-neutral-950/80',
           props.className
         )}
       >
@@ -193,8 +193,13 @@ export function Footer(props: FooterProps) {
 
   return (
     <footer
-      className={cn('border-border/40 relative z-10 border-t', props.className)}
+      className={cn('relative z-10 border-t border-border/40 bg-gradient-to-b from-background via-background to-muted/30 dark:from-background dark:via-background dark:to-neutral-950/80', props.className)}
     >
+      {/* Bottom gradient line */}
+      <div
+        aria-hidden
+        className='absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-violet-500/40 to-transparent'
+      />
       <div className='mx-auto max-w-6xl px-6 py-12 md:py-16'>
         <div className='flex flex-col justify-between gap-10 md:flex-row md:gap-16'>
           {/* Brand column */}

@@ -64,7 +64,7 @@ export function NavGroup({ title, items }: NavGroupProps) {
 
   return (
     <SidebarGroup className='px-2 py-1'>
-      <SidebarGroupLabel className='text-muted-foreground/70 px-2 text-[11px] font-medium tracking-wider uppercase'>
+      <SidebarGroupLabel className='text-muted-foreground/70 gradient-text px-2 text-[11px] font-medium tracking-wider uppercase'>
         {title}
       </SidebarGroupLabel>
       <SidebarMenu>
@@ -120,11 +120,13 @@ function NavBadge({ children }: { children: ReactNode }) {
  */
 function SidebarMenuLink({ item, href }: { item: NavLink; href: string }) {
   const { setOpenMobile } = useSidebar()
+  const isActive = checkIsActive(href, item)
   return (
-    <SidebarMenuItem>
+    <SidebarMenuItem className={isActive ? 'relative before:absolute before:left-0 before:inset-y-1 before:w-[3px] before:rounded-full before:bg-gradient-to-b before:from-blue-400 before:via-violet-500 before:to-fuchsia-400' : ''}>
       <SidebarMenuButton
-        isActive={checkIsActive(href, item)}
+        isActive={isActive}
         tooltip={item.title}
+        className='hover:bg-gradient-to-r hover:from-purple-500/10 hover:via-fuchsia-500/10 hover:to-purple-500/10'
         render={<Link to={item.url} onClick={() => setOpenMobile(false)} />}
       >
         {item.icon && <item.icon />}
@@ -178,9 +180,10 @@ function SidebarMenuCollapsible({
       <CollapsibleContent className='CollapsibleContent'>
         <SidebarMenuSub>
           {item.items.map((subItem) => (
-            <SidebarMenuSubItem key={subItem.title}>
+            <SidebarMenuSubItem key={subItem.title} className={checkIsActive(href, subItem) ? 'relative before:absolute before:left-0 before:inset-y-1 before:w-[3px] before:rounded-full before:bg-gradient-to-b before:from-blue-400 before:via-violet-500 before:to-fuchsia-400' : ''}>
               <SidebarMenuSubButton
                 isActive={checkIsActive(href, subItem)}
+                className='hover:bg-gradient-to-r hover:from-purple-500/10 hover:via-fuchsia-500/10 hover:to-purple-500/10'
                 render={
                   <Link to={subItem.url} onClick={() => setOpenMobile(false)} />
                 }
