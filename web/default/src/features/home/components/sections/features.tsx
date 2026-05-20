@@ -16,226 +16,115 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 For commercial licensing, please contact support@quantumnous.com
 */
-import {
-  Zap,
-  Shield,
-  Globe,
-  Code,
-  Gauge,
-  DollarSign,
-  Users,
-  HeartHandshake,
-} from 'lucide-react'
+import { BarChart3, Code, DollarSign, Globe, Shield, Users, Workflow, Zap } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { AnimateInView } from '@/components/animate-in-view'
 
-interface FeaturesProps {
-  className?: string
-}
-
-export function Features(_props: FeaturesProps) {
+export function Features() {
   const { t } = useTranslation()
 
   const features = [
     {
-      id: 'fast',
-      num: '01',
-      title: t('Lightning Fast'),
-      desc: t(
-        'Optimized network architecture ensures millisecond response times'
-      ),
-      span: 'md:col-span-2',
-      icon: <Zap className='size-4 text-blue-400' />,
-      visual: (
-        <div className='mt-4 grid grid-cols-3 gap-2'>
-          {['OpenAI', 'Claude', 'Gemini', 'DeepSeek', 'Qwen', 'Llama'].map(
-            (name) => (
-              <div
-                key={name}
-                className='border-border/30 bg-muted/20 text-muted-foreground flex items-center justify-center rounded-lg border px-3 py-2 text-xs transition-colors duration-300 hover:border-blue-500/30 hover:bg-blue-500/5'
-              >
-                {name}
-              </div>
-            )
-          )}
-        </div>
-      ),
+      icon: <Workflow className='size-5' strokeWidth={1.8} />,
+      title: t('Enterprise model routing'),
+      desc: t('Configure unified model mapping, traffic dispatch, multi-channel fallback and service continuity policies.'),
     },
     {
-      id: 'secure',
-      num: '02',
-      title: t('Secure & Reliable'),
-      desc: t(
-        'Enterprise-grade security with comprehensive permission management'
-      ),
-      span: 'md:col-span-1',
-      icon: <Shield className='size-4 text-emerald-400' />,
-      visual: (
-        <div className='mt-4 flex items-center justify-center'>
-          <div className='relative'>
-            <div className='flex size-16 items-center justify-center rounded-2xl border border-emerald-500/20 bg-emerald-500/5'>
-              <Shield
-                className='size-7 text-emerald-500/70'
-                strokeWidth={1.5}
-              />
-            </div>
-            <div className='absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full bg-emerald-500'>
-              <svg
-                className='size-2.5 text-white'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke='currentColor'
-                strokeWidth={3}
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='m4.5 12.75 6 6 9-13.5'
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-      ),
+      icon: <DollarSign className='size-5' strokeWidth={1.8} />,
+      title: t('Business-ready billing'),
+      desc: t('Support account balance, usage metering, model pricing and customer-facing monetization strategies.'),
     },
     {
-      id: 'global',
-      num: '03',
-      title: t('Global Coverage'),
-      desc: t('Multi-region deployment for stable global access'),
-      span: 'md:col-span-1',
-      icon: <Globe className='size-4 text-violet-400' />,
-      visual: (
-        <div className='mt-4 space-y-2'>
-          {[t('Load Balancing'), t('Rate Limiting'), t('Cost Tracking')].map(
-            (step, i) => (
-              <div key={step} className='flex items-center gap-2'>
-                <div
-                  className={`flex size-6 items-center justify-center rounded-full text-[10px] font-bold ${
-                    i === 1
-                      ? 'border border-blue-500/30 bg-blue-500/20 text-blue-500'
-                      : 'border-border/40 bg-muted text-muted-foreground border'
-                  }`}
-                >
-                  {i + 1}
-                </div>
-                <div className='bg-border/40 h-px flex-1' />
-                <span className='text-muted-foreground text-xs'>{step}</span>
-              </div>
-            )
-          )}
-        </div>
-      ),
+      icon: <Shield className='size-5' strokeWidth={1.8} />,
+      title: t('Secure governance'),
+      desc: t('Build permission boundaries, quota rules and operational controls for enterprise deployment.'),
     },
     {
-      id: 'developer',
-      num: '04',
-      title: t('Developer Friendly'),
-      desc: t('Compatible API routes for common AI application workflows'),
-      span: 'md:col-span-2',
-      icon: <Code className='size-4 text-amber-400' />,
-      visual: (
-        <div className='mt-4 flex items-center gap-3'>
-          <div className='flex -space-x-2'>
-            {['API', 'SDK', 'CLI', 'Docs'].map((n) => (
-              <div
-                key={n}
-                className='border-background from-muted to-muted/60 text-muted-foreground flex size-8 items-center justify-center rounded-full border-2 bg-gradient-to-br text-[9px] font-bold'
-              >
-                {n}
-              </div>
-            ))}
-          </div>
-          <div className='text-muted-foreground flex items-center gap-1.5 text-xs'>
-            <Code className='size-3.5 text-blue-500' />
-            {t('Multi-protocol Compatible')}
-          </div>
-        </div>
-      ),
+      icon: <BarChart3 className='size-5' strokeWidth={1.8} />,
+      title: t('Operational visibility'),
+      desc: t('Track cost, usage, latency, trends and business growth through unified observability panels.'),
+    },
+    {
+      icon: <Code className='size-5' strokeWidth={1.8} />,
+      title: t('Developer compatibility'),
+      desc: t('Stay compatible with mainstream application workflows through standardized API interfaces.'),
+    },
+    {
+      icon: <Globe className='size-5' strokeWidth={1.8} />,
+      title: t('Global delivery'),
+      desc: t('Combine multiple provider channels to improve stability, resilience and region-level access performance.'),
     },
   ]
 
-  const additionalFeatures = [
+  const highlights = [
     {
-      icon: <Gauge className='size-5' strokeWidth={1.5} />,
-      title: t('High Performance'),
-      desc: t('Support for high concurrency with automatic load balancing'),
+      icon: <Zap className='size-4' strokeWidth={1.8} />,
+      title: t('Fast integration'),
+      desc: t('Reduce application migration cost with a single unified access layer.'),
     },
     {
-      icon: <DollarSign className='size-5' strokeWidth={1.5} />,
-      title: t('Transparent Billing'),
-      desc: t('Pay-as-you-go with real-time usage monitoring'),
-    },
-    {
-      icon: <Users className='size-5' strokeWidth={1.5} />,
-      title: t('Team Collaboration'),
-      desc: t('Multi-user management with flexible permission allocation'),
-    },
-    {
-      icon: <HeartHandshake className='size-5' strokeWidth={1.5} />,
-      title: t('Open Source'),
-      desc: t('Community driven, self-hosted, and extensible'),
+      icon: <Users className='size-4' strokeWidth={1.8} />,
+      title: t('Team collaboration'),
+      desc: t('Support multiple users, customer accounts and enterprise operational workflows.'),
     },
   ]
 
   return (
-    <section className='relative z-10 py-24 px-4'>
-      {/* Section divider */}
-      <div className='section-divider mx-auto mb-16 max-w-6xl' />
-
+    <section className='relative z-10 px-4 py-24 md:py-28'>
       <div className='mx-auto max-w-6xl'>
-        <AnimateInView className='mb-16 max-w-lg'>
-          <p className='tech-gradient-text mb-3 text-xs font-medium tracking-widest uppercase'>
-            {t('Core Features')}
+        <AnimateInView className='mb-14 max-w-2xl'>
+          <p className='tech-gradient-text mb-3 text-xs font-medium tracking-[0.24em] uppercase'>
+            {t('Capabilities')}
           </p>
-          <h2 className='tech-gradient-text text-2xl leading-tight font-bold tracking-tight md:text-3xl'>
-            {t('Built for developers,')}
-            <br />
-            {t('designed for scale')}
+          <h2 className='text-3xl font-semibold tracking-tight text-white md:text-4xl'>
+            {t('Everything you need to operate an enterprise AI model platform')}
           </h2>
+          <p className='mt-4 text-sm leading-7 text-white/45 md:text-base'>
+            {t('Transform a raw model gateway into a productized enterprise platform with operations, governance and growth capabilities.')}
+          </p>
         </AnimateInView>
 
-        {/* Bento grid */}
-        <div className='grid gap-3 md:grid-cols-3'>
-          {features.map((f, i) => (
-            <AnimateInView
-              key={f.id}
-              delay={i * 100}
-              animation='scale-in'
-              className={`tech-card group p-7 transition-all duration-500 md:p-8 ${f.span}`}
-            >
-              <div className='mb-3 flex items-center gap-3'>
-                <span className='tech-icon-box'>
-                  {f.icon}
-                </span>
-                <h3 className='text-sm font-semibold'>{f.title}</h3>
-              </div>
-              <p className='text-muted-foreground text-sm leading-relaxed'>
-                {f.desc}
-              </p>
-              {f.visual}
-            </AnimateInView>
-          ))}
-        </div>
+        <div className='grid gap-4 lg:grid-cols-[1.1fr_0.9fr]'>
+          <div className='grid gap-4 md:grid-cols-2'>
+            {features.map((item, index) => (
+              <AnimateInView
+                key={item.title}
+                delay={index * 60}
+                animation='fade-up'
+                className='tech-card rounded-[26px] p-6'
+              >
+                <div className='tech-icon-box mb-5'>{item.icon}</div>
+                <h3 className='text-lg font-semibold text-white'>{item.title}</h3>
+                <p className='mt-3 text-sm leading-7 text-white/45'>{item.desc}</p>
+              </AnimateInView>
+            ))}
+          </div>
 
-        {/* Additional features row */}
-        <div className='mt-12 grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-12'>
-          {additionalFeatures.map((f, i) => (
-            <AnimateInView
-              key={f.title}
-              delay={i * 100}
-              animation='fade-up'
-              className='flex flex-col items-center text-center'
-            >
-              <div className='tech-icon-box mb-3 mx-auto size-12'>
-                {f.icon}
-              </div>
-              <h3 className='mb-1.5 text-sm font-semibold'>{f.title}</h3>
-              <p className='text-muted-foreground max-w-[200px] text-xs leading-relaxed'>
-                {f.desc}
+          <div className='grid gap-4'>
+            <AnimateInView className='tech-card rounded-[28px] p-7 md:p-8' animation='fade-left'>
+              <p className='enterprise-kpi-label'>{t('Platform Value')}</p>
+              <h3 className='mt-3 text-2xl font-semibold tracking-tight text-white'>
+                {t('From technical gateway to enterprise product capability')}
+              </h3>
+              <p className='mt-4 text-sm leading-7 text-white/45'>
+                {t('The homepage now emphasizes enterprise scenarios, solution packaging and business value, making the product feel like a serious large-model platform instead of a generic admin panel.')}
               </p>
+
+              <div className='mt-8 space-y-4'>
+                {highlights.map((item) => (
+                  <div key={item.title} className='rounded-2xl border border-white/6 bg-white/[0.02] p-4'>
+                    <div className='flex items-center gap-3'>
+                      <span className='tech-icon-box size-10'>{item.icon}</span>
+                      <div>
+                        <div className='text-sm font-medium text-white'>{item.title}</div>
+                        <div className='mt-1 text-sm leading-6 text-white/45'>{item.desc}</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </AnimateInView>
-          ))}
+          </div>
         </div>
       </div>
     </section>

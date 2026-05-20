@@ -16,11 +16,11 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 For commercial licensing, please contact support@quantumnous.com
 */
+import { useMemo } from 'react'
 import { Link } from '@tanstack/react-router'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, BarChart3, Cpu, ShieldCheck } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/ui/button'
-import { useMemo } from 'react'
 
 interface HeroProps {
   className?: string
@@ -29,19 +29,20 @@ interface HeroProps {
 
 function TechParticles() {
   const particles = useMemo(() => {
-    return Array.from({ length: 8 }, (_, i) => ({
-      left: `${5 + Math.random() * 90}%`,
-      top: `${10 + Math.random() * 80}%`,
+    return Array.from({ length: 10 }, () => ({
+      left: `${4 + Math.random() * 92}%`,
+      top: `${8 + Math.random() * 84}%`,
       delay: `${Math.random() * 5}s`,
-      duration: `${3 + Math.random() * 4}s`,
-      '--tx': `${(Math.random() - 0.5) * 60}px`,
-      '--ty': `${(Math.random() - 0.5) * 40}px`,
+      duration: `${4 + Math.random() * 4}s`,
+      '--tx': `${(Math.random() - 0.5) * 70}px`,
+      '--ty': `${(Math.random() - 0.5) * 45}px`,
     })) as React.CSSProperties[]
   }, [])
+
   return (
     <>
-      {particles.map((style, i) => (
-        <div key={i} className='tech-particle' style={style as React.CSSProperties} />
+      {particles.map((style, index) => (
+        <div key={index} className='tech-particle' style={style} />
       ))}
     </>
   )
@@ -51,112 +52,134 @@ export function Hero(props: HeroProps) {
   const { t } = useTranslation()
 
   return (
-    <section className='relative z-10 flex flex-col items-center overflow-hidden px-6 pt-28 pb-16 md:pt-36 md:pb-24'>
-      {/* Deep dark tech background */}
-      <div
-        aria-hidden
-        className='pointer-events-none absolute inset-0 -z-10'
-        style={{
-          background: 'linear-gradient(to bottom, #050508, #0a0a0f, #08080c)',
-        }}
-      />
-
-      {/* Tech grid overlay */}
-      <div aria-hidden className='tech-grid pointer-events-none absolute inset-0 -z-[8]' />
-
-      {/* Scanning line */}
+    <section className='relative z-10 overflow-hidden px-4 pt-28 pb-20 md:px-6 md:pt-34 md:pb-26'>
+      <div aria-hidden className='tech-grid pointer-events-none absolute inset-0 -z-10 opacity-70' />
       <div aria-hidden className='tech-scan-line' />
-
-      {/* Glow orbs */}
-      <div aria-hidden className='tech-glow-orb tech-glow-orb-1 z-[0]' />
-      <div aria-hidden className='tech-glow-orb tech-glow-orb-2 z-[0]' />
-
-      {/* Floating particles */}
+      <div aria-hidden className='tech-glow-orb tech-glow-orb-1 z-0' />
+      <div aria-hidden className='tech-glow-orb tech-glow-orb-2 z-0' />
       <TechParticles />
 
-      {/* Corner decorations */}
-      <div aria-hidden className='tech-corner-decoration tech-corner-tl rounded-tl-lg' />
-      <div aria-hidden className='tech-corner-decoration tech-corner-tr rounded-tr-lg' />
-      <div aria-hidden className='tech-corner-decoration tech-corner-bl rounded-bl-lg' />
-      <div aria-hidden className='tech-corner-decoration tech-corner-br rounded-br-lg' />
+      <div className='mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]'>
+        <div className='relative z-10'>
+          <div className='enterprise-badge'>
+            <span className='enterprise-badge-dot' />
+            <span className='text-xs font-medium tracking-[0.18em] uppercase'>
+              {t('Enterprise AI Infrastructure')}
+            </span>
+          </div>
 
-      {/* Data stream dots */}
-      {[...Array(3)].map((_, i) => (
-        <div
-          key={`d${i}`}
-          className='tech-data-dot'
-          style={{
-            left: `${20 + i * 30}%`,
-            top: `${30 + i * 15}%`,
-            animationDelay: `${i * 1.5}s`,
-          }}
-        />
-      ))}
+          <h1 className='mt-7 max-w-4xl text-5xl font-semibold tracking-tight text-white md:text-6xl xl:text-7xl'>
+            <span className='tech-gradient-text'>{t('Build your own')}</span>
+            <br />
+            <span className='text-white'>{t('Big Model Platform')}</span>
+          </h1>
 
-      {/* Content */}
-      <div className='relative z-10 flex max-w-4xl flex-col items-center gap-8 text-center'>
-        {/* Tech badge */}
-        <div className='tech-badge'>
-          <span className='tech-badge-dot' />
-          <span className='tracking-wide'>{t('AI-Powered API Gateway')}</span>
-        </div>
+          <p className='mt-6 max-w-2xl text-base leading-8 text-white/46 md:text-lg'>
+            {t('Create an enterprise-grade large model gateway with unified model access, channel routing, billing governance and operational analytics.')}
+          </p>
 
-        {/* Main heading — electric gradient */}
-        <h1 className='tech-gradient-text text-5xl font-extrabold leading-tight tracking-tight md:text-7xl'>
-          {t('Next-Gen AI Platform')}
-        </h1>
+          <div className='mt-8 flex flex-wrap items-center gap-3 text-sm text-white/56'>
+            <div className='rounded-full border border-white/8 bg-white/[0.03] px-3 py-1.5'>
+              {t('Unified model routing')}
+            </div>
+            <div className='rounded-full border border-white/8 bg-white/[0.03] px-3 py-1.5'>
+              {t('Enterprise-grade governance')}
+            </div>
+            <div className='rounded-full border border-white/8 bg-white/[0.03] px-3 py-1.5'>
+              {t('Private deployment ready')}
+            </div>
+          </div>
 
-        {/* Subtitle */}
-        <p className='max-w-2xl text-lg text-white/40 md:text-xl'>
-          {t('Unified gateway for 40+ AI providers. One API. Infinite possibilities.')}
-        </p>
-
-        {/* CTA buttons */}
-        <div className='flex items-center gap-4'>
-          {props.isAuthenticated ? (
-            <Button
-              className='group rounded-lg bg-blue-600 px-6 shadow-lg shadow-blue-600/20 transition-all duration-300 hover:bg-blue-500 hover:shadow-xl hover:shadow-blue-500/30'
-              render={<Link to='/dashboard' />}
-            >
-              {t('Go to Dashboard')}
-              <ArrowRight className='ml-1.5 size-4 transition-transform duration-200 group-hover:translate-x-0.5' />
-            </Button>
-          ) : (
-            <>
+          <div className='mt-10 flex flex-wrap items-center gap-4'>
+            {props.isAuthenticated ? (
               <Button
-                className='group rounded-lg bg-blue-600 px-6 shadow-lg shadow-blue-600/20 transition-all duration-300 hover:bg-blue-500 hover:shadow-xl hover:shadow-blue-500/30'
-                render={<Link to='/sign-up' />}
+                className='group h-12 rounded-xl bg-blue-600 px-6 text-sm font-medium shadow-lg shadow-blue-600/20 transition-all duration-300 hover:bg-blue-500 hover:shadow-blue-500/30'
+                render={<Link to='/dashboard' />}
               >
-                {t('Get Started')}
+                {t('Go to Dashboard')}
                 <ArrowRight className='ml-1.5 size-4 transition-transform duration-200 group-hover:translate-x-0.5' />
               </Button>
-              <Button
-                variant='outline'
-                className='rounded-lg border border-white/10 bg-white/[0.03] px-6 text-white/60 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06] hover:text-white/80'
-                render={<Link to='/pricing' />}
-              >
-                <svg className='mr-1.5 size-4' viewBox='0 0 24 24' fill='currentColor'><path d='M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z'/></svg>
-                {t('View on GitHub')}
-              </Button>
-            </>
-          )}
+            ) : (
+              <>
+                <Button
+                  className='group h-12 rounded-xl bg-blue-600 px-6 text-sm font-medium shadow-lg shadow-blue-600/20 transition-all duration-300 hover:bg-blue-500 hover:shadow-blue-500/30'
+                  render={<Link to='/sign-up' />}
+                >
+                  {t('Start Building')}
+                  <ArrowRight className='ml-1.5 size-4 transition-transform duration-200 group-hover:translate-x-0.5' />
+                </Button>
+                <Button
+                  variant='outline'
+                  className='h-12 rounded-xl border border-white/10 bg-white/[0.03] px-6 text-sm text-white/72 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06] hover:text-white'
+                  render={<Link to='/pricing' />}
+                >
+                  {t('Explore Pricing')}
+                </Button>
+              </>
+            )}
+          </div>
+
+          <div className='mt-12 enterprise-kpi-grid'>
+            <div className='enterprise-kpi-card'>
+              <div className='enterprise-kpi-label'>{t('Providers')}</div>
+              <div className='enterprise-kpi-value'>40+</div>
+              <div className='enterprise-kpi-desc'>{t('Access major model ecosystems through one control plane.')}</div>
+            </div>
+            <div className='enterprise-kpi-card'>
+              <div className='enterprise-kpi-label'>{t('Channels')}</div>
+              <div className='enterprise-kpi-value'>100+</div>
+              <div className='enterprise-kpi-desc'>{t('Design flexible routing and business-ready quota strategies.')}</div>
+            </div>
+            <div className='enterprise-kpi-card'>
+              <div className='enterprise-kpi-label'>{t('Operations')}</div>
+              <div className='enterprise-kpi-value'>24/7</div>
+              <div className='enterprise-kpi-desc'>{t('Observe cost, stability and growth in one unified platform view.')}</div>
+            </div>
+          </div>
         </div>
 
-        {/* Stats bar */}
-        <div className='mt-4 flex items-center gap-6 text-sm md:gap-10'>
-          <div className='flex flex-col items-center gap-1'>
-            <span className='tech-stat text-2xl font-bold tracking-tight'>40+</span>
-            <span className='text-white/30'>Providers</span>
-          </div>
-          <div className='h-8 w-px bg-white/[0.06]' />
-          <div className='flex flex-col items-center gap-1'>
-            <span className='tech-stat text-2xl font-bold tracking-tight'>99.9%</span>
-            <span className='text-white/30'>Uptime</span>
-          </div>
-          <div className='h-8 w-px bg-white/[0.06]' />
-          <div className='flex flex-col items-center gap-1'>
-            <span className='tech-stat text-2xl font-bold tracking-tight'>10M+</span>
-            <span className='text-white/30'>Requests/Day</span>
+        <div className='relative z-10'>
+          <div className='tech-card rounded-[30px] p-5 md:p-6'>
+            <div className='enterprise-terminal-shell rounded-[24px] border border-white/6 bg-[#060a12] p-5 md:p-6'>
+              <div className='mb-5 flex items-center gap-2'>
+                <span className='size-2.5 rounded-full bg-[#ff5f57]' />
+                <span className='size-2.5 rounded-full bg-[#febc2e]' />
+                <span className='size-2.5 rounded-full bg-[#28c840]' />
+                <span className='ml-2 text-xs tracking-wide text-white/35'>enterprise-control-center</span>
+              </div>
+
+              <div className='grid gap-4 md:grid-cols-2'>
+                <div className='enterprise-node-card'>
+                  <div className='tech-icon-box mb-4'>
+                    <Cpu className='size-4' strokeWidth={1.8} />
+                  </div>
+                  <div className='enterprise-node-label'>{t('Model Access')}</div>
+                  <div className='enterprise-node-title'>{t('Multi-provider model aggregation')}</div>
+                  <div className='enterprise-node-desc'>{t('OpenAI, Claude, Gemini, Qwen, GLM and other model ecosystems with a unified access layer.')}</div>
+                </div>
+                <div className='enterprise-node-card'>
+                  <div className='tech-icon-box mb-4'>
+                    <ShieldCheck className='size-4' strokeWidth={1.8} />
+                  </div>
+                  <div className='enterprise-node-label'>{t('Governance')}</div>
+                  <div className='enterprise-node-title'>{t('Permission, quota and tenant isolation')}</div>
+                  <div className='enterprise-node-desc'>{t('Meet enterprise operational needs for account management, billing control and secure API delivery.')}</div>
+                </div>
+                <div className='enterprise-node-card'>
+                  <div className='tech-icon-box mb-4'>
+                    <BarChart3 className='size-4' strokeWidth={1.8} />
+                  </div>
+                  <div className='enterprise-node-label'>{t('Analytics')}</div>
+                  <div className='enterprise-node-title'>{t('Usage insights and cost observability')}</div>
+                  <div className='enterprise-node-desc'>{t('Track request trends, provider performance and monetization efficiency in real time.')}</div>
+                </div>
+                <div className='enterprise-node-card'>
+                  <div className='enterprise-node-label'>{t('Open Interface')}</div>
+                  <div className='enterprise-node-title'>{t('OpenAI-compatible API gateway')}</div>
+                  <div className='enterprise-node-desc'>{t('Keep application integration simple while your platform evolves behind the scenes.')}</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

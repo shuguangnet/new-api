@@ -17,7 +17,11 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 For commercial licensing, please contact support@quantumnous.com
 */
 export { CTA } from './sections/cta'
+export { Ecosystem } from './sections/ecosystem'
+export { Faq } from './sections/faq'
 export { Features } from './sections/features'
 export { Hero } from './sections/hero'
 export { HowItWorks } from './sections/how-it-works'
+export { PlatformShowcase } from './sections/platform-showcase'
+export { Solutions } from './sections/solutions'
 export { Stats } from './sections/stats'

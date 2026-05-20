@@ -19,8 +19,8 @@ For commercial licensing, please contact support@quantumnous.com
 import { Link } from '@tanstack/react-router'
 import { ArrowRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { Button } from '@/components/ui/button'
 import { AnimateInView } from '@/components/animate-in-view'
+import { Button } from '@/components/ui/button'
 
 interface CTAProps {
   className?: string
@@ -35,50 +35,35 @@ export function CTA(props: CTAProps) {
   }
 
   return (
-    <section className='relative z-10 overflow-hidden py-24 px-4'>
-      {/* Dark tech glow background */}
-      <div
-        aria-hidden
-        className='absolute inset-0 -z-10'
-        style={{
-          background: [
-            'radial-gradient(ellipse 50% 50% at 30% 50%, rgba(59,130,246,0.06) 0%, transparent 70%)',
-            'radial-gradient(ellipse 40% 40% at 70% 40%, rgba(6,182,212,0.04) 0%, transparent 70%)',
-          ].join(', '),
-        }}
-      />
+    <section className='relative z-10 overflow-hidden px-4 py-24 md:py-28'>
+      <AnimateInView className='mx-auto max-w-5xl' animation='scale-in'>
+        <div className='tech-card rounded-[32px] px-6 py-10 text-center md:px-10 md:py-14'>
+          <p className='tech-gradient-text mb-3 text-xs font-medium tracking-[0.24em] uppercase'>
+            {t('Ready to Launch')}
+          </p>
+          <h2 className='mx-auto max-w-3xl text-3xl font-semibold tracking-tight text-white md:text-5xl'>
+            {t('Upgrade your product into an enterprise-ready Big Model Platform')}
+          </h2>
+          <p className='mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/45 md:text-base'>
+            {t('Start with a unified model gateway, then extend into governance, operations, pricing and customer-facing platform capabilities.')}
+          </p>
 
-      <AnimateInView
-        className='tech-card group mx-auto max-w-2xl text-center p-8 md:p-12 rounded-2xl'
-        animation='scale-in'
-      >
-        <h2 className='tech-gradient-text text-2xl leading-tight font-bold tracking-tight md:text-4xl'>
-          {t('Ready to simplify')}
-          <br />
-          <span>
-            {t('your AI integration?')}
-          </span>
-        </h2>
-        <p className='text-muted-foreground/80 mx-auto mt-5 max-w-md text-sm leading-relaxed md:text-base'>
-          {t(
-            'Deploy your own gateway and start routing requests through your configured upstream services.'
-          )}
-        </p>
-        <div className='mt-8 flex items-center justify-center gap-3'>
-          <Button
-            className='group rounded-lg bg-blue-600 px-6 shadow-lg shadow-blue-600/20 transition-all duration-300 hover:bg-blue-500 hover:shadow-xl hover:shadow-blue-500/30'
-            render={<Link to='/sign-up' />}
-          >
-            {t('Get Started')}
-            <ArrowRight className='ml-1 size-3.5 transition-transform duration-200 group-hover:translate-x-0.5' />
-          </Button>
-          <Button
-            variant='outline'
-            className='rounded-lg border border-white/10 bg-white/[0.02] px-6 text-white/60 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.05] hover:text-white/80'
-            render={<Link to='/pricing' />}
-          >
-            {t('View Pricing')}
-          </Button>
+          <div className='mt-8 flex flex-wrap items-center justify-center gap-4'>
+            <Button
+              className='group h-12 rounded-xl bg-blue-600 px-6 text-sm font-medium shadow-lg shadow-blue-600/20 transition-all duration-300 hover:bg-blue-500 hover:shadow-blue-500/30'
+              render={<Link to='/sign-up' />}
+            >
+              {t('Get Started')}
+              <ArrowRight className='ml-1 size-3.5 transition-transform duration-200 group-hover:translate-x-0.5' />
+            </Button>
+            <Button
+              variant='outline'
+              className='h-12 rounded-xl border border-white/10 bg-white/[0.03] px-6 text-sm text-white/72 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06] hover:text-white'
+              render={<Link to='/pricing' />}
+            >
+              {t('View Pricing')}
+            </Button>
+          </div>
         </div>
       </AnimateInView>
     </section>

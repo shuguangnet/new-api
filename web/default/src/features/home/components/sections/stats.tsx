@@ -28,36 +28,52 @@ interface CounterProps {
 }
 
 function Counter(props: CounterProps) {
-  const { end, suffix = '', prefix = '', duration = 1600, decimals = 0 } = props
   const ref = useRef<HTMLSpanElement>(null)
   const startedRef = useRef(false)
 
   const formatValue = useCallback(
-    (v: number) =>
-      decimals > 0 ? v.toFixed(decimals) : Math.round(v).toLocaleString(),
-    [decimals]
+    (value: number) =>
+      props.decimals && props.decimals > 0
+        ? value.toFixed(props.decimals)
+        : Math.round(value).toLocaleString(),
+    [props.decimals]
   )
 
   const animate = useCallback(() => {
-    const el = ref.current
-    if (!el) return
+    const element = ref.current
+    if (!element) {
+      return
+    }
+
     const start = performance.now()
+    const duration = props.duration ?? 1600
+    const prefix = props.prefix ?? ''
+    const suffix = props.suffix ?? ''
+
     const step = (now: number) => {
       const progress = Math.min((now - start) / duration, 1)
       const eased = 1 - Math.pow(1 - progress, 3)
-      el.textContent = `${prefix}${formatValue(eased * end)}${suffix}`
-      if (progress < 1) requestAnimationFrame(step)
+      element.textContent = `${prefix}${formatValue(eased * props.end)}${suffix}`
+      if (progress < 1) {
+        requestAnimationFrame(step)
+      }
     }
+
     requestAnimationFrame(step)
-  }, [end, duration, prefix, suffix, formatValue])
+  }, [formatValue, props.duration, props.end, props.prefix, props.suffix])
 
   useEffect(() => {
-    const el = ref.current
-    if (!el) return
+    const element = ref.current
+    if (!element) {
+      return
+    }
 
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-    if (mq.matches) {
-      el.textContent = `${prefix}${formatValue(end)}${suffix}`
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const prefix = props.prefix ?? ''
+    const suffix = props.suffix ?? ''
+
+    if (mediaQuery.matches) {
+      element.textContent = `${prefix}${formatValue(props.end)}${suffix}`
       return
     }
 
@@ -66,63 +82,77 @@ function Counter(props: CounterProps) {
         if (entry.isIntersecting && !startedRef.current) {
           startedRef.current = true
           animate()
-          observer.unobserve(el)
+          observer.unobserve(element)
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.4 }
     )
 
-    observer.observe(el)
+    observer.observe(element)
+
     return () => observer.disconnect()
-  }, [animate, end, prefix, suffix, formatValue])
+  }, [animate, formatValue, props.end, props.prefix, props.suffix])
 
   return (
     <span ref={ref} className='tabular-nums'>
-      {prefix}0{suffix}
+      {props.prefix ?? ''}0{props.suffix ?? ''}
     </span>
   )
-}
-
-interface StatsProps {
-  className?: string
 }
 
 interface StatItem {
   end: number
   suffix: string
   label: string
+  desc: string
   decimals?: number
 }
 
-export function Stats(_props: StatsProps) {
+export function Stats() {
   const { t } = useTranslation()
 
   const stats: StatItem[] = [
-    { end: 50, suffix: '+', label: t('upstream services integrated') },
-    { end: 100, suffix: '+', label: t('model billing support') },
-    { end: 50, suffix: '+', label: t('compatible API routes') },
-    { end: 10, suffix: '+', label: t('scheduling controls') },
+    {
+      end: 50,
+      suffix: '+',
+      label: t('Integrated upstream services'),
+      desc: t('Aggregate major LLM ecosystems into one stable enterprise access layer.'),
+    },
+    {
+      end: 100,
+      suffix: '+',
+      label: t('Model billing support'),
+      desc: t('Flexible pricing, recharge and customer monetization capabilities.'),
+    },
+    {
+      end: 50,
+      suffix: '+',
+      label: t('Compatible API routes'),
+      desc: t('Rapidly connect products through standardized developer-facing APIs.'),
+    },
+    {
+      end: 10,
+      suffix: '+',
+      label: t('Scheduling controls'),
+      desc: t('Fine-grained quota, policy and traffic orchestration for production usage.'),
+    },
   ]
 
   return (
-    <div className='relative z-10 mx-auto max-w-5xl px-6'>
-      <div className='rounded-2xl border border-white/[0.04] bg-[#0c0c12]/80 px-6 py-10 backdrop-blur-sm md:py-12'>
-        <div className='grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-0'>
-          {stats.map((s, i) => (
-            <div
-              key={s.label}
-              className={`flex flex-col items-center text-center ${i > 0 ? 'md:border-l md:border-white/[0.05]' : ''}`}
-            >
-              <span className='tech-stat text-2xl font-bold tracking-tight md:text-3xl'>
-                <Counter end={s.end} suffix={s.suffix} decimals={s.decimals} />
-              </span>
-              <span className='text-muted-foreground mt-1.5 text-xs'>
-                {s.label}
-              </span>
+    <section className='relative z-10 px-4 py-8 md:py-10'>
+      <div className='mx-auto max-w-6xl'>
+        <div className='grid gap-4 md:grid-cols-2 xl:grid-cols-4'>
+          {stats.map((item) => (
+            <div key={item.label} className='tech-card rounded-[24px] p-6'>
+              <div className='enterprise-kpi-label'>{item.label}</div>
+              <div className='mt-3 tech-stat text-3xl font-bold tracking-tight md:text-4xl'>
+                <Counter end={item.end} suffix={item.suffix} decimals={item.decimals} />
+              </div>
+              <p className='mt-3 text-sm leading-7 text-white/45'>{item.desc}</p>
             </div>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   )
 }
