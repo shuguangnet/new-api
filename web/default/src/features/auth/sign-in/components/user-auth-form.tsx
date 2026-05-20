@@ -282,6 +282,7 @@ export function UserAuthForm({
         className={cn('grid gap-4', className)}
         {...props}
       >
+        <div className='rounded-[24px] border border-white/6 bg-white/[0.03] p-4 sm:p-5'>
         {/* Username Field */}
         <FormField
           control={form.control}
@@ -324,7 +325,7 @@ export function UserAuthForm({
         {/* Submit Button */}
         <Button
           type='submit'
-          className='btn-shine mt-2 w-full justify-center gap-2'
+          className='btn-shine mt-2 h-11 w-full justify-center gap-2 rounded-xl bg-blue-600 text-white shadow-[0_14px_30px_rgba(37,99,235,0.25)] transition-all duration-300 hover:bg-blue-500 hover:shadow-[0_18px_36px_rgba(37,99,235,0.32)]'
           disabled={isLoading || (requiresLegalConsent && !agreedToLegal)}
         >
           {isLoading ? <Loader2 className='animate-spin' /> : <LogIn />}
@@ -378,7 +379,9 @@ export function UserAuthForm({
           disabled={isLoading || (requiresLegalConsent && !agreedToLegal)}
           onWeChatLogin={hasWeChatLogin ? handleOpenWeChatDialog : undefined}
           isWeChatLoading={isWeChatSubmitting}
+          className='border-t border-white/6 pt-4'
         />
+      </div>
       </form>
 
       {hasWeChatLogin && (
