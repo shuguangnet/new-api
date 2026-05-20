@@ -303,7 +303,7 @@ function renderDesktop<TData>(
   return (
     <div
       className={cn(
-        'overflow-hidden rounded-lg border transition-opacity duration-150',
+        'glass-panel rounded-2xl overflow-hidden border transition-opacity duration-150',
         isFetchingOnly && 'pointer-events-none opacity-60',
         props.tableClassName
       )}
@@ -378,7 +378,7 @@ function DefaultRow<TData>({
   return (
     <TableRow
       data-state={row.getIsSelected() && 'selected'}
-      className={className}
+      className={cn('table-row-hover', className)}
     >
       {row.getVisibleCells().map((cell) => (
         <TableCell key={cell.id}>

@@ -41,12 +41,12 @@ export function RankingsHero(props: RankingsHeroProps) {
   const { t } = useTranslation()
 
   return (
-    <section className='space-y-5'>
+    <section className='bg-gradient-to-b from-[oklch(0.13_0.04_270)] to-background space-y-5'>
       <div className='space-y-2'>
         <p className='text-muted-foreground text-xs font-medium tracking-widest uppercase'>
           {t('Leaderboards')}
         </p>
-        <h1 className='text-[clamp(1.75rem,4vw,2.5rem)] leading-[1.15] font-bold tracking-tight'>
+        <h1 className='gradient-text text-[clamp(1.75rem,4vw,2.5rem)] leading-[1.15] font-bold tracking-tight'>
           {t('Rankings')}
         </h1>
         <p className='text-muted-foreground/80 max-w-2xl text-sm'>

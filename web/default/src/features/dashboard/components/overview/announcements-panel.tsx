@@ -68,6 +68,7 @@ export function AnnouncementsPanel() {
       emptyMessage={t('No announcements at this time')}
       height='h-72'
       contentClassName='p-0'
+      className='glass-panel card-float'
     >
       <ScrollArea className='h-72'>
         <div>

@@ -29,7 +29,7 @@ function Separator({
       data-slot='separator'
       orientation={orientation}
       className={cn(
-        'bg-border shrink-0 data-horizontal:h-px data-horizontal:w-full data-vertical:w-px data-vertical:self-stretch',
+        'bg-gradient-to-r from-transparent via-[oklch(0.5_0.1_280_/_30%)] to-transparent shrink-0 data-horizontal:h-px data-horizontal:w-full data-vertical:w-px data-vertical:self-stretch',
         className
       )}
       {...props}

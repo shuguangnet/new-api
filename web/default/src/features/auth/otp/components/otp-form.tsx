@@ -203,7 +203,7 @@ export function OtpForm({ className, ...props }: OtpFormProps) {
 
         <Button
           type='submit'
-          className='mt-2 w-full'
+          className='btn-shine mt-2 w-full'
           disabled={!isFormValid || isLoading}
         >
           {isLoading ? <Loader2 className='h-4 w-4 animate-spin' /> : null}

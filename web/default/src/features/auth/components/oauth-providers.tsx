@@ -157,7 +157,7 @@ export function OAuthProviders({
               type='button'
               disabled={disabled || isLoading || extraDisabled}
               onClick={onClick}
-              className='h-11 w-full justify-center gap-2 rounded-lg'
+              className='h-11 w-full justify-center gap-2 rounded-lg hover:border-[oklch(0.5_0.15_280_/_30%)] hover:bg-[oklch(0.5_0.1_280_/_8%)]'
             >
               {icon}
               {label}

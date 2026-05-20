@@ -130,7 +130,7 @@ function FilterSection(props: FilterSectionProps) {
   return (
     <Collapsible
       defaultOpen
-      className='border-border/70 border-b pb-3 last:border-b-0'
+      className='section-divider pb-3 last:border-b-0'
     >
       <CollapsibleTrigger className='group flex w-full items-center justify-between py-2.5 text-left'>
         <span className='text-foreground text-sm font-semibold'>
@@ -244,7 +244,7 @@ export function PricingSidebar(props: PricingSidebarProps) {
   ]
 
   return (
-    <aside className={cn('rounded-xl border p-3', props.className)}>
+    <aside className={cn('glass-panel rounded-2xl p-3', props.className)}>
       <div className='mb-2.5 flex items-center justify-between gap-2'>
         <div>
           <h2 className='text-foreground text-sm font-bold'>{t('Filter')}</h2>

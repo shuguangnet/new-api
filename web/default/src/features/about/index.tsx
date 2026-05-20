@@ -48,7 +48,7 @@ function EmptyAboutState() {
           <Construction className='text-muted-foreground h-24 w-24' />
         </div>
         <div className='space-y-2'>
-          <h2 className='text-2xl font-bold'>{t('No About Content Set')}</h2>
+          <h2 className='gradient-text text-2xl font-bold'>{t('No About Content Set')}</h2>
           <p className='text-muted-foreground'>
             {t(
               'The administrator has not configured any about content yet. You can set it in the settings page, supporting HTML or URL.'
@@ -172,13 +172,15 @@ export function About() {
       <div className='mx-auto max-w-6xl px-4 py-8'>
         {isHtml ? (
           <div
-            className='prose prose-neutral dark:prose-invert max-w-none'
+            className='glass-panel card-float prose prose-neutral dark:prose-invert max-w-none rounded-2xl p-6'
             dangerouslySetInnerHTML={{ __html: rawContent }}
           />
         ) : (
-          <Markdown className='prose-neutral dark:prose-invert max-w-none'>
-            {rawContent}
-          </Markdown>
+          <div className='glass-panel card-float rounded-2xl p-6'>
+            <Markdown className='prose-neutral dark:prose-invert max-w-none'>
+              {rawContent}
+            </Markdown>
+          </div>
         )}
       </div>
     </PublicLayout>

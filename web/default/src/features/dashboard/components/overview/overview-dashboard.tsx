@@ -593,8 +593,8 @@ export function OverviewDashboard() {
     saveSetupGuideExpanded(nextExpanded)
   }
 
-  return (
-    <div className='flex flex-col gap-4'>
+    return (
+    <div className='flex flex-col gap-4 section-divider pt-4'>
       {setupGuideExpanded ? (
         <CardStaggerContainer className='grid items-stretch gap-4 xl:grid-cols-[minmax(0,1fr)_22rem]'>
           <CardStaggerItem className='bg-card h-full overflow-hidden rounded-2xl border shadow-xs'>
@@ -608,7 +608,7 @@ export function OverviewDashboard() {
                         <ListChecks className='size-3.5' aria-hidden='true' />
                         {t('Get started')}
                       </div>
-                      <h3 className='text-xl font-semibold tracking-tight sm:text-2xl'>
+                      <h3 className='gradient-text text-xl font-semibold tracking-tight sm:text-2xl'>
                         {t('Build on your API gateway in minutes')}
                       </h3>
                       <p className='text-muted-foreground max-w-xl text-sm leading-relaxed'>
@@ -659,7 +659,7 @@ export function OverviewDashboard() {
                 <div className='text-muted-foreground text-xs font-medium tracking-wider uppercase'>
                   {t('Recommended actions')}
                 </div>
-                <h3 className='text-lg font-semibold tracking-tight'>
+                <h3 className='gradient-text text-lg font-semibold tracking-tight'>
                   {t('Keep the platform ready')}
                 </h3>
               </div>
@@ -683,7 +683,7 @@ export function OverviewDashboard() {
                   </span>
                   <div className='min-w-0'>
                     <div className='flex items-center gap-2'>
-                      <h3 className='truncate text-sm font-semibold'>
+                      <h3 className='gradient-text truncate text-sm font-semibold'>
                         {setupComplete
                           ? t('Setup guide complete')
                           : t('Setup guide')}

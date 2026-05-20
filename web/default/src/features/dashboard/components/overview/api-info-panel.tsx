@@ -58,6 +58,7 @@ export function ApiInfoPanel() {
       emptyMessage={t('No API routes configured')}
       height='h-72'
       contentClassName='p-0'
+      className='glass-panel card-float'
     >
       <ScrollArea className='h-72'>
         <div>

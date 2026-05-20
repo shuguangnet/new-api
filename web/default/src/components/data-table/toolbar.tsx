@@ -160,14 +160,14 @@ export function DataTableToolbar<TData>(props: DataTableToolbarProps<TData>) {
           .getColumn(props.searchKey!)
           ?.setFilterValue(event.target.value)
       }
-      className='w-full sm:w-[200px] lg:w-[240px]'
+      className='input-glow w-full sm:w-[200px] lg:w-[240px]'
     />
   ) : (
     <Input
       placeholder={placeholder}
       value={props.table.getState().globalFilter ?? ''}
       onChange={(event) => props.table.setGlobalFilter(event.target.value)}
-      className='w-full sm:w-[200px] lg:w-[240px]'
+      className='input-glow w-full sm:w-[200px] lg:w-[240px]'
     />
   )
 

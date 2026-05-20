@@ -29,7 +29,7 @@ export function SignUp() {
 
   return (
     <AuthLayout>
-      <div className='w-full space-y-8'>
+      <div className='glass-panel rounded-2xl w-full space-y-8 p-6 sm:p-8'>
         <div className='space-y-2'>
           <h2 className='text-center text-2xl font-semibold tracking-tight sm:text-left'>
             {t('Create an account')}

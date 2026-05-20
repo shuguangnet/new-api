@@ -93,11 +93,11 @@ export function PricingTable(props: PricingTableProps) {
 
   return (
     <div className='space-y-4'>
-      <div className='overflow-hidden rounded-lg border'>
+      <div className='glass-panel overflow-hidden rounded-2xl'>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow key={headerGroup.id} className='border-b border-[oklch(0.5_0.1_280_/_15%)]'>
                 {headerGroup.headers.map((header) => (
                   <TableHead
                     key={header.id}
@@ -129,7 +129,7 @@ export function PricingTable(props: PricingTableProps) {
                 <TableRow
                   key={row.id}
                   onClick={() => handleRowClick(row.original)}
-                  className='hover:bg-muted/30 cursor-pointer transition-colors'
+                  className='hover:bg-[oklch(0.5_0.1_280_/_5%)] cursor-pointer transition-colors'
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

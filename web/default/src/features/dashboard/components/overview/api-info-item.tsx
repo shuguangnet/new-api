@@ -52,7 +52,7 @@ export function ApiInfoItemComponent(props: ApiInfoItemProps) {
 
         <div className='flex min-w-0 flex-1 flex-col gap-0.5'>
           <div className='flex items-baseline gap-2'>
-            <span className='font-mono text-sm font-semibold'>
+            <span className='stat-glow font-mono text-sm font-semibold'>
               {item.route}
             </span>
             <span className='text-muted-foreground/60 hidden truncate text-xs md:inline'>
@@ -71,7 +71,7 @@ export function ApiInfoItemComponent(props: ApiInfoItemProps) {
             <StatusBadge
               label={t('Testing...')}
               variant='warning'
-              className='animate-pulse'
+              className='badge-glow animate-pulse'
               copyable={false}
             />
           )}
@@ -80,7 +80,7 @@ export function ApiInfoItemComponent(props: ApiInfoItemProps) {
               variant='success'
               label={`${status.latency}${t('ms')}`}
               className={cn(
-                'font-mono font-medium',
+                'badge-glow font-mono font-medium',
                 getLatencyColorClass(status.latency)
               )}
               copyable={false}
