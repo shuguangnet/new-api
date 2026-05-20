@@ -17,6 +17,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 For commercial licensing, please contact support@quantumnous.com
 */
 import { Link } from '@tanstack/react-router'
+import { BarChart3, Building2, Cpu, ShieldCheck } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { useSystemConfig } from '@/hooks/use-system-config'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -25,82 +26,119 @@ type AuthLayoutProps = {
   children: React.ReactNode
 }
 
-export function AuthLayout({ children }: AuthLayoutProps) {
+export function AuthLayout(props: AuthLayoutProps) {
   const { t } = useTranslation()
   const { systemName, logo, loading } = useSystemConfig()
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 h-svh">
-      {/* Left - Brand showcase (hidden on mobile) */}
-      <div className="hidden md:flex md:flex-col md:items-center md:justify-center relative overflow-hidden bg-gradient-to-br from-[oklch(0.13_0.04_270)] to-[oklch(0.15_0.05_300)]">
-        {/* Decorative nebula elements */}
-        <div className="absolute -top-32 -right-32 size-96 rounded-full bg-[oklch(0.4_0.15_280_/_10%)] blur-3xl" />
-        <div className="absolute -bottom-24 -left-24 size-72 rounded-full bg-[oklch(0.4_0.12_300_/_8%)] blur-3xl" />
-        <div className="absolute top-1/3 left-1/2 size-48 rounded-full bg-[oklch(0.5_0.18_260_/_6%)] blur-2xl" />
+    <div className='relative min-h-svh overflow-hidden bg-[#05070c]'>
+      <div className='pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_center,rgba(37,99,235,0.14),transparent_30%),radial-gradient(circle_at_18%_24%,rgba(59,130,246,0.10),transparent_24%),radial-gradient(circle_at_82%_20%,rgba(14,165,233,0.08),transparent_24%)]' />
+      <div className='pointer-events-none absolute inset-0 opacity-[0.16]' style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)', backgroundSize: '72px 72px' }} />
 
-        {/* Brand content */}
-        <div className="relative z-10 flex flex-col items-center gap-6">
-          <Link
-            to="/"
-            className="flex items-center gap-2 transition-opacity hover:opacity-80"
-          >
-            {loading ? (
-              <Skeleton className="size-20 rounded-full" />
-            ) : (
-              <img
-                src={logo}
-                alt={t('Logo')}
-                className="size-20 rounded-full object-cover glow-pulse"
-              />
-            )}
-          </Link>
-          {loading ? (
-            <Skeleton className="h-9 w-40" />
-          ) : (
-            <h1 className="text-3xl font-semibold gradient-text">
-              {systemName}
-            </h1>
-          )}
-          <p className="text-lg text-white/60">Connect to the Future of AI</p>
-        </div>
-      </div>
+      <div className='relative z-10 grid min-h-svh grid-cols-1 lg:grid-cols-[1.05fr_0.95fr]'>
+        <div className='hidden lg:flex lg:flex-col lg:justify-between lg:border-r lg:border-white/8 lg:px-12 lg:py-10'>
+          <div className='space-y-8'>
+            <Link to='/' className='inline-flex items-center gap-3 transition-opacity hover:opacity-85'>
+              {loading ? (
+                <Skeleton className='size-12 rounded-2xl' />
+              ) : (
+                <img src={logo} alt={t('Logo')} className='size-12 rounded-2xl border border-white/10 object-cover shadow-[0_0_28px_rgba(37,99,235,0.18)]' />
+              )}
+              <div>
+                <div className='text-xs tracking-[0.22em] text-white/40 uppercase'>
+                  {t('Enterprise AI Platform')}
+                </div>
+                {loading ? (
+                  <Skeleton className='mt-2 h-7 w-36' />
+                ) : (
+                  <div className='mt-1 text-xl font-semibold text-white'>{systemName}</div>
+                )}
+              </div>
+            </Link>
 
-      {/* Right - Login form area */}
-      <div className="flex flex-col bg-gradient-to-b from-background to-[oklch(0.12_0.02_280)]">
-        {/* Mobile-only logo & name */}
-        <Link
-          to="/"
-          className="flex items-center gap-2 p-4 transition-opacity hover:opacity-80 sm:p-8 md:hidden"
-        >
-          <div className="relative h-8 w-8">
-            {loading ? (
-              <Skeleton className="absolute inset-0 rounded-full" />
-            ) : (
-              <img
-                src={logo}
-                alt={t('Logo')}
-                className="h-8 w-8 rounded-full object-cover"
-              />
-            )}
+            <div className='max-w-xl'>
+              <div className='enterprise-badge'>
+                <span className='enterprise-badge-dot' />
+                <span className='text-xs font-medium tracking-[0.18em] uppercase'>
+                  {t('Secure Access Portal')}
+                </span>
+              </div>
+              <h1 className='mt-8 text-5xl leading-[1.08] font-semibold tracking-tight text-white'>
+                <span className='tech-gradient-text'>{t('Operate your')}</span>
+                <br />
+                <span>{t('Big Model Platform')}</span>
+              </h1>
+              <p className='mt-6 max-w-lg text-base leading-8 text-white/46'>
+                {t('Access the enterprise console for model routing, quota governance, billing operations and production analytics.')}
+              </p>
+            </div>
           </div>
-          {loading ? (
-            <Skeleton className="h-6 w-24" />
-          ) : (
-            <h1 className="text-xl font-medium">{systemName}</h1>
-          )}
-        </Link>
 
-        {/* Centered form */}
-        <div className="flex flex-1 items-center justify-center">
-          <div className="mx-auto flex w-full flex-col justify-center space-y-2 px-4 py-8 sm:w-[480px] sm:p-8">
-            {children}
-            <div className="bg-gradient-to-r from-transparent via-[oklch(0.5_0.15_280_/_15%)] to-transparent h-px mt-6" />
+          <div className='grid gap-4 xl:grid-cols-2'>
+            <div className='tech-card rounded-[24px] p-5'>
+              <div className='tech-icon-box mb-4'>
+                <Cpu className='size-4' strokeWidth={1.8} />
+              </div>
+              <div className='text-sm font-medium text-white'>{t('Unified model access')}</div>
+              <div className='mt-2 text-sm leading-7 text-white/45'>
+                {t('Aggregate multiple providers with one enterprise gateway and consistent integration surface.')}
+              </div>
+            </div>
+            <div className='tech-card rounded-[24px] p-5'>
+              <div className='tech-icon-box mb-4'>
+                <ShieldCheck className='size-4' strokeWidth={1.8} />
+              </div>
+              <div className='text-sm font-medium text-white'>{t('Governance by design')}</div>
+              <div className='mt-2 text-sm leading-7 text-white/45'>
+                {t('Role-based permissions, key isolation and policy controls for secure enterprise operations.')}
+              </div>
+            </div>
+            <div className='tech-card rounded-[24px] p-5'>
+              <div className='tech-icon-box mb-4'>
+                <BarChart3 className='size-4' strokeWidth={1.8} />
+              </div>
+              <div className='text-sm font-medium text-white'>{t('Operational analytics')}</div>
+              <div className='mt-2 text-sm leading-7 text-white/45'>
+                {t('Track usage, performance and commercial growth from a single operations center.')}
+              </div>
+            </div>
+            <div className='tech-card rounded-[24px] p-5'>
+              <div className='tech-icon-box mb-4'>
+                <Building2 className='size-4' strokeWidth={1.8} />
+              </div>
+              <div className='text-sm font-medium text-white'>{t('Production-ready deployment')}</div>
+              <div className='mt-2 text-sm leading-7 text-white/45'>
+                {t('Support self-hosted and enterprise delivery scenarios with a platform-grade experience.')}
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Bottom copyright */}
-        <div className="p-4 text-center text-xs text-[oklch(0.5_0.05_280_/_40%)] sm:p-6">
-          © {new Date().getFullYear()} QuantumNous. All rights reserved.
+        <div className='flex min-h-svh flex-col'>
+          <div className='flex items-center justify-between px-4 py-4 sm:px-6 lg:hidden'>
+            <Link to='/' className='flex items-center gap-3 transition-opacity hover:opacity-85'>
+              {loading ? (
+                <Skeleton className='size-9 rounded-xl' />
+              ) : (
+                <img src={logo} alt={t('Logo')} className='size-9 rounded-xl border border-white/10 object-cover' />
+              )}
+              {loading ? (
+                <Skeleton className='h-6 w-28' />
+              ) : (
+                <div className='text-base font-medium text-white'>{systemName}</div>
+              )}
+            </Link>
+          </div>
+
+          <div className='flex flex-1 items-center justify-center px-4 py-8 sm:px-6 lg:px-10'>
+            <div className='w-full max-w-[520px]'>
+              {props.children}
+            </div>
+          </div>
+
+          <div className='px-4 pb-6 text-center text-xs text-white/28 sm:px-6'>
+            © {new Date().getFullYear()} QuantumNous. All rights reserved.
+          </div>
         </div>
       </div>
     </div>

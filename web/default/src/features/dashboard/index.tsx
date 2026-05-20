@@ -226,10 +226,46 @@ export function Dashboard() {
 
   return (
     <SectionPageLayout>
-      <SectionPageLayout.Title>{t(meta.titleKey)}</SectionPageLayout.Title>
-      <SectionPageLayout.Description>
-        {t(meta.descriptionKey)}
-      </SectionPageLayout.Description>
+      <div className='mb-4 rounded-[28px] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.045),rgba(255,255,255,0.02)),rgba(8,12,20,0.92)] px-5 py-6 shadow-[0_20px_60px_rgba(0,0,0,0.28)] sm:px-6 sm:py-7'>
+        <div className='flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between'>
+          <div className='max-w-3xl'>
+            <div className='inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-[11px] font-medium tracking-[0.18em] text-white/56 uppercase'>
+              <span className='h-2 w-2 rounded-full bg-blue-400 shadow-[0_0_12px_rgba(96,165,250,0.9)]' />
+              {t('Enterprise Operations Console')}
+            </div>
+            <SectionPageLayout.Title>{t(meta.titleKey)}</SectionPageLayout.Title>
+            <SectionPageLayout.Description>
+              {t(meta.descriptionKey)}
+            </SectionPageLayout.Description>
+          </div>
+          <div className='grid gap-3 sm:grid-cols-3 lg:min-w-[420px]'>
+            <div className='rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3'>
+              <div className='text-[11px] tracking-[0.18em] text-white/34 uppercase'>
+                {t('Focus')}
+              </div>
+              <div className='mt-2 text-sm font-medium text-white'>
+                {t(activeSection === 'overview' ? 'Platform overview' : activeSection === 'models' ? 'Model analytics' : 'User analytics')}
+              </div>
+            </div>
+            <div className='rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3'>
+              <div className='text-[11px] tracking-[0.18em] text-white/34 uppercase'>
+                {t('Access')}
+              </div>
+              <div className='mt-2 text-sm font-medium text-white'>
+                {t(isAdmin ? 'Administrator' : 'Workspace user')}
+              </div>
+            </div>
+            <div className='rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3'>
+              <div className='text-[11px] tracking-[0.18em] text-white/34 uppercase'>
+                {t('Status')}
+              </div>
+              <div className='mt-2 text-sm font-medium text-white'>
+                {t('Live dashboard')}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <SectionPageLayout.Content>
         <div className='space-y-3 sm:space-y-4'>
           {activeSection !== 'overview' && (

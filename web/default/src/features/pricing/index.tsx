@@ -173,22 +173,25 @@ export function Pricing() {
           }}
         />
         <PageTransition className='relative mx-auto w-full max-w-[1800px] px-3 pt-16 pb-8 sm:px-6 sm:pt-20 sm:pb-10 xl:px-8'>
-          <header className='mx-auto mb-5 max-w-3xl pt-5 text-center sm:mb-10 sm:pt-10'>
-            <p className='text-muted-foreground mb-3 text-xs font-medium tracking-widest uppercase'>
-              {t('Models Directory')}
-            </p>
-            <h1 className='text-[clamp(2rem,5.5vw,3.5rem)] leading-[1.15] font-bold tracking-tight'>
-              {t('Model Square')}
+          <header className='mx-auto mb-5 max-w-4xl pt-5 text-center sm:mb-10 sm:pt-10'>
+            <div className='enterprise-badge mx-auto w-fit'>
+              <span className='enterprise-badge-dot' />
+              <span className='text-xs font-medium tracking-[0.18em] uppercase'>
+                {t('Enterprise Model Marketplace')}
+              </span>
+            </div>
+            <h1 className='mt-6 text-[clamp(2.4rem,5.5vw,4.25rem)] leading-[1.08] font-semibold tracking-tight text-white'>
+              <span className='tech-gradient-text'>{t('Model Pricing')}</span>
+              <br />
+              <span>{t('and Capability Center')}</span>
             </h1>
-            <p className='text-muted-foreground/80 mt-3 text-sm sm:mt-4 sm:text-base'>
+            <p className='mx-auto mt-4 max-w-3xl text-sm leading-7 text-white/45 sm:text-base'>
+              {t('Compare model pricing, routing characteristics and platform delivery options in one enterprise-grade directory experience.')}
+            </p>
+            <p className='mx-auto mt-2 max-w-2xl text-xs leading-7 text-white/30 sm:text-sm'>
               {t('This site currently has {{count}} models enabled', {
                 count: models?.length || 0,
               })}
-            </p>
-            <p className='text-muted-foreground/60 mx-auto mt-2 max-w-2xl text-xs leading-relaxed sm:text-sm'>
-              {t(
-                'Discover curated AI models, compare pricing and capabilities, and choose the right model for every scenario.'
-              )}
             </p>
             <SearchBar
               value={searchInput}
@@ -197,9 +200,39 @@ export function Pricing() {
               placeholder={t(
                 'Search model name, provider, endpoint, or tag...'
               )}
-              className='mx-auto mt-4 max-w-2xl sm:mt-6'
+              className='mx-auto mt-6 max-w-2xl sm:mt-7'
             />
           </header>
+
+          <div className='mx-auto mb-5 grid max-w-6xl gap-4 md:grid-cols-3'>
+            <div className='tech-card rounded-[24px] p-5 text-left'>
+              <div className='enterprise-kpi-label'>{t('Models')}</div>
+              <div className='mt-2 text-3xl font-bold tracking-tight text-white'>
+                {models?.length || 0}
+              </div>
+              <div className='mt-2 text-sm leading-7 text-white/45'>
+                {t('Continuously compare active model inventory for different product scenarios.')}
+              </div>
+            </div>
+            <div className='tech-card rounded-[24px] p-5 text-left'>
+              <div className='enterprise-kpi-label'>{t('Providers')}</div>
+              <div className='mt-2 text-3xl font-bold tracking-tight text-white'>
+                {vendors?.length || 0}
+              </div>
+              <div className='mt-2 text-sm leading-7 text-white/45'>
+                {t('Observe upstream ecosystem diversity and plan routing strategy with confidence.')}
+              </div>
+            </div>
+            <div className='tech-card rounded-[24px] p-5 text-left'>
+              <div className='enterprise-kpi-label'>{t('View Scope')}</div>
+              <div className='mt-2 text-3xl font-bold tracking-tight text-white'>
+                {filteredModels.length}
+              </div>
+              <div className='mt-2 text-sm leading-7 text-white/45'>
+                {t('Refine enterprise selection through tags, endpoints, quota type and pricing filters.')}
+              </div>
+            </div>
+          </div>
 
           <div className='grid gap-4 xl:grid-cols-[330px_minmax(0,1fr)]'>
             <PricingSidebar
