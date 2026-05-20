@@ -48,7 +48,7 @@ export function PublicNavigation({
   const links = dynamicLinks.length > 0 ? dynamicLinks : defaultLinks
 
   return (
-    <nav className={cn('hidden items-center gap-1 md:flex', className)}>
+    <nav className={cn('hidden items-center gap-1.5 md:flex', className)}>
       {links.map((link, index) => {
         // Handle external links
         if (link.external) {
@@ -59,7 +59,7 @@ export function PublicNavigation({
               target='_blank'
               rel='noopener noreferrer'
               className={cn(
-                'text-muted-foreground hover:bg-gradient-to-r hover:from-violet-400/10 hover:to-blue-400/10 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-all duration-200 focus:outline-none',
+                'inline-flex h-10 w-max items-center justify-center rounded-full border border-transparent bg-transparent px-4 py-2 text-sm font-medium text-white/58 transition-all duration-200 hover:border-white/8 hover:bg-white/[0.04] hover:text-white focus:outline-none',
                 link.disabled && 'pointer-events-none opacity-50'
               )}
             >
@@ -73,7 +73,7 @@ export function PublicNavigation({
             key={index}
             to={link.href}
             className={cn(
-              'text-muted-foreground hover:bg-gradient-to-r hover:from-violet-400/10 hover:to-blue-400/10 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-all duration-200 focus:outline-none',
+              'inline-flex h-10 w-max items-center justify-center rounded-full border border-transparent bg-transparent px-4 py-2 text-sm font-medium text-white/58 transition-all duration-200 hover:border-white/8 hover:bg-white/[0.04] hover:text-white focus:outline-none',
               link.disabled && 'pointer-events-none opacity-50'
             )}
           >

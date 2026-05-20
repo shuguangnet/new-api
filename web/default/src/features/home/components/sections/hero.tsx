@@ -90,6 +90,33 @@ export function Hero(props: HeroProps) {
             </div>
           </div>
 
+          <div className='mt-8 grid max-w-3xl gap-4 sm:grid-cols-3'>
+            <div className='rounded-[22px] border border-white/8 bg-white/[0.03] px-4 py-4'>
+              <div className='text-[11px] tracking-[0.18em] text-white/34 uppercase'>
+                {t('Launch Scope')}
+              </div>
+              <div className='mt-2 text-lg font-semibold text-white'>
+                {t('Self-hosted / SaaS / Enterprise')}
+              </div>
+            </div>
+            <div className='rounded-[22px] border border-white/8 bg-white/[0.03] px-4 py-4'>
+              <div className='text-[11px] tracking-[0.18em] text-white/34 uppercase'>
+                {t('Core Value')}
+              </div>
+              <div className='mt-2 text-lg font-semibold text-white'>
+                {t('Gateway + Billing + Governance')}
+              </div>
+            </div>
+            <div className='rounded-[22px] border border-white/8 bg-white/[0.03] px-4 py-4'>
+              <div className='text-[11px] tracking-[0.18em] text-white/34 uppercase'>
+                {t('Delivery Mode')}
+              </div>
+              <div className='mt-2 text-lg font-semibold text-white'>
+                {t('OpenAI-compatible API')}
+              </div>
+            </div>
+          </div>
+
           <div className='mt-10 flex flex-wrap items-center gap-4'>
             {props.isAuthenticated ? (
               <Button
@@ -141,11 +168,31 @@ export function Hero(props: HeroProps) {
         <div className='relative z-10'>
           <div className='tech-card rounded-[30px] p-5 md:p-6'>
             <div className='enterprise-terminal-shell rounded-[24px] border border-white/6 bg-[#060a12] p-5 md:p-6'>
-              <div className='mb-5 flex items-center gap-2'>
-                <span className='size-2.5 rounded-full bg-[#ff5f57]' />
-                <span className='size-2.5 rounded-full bg-[#febc2e]' />
-                <span className='size-2.5 rounded-full bg-[#28c840]' />
-                <span className='ml-2 text-xs tracking-wide text-white/35'>enterprise-control-center</span>
+              <div className='mb-5 flex items-center justify-between gap-3'>
+                <div className='flex items-center gap-2'>
+                  <span className='size-2.5 rounded-full bg-[#ff5f57]' />
+                  <span className='size-2.5 rounded-full bg-[#febc2e]' />
+                  <span className='size-2.5 rounded-full bg-[#28c840]' />
+                  <span className='ml-2 text-xs tracking-wide text-white/35'>enterprise-control-center</span>
+                </div>
+                <div className='rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-medium tracking-[0.16em] text-emerald-300 uppercase'>
+                  {t('system online')}
+                </div>
+              </div>
+
+              <div className='mb-4 grid gap-3 md:grid-cols-3'>
+                <div className='rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-3'>
+                  <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>{t('Gateway')}</div>
+                  <div className='mt-2 text-sm font-semibold text-white'>{t('Multi-provider live')}</div>
+                </div>
+                <div className='rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-3'>
+                  <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>{t('Policies')}</div>
+                  <div className='mt-2 text-sm font-semibold text-white'>{t('Quota & routing active')}</div>
+                </div>
+                <div className='rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-3'>
+                  <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>{t('Analytics')}</div>
+                  <div className='mt-2 text-sm font-semibold text-white'>{t('Operational insights ready')}</div>
+                </div>
               </div>
 
               <div className='grid gap-4 md:grid-cols-2'>

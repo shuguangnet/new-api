@@ -72,8 +72,8 @@ export function Features() {
   return (
     <section className='relative z-10 px-4 py-24 md:py-28'>
       <div className='mx-auto max-w-6xl'>
-        <AnimateInView className='mb-14 max-w-2xl'>
-          <p className='tech-gradient-text mb-3 text-xs font-medium tracking-[0.24em] uppercase'>
+        <AnimateInView className='mb-14 max-w-3xl'>
+          <p className='mb-3 text-xs font-medium tracking-[0.24em] text-white/38 uppercase'>
             {t('Capabilities')}
           </p>
           <h2 className='text-3xl font-semibold tracking-tight text-white md:text-4xl'>
@@ -109,6 +109,17 @@ export function Features() {
               <p className='mt-4 text-sm leading-7 text-white/45'>
                 {t('The homepage now emphasizes enterprise scenarios, solution packaging and business value, making the product feel like a serious large-model platform instead of a generic admin panel.')}
               </p>
+
+              <div className='mt-6 grid gap-3 sm:grid-cols-2'>
+                <div className='rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-4'>
+                  <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>{t('Operators')}</div>
+                  <div className='mt-2 text-sm font-semibold text-white'>{t('Model service providers')}</div>
+                </div>
+                <div className='rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-4'>
+                  <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>{t('Scenarios')}</div>
+                  <div className='mt-2 text-sm font-semibold text-white'>{t('B2B platform, internal AI hub, API service')}</div>
+                </div>
+              </div>
 
               <div className='mt-8 space-y-4'>
                 {highlights.map((item) => (

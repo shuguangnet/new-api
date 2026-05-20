@@ -115,32 +115,45 @@ export function Stats() {
     {
       end: 50,
       suffix: '+',
-      label: t('Integrated upstream services'),
-      desc: t('Aggregate major LLM ecosystems into one stable enterprise access layer.'),
+      label: t('Integrated providers'),
+      desc: t('Aggregate major LLM ecosystems into one stable enterprise delivery surface.'),
     },
     {
       end: 100,
       suffix: '+',
-      label: t('Model billing support'),
-      desc: t('Flexible pricing, recharge and customer monetization capabilities.'),
+      label: t('Commercial pricing support'),
+      desc: t('Flexible pricing, recharge and monetization capability for platform operators.'),
     },
     {
       end: 50,
       suffix: '+',
       label: t('Compatible API routes'),
-      desc: t('Rapidly connect products through standardized developer-facing APIs.'),
+      desc: t('Connect products quickly through standardized developer-facing APIs and gateway semantics.'),
     },
     {
       end: 10,
       suffix: '+',
-      label: t('Scheduling controls'),
-      desc: t('Fine-grained quota, policy and traffic orchestration for production usage.'),
+      label: t('Governance controls'),
+      desc: t('Quota, policy and traffic orchestration aligned to real production operations.'),
     },
   ]
 
   return (
-    <section className='relative z-10 px-4 py-8 md:py-10'>
+    <section className='relative z-10 px-4 py-10 md:py-12'>
       <div className='mx-auto max-w-6xl'>
+        <div className='mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between'>
+          <div>
+            <div className='text-[11px] tracking-[0.18em] text-white/34 uppercase'>
+              {t('Platform Snapshot')}
+            </div>
+            <h2 className='mt-2 text-2xl font-semibold tracking-tight text-white md:text-3xl'>
+              {t('Position your AI gateway like a real business platform')}
+            </h2>
+          </div>
+          <p className='max-w-2xl text-sm leading-7 text-white/45'>
+            {t('Use concrete delivery, monetization and governance metrics to present a more convincing enterprise-grade product narrative.')}
+          </p>
+        </div>
         <div className='grid gap-4 md:grid-cols-2 xl:grid-cols-4'>
           {stats.map((item) => (
             <div key={item.label} className='tech-card rounded-[24px] p-6'>

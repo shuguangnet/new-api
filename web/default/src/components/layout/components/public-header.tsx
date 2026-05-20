@@ -181,7 +181,7 @@ export function PublicHeader(props: PublicHeaderProps) {
 
   return (
     <>
-      <header className='nav-blur pointer-events-none fixed inset-x-0 top-0 z-50 border-b border-[oklch(0.5_0.1_280_/_8%)]'>
+      <header className='nav-blur pointer-events-none fixed inset-x-0 top-0 z-50 border-b border-white/6'>
         <div
           className={cn(
             'pointer-events-auto mx-auto transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]',
@@ -199,7 +199,7 @@ export function PublicHeader(props: PublicHeaderProps) {
             {/* Logo */}
             <Link
               to={homeUrl}
-              className='group flex shrink-0 items-center gap-2.5'
+              className='group flex shrink-0 items-center gap-3'
             >
               <div className='flex size-7 shrink-0 items-center justify-center transition-all duration-300 group-hover:scale-105'>
                 {loading ? (
@@ -215,7 +215,7 @@ export function PublicHeader(props: PublicHeaderProps) {
                   />
                 )}
               </div>
-              <span className='gradient-text text-sm font-semibold tracking-tight'>
+              <span className='text-sm font-semibold tracking-tight text-white'>
                 {loading ? <Skeleton className='h-4 w-16' /> : displaySiteName}
               </span>
             </Link>
@@ -235,7 +235,7 @@ export function PublicHeader(props: PublicHeaderProps) {
                       tabIndex={link.disabled ? -1 : undefined}
                       onClick={(event) => handleNavLinkClick(event, link)}
                       className={cn(
-                        'text-muted-foreground rounded-lg px-3 py-1.5 text-[13px] font-medium transition-all duration-200 hover:bg-gradient-to-r hover:from-violet-400/10 hover:to-blue-400/10 hover:text-[oklch(0.65_0.2_280)]',
+                        'rounded-full border border-transparent px-3.5 py-2 text-[13px] font-medium text-white/58 transition-all duration-200 hover:border-white/8 hover:bg-white/[0.04] hover:text-white',
                         link.disabled && 'pointer-events-none opacity-50'
                       )}
                     >
@@ -250,10 +250,10 @@ export function PublicHeader(props: PublicHeaderProps) {
                     disabled={link.disabled}
                     onClick={(event) => handleNavLinkClick(event, link)}
                     className={cn(
-                      'rounded-lg px-3 py-1.5 text-[13px] font-medium transition-all duration-200 hover:bg-gradient-to-r hover:from-violet-400/10 hover:to-blue-400/10 hover:text-[oklch(0.65_0.2_280)]',
+                      'rounded-full border px-3.5 py-2 text-[13px] font-medium transition-all duration-200',
                       isActive
-                        ? 'text-foreground'
-                        : 'text-muted-foreground hover:text-foreground',
+                        ? 'border-white/10 bg-white/[0.05] text-white'
+                        : 'border-transparent text-white/58 hover:border-white/8 hover:bg-white/[0.04] hover:text-white',
                       link.disabled && 'pointer-events-none opacity-50'
                     )}
                   >
@@ -287,7 +287,7 @@ export function PublicHeader(props: PublicHeaderProps) {
                   ) : (
                     <Button
                       size='sm'
-                      className='btn-shine h-8 rounded-lg px-3.5 text-xs font-medium'
+                      className='h-9 rounded-full bg-blue-600 px-4 text-xs font-medium text-white shadow-[0_12px_30px_rgba(37,99,235,0.28)] transition-all duration-200 hover:bg-blue-500'
                       render={<Link to='/sign-in' />}
                     >
                       {t('Sign in')}
