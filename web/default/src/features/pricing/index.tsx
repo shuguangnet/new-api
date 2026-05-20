@@ -103,6 +103,26 @@ export function Pricing() {
     [usableGroup]
   )
 
+  const previewVendors = useMemo(
+    () => (vendors || []).slice(0, 6).map((vendor) => vendor.name),
+    [vendors]
+  )
+
+  const deliverySummary = useMemo(() => {
+    if (!availableGroups.length) return '—'
+    return availableGroups.slice(0, 3).join(' · ')
+  }, [availableGroups])
+
+  const endpointCoverage = useMemo(() => {
+    const types = new Set<string>()
+    ;(models || []).forEach((model) => {
+      ;(model.supported_endpoint_types || []).forEach((type) => {
+        if (type) types.add(type)
+      })
+    })
+    return types.size
+  }, [models])
+
   const handleClearAll = useCallback(() => {
     clearFilters()
     clearSearch()
@@ -156,85 +176,134 @@ export function Pricing() {
 
   return (
     <PublicLayout showMainContainer={false}>
-      <div className='relative'>
+      <div className='relative overflow-hidden'>
         <div
           aria-hidden
-          className='pointer-events-none absolute inset-x-0 top-0 h-[600px] opacity-20 dark:opacity-[0.10]'
+          className='pointer-events-none absolute inset-x-0 top-0 h-[720px] opacity-20 dark:opacity-[0.10]'
           style={{
             background: [
-              'radial-gradient(ellipse 60% 50% at 20% 20%, oklch(0.72 0.18 250 / 80%) 0%, transparent 70%)',
-              'radial-gradient(ellipse 50% 40% at 80% 15%, oklch(0.65 0.15 200 / 60%) 0%, transparent 70%)',
-              'radial-gradient(ellipse 40% 35% at 50% 70%, oklch(0.70 0.12 280 / 40%) 0%, transparent 70%)',
+              'radial-gradient(ellipse 62% 54% at 12% 16%, oklch(0.72 0.18 250 / 80%) 0%, transparent 72%)',
+              'radial-gradient(ellipse 50% 38% at 82% 14%, oklch(0.65 0.12 215 / 58%) 0%, transparent 72%)',
+              'radial-gradient(ellipse 42% 35% at 56% 72%, oklch(0.70 0.10 280 / 32%) 0%, transparent 74%)',
             ].join(', '),
             maskImage:
-              'linear-gradient(to bottom, black 40%, transparent 100%)',
+              'linear-gradient(to bottom, black 45%, transparent 100%)',
             WebkitMaskImage:
-              'linear-gradient(to bottom, black 40%, transparent 100%)',
+              'linear-gradient(to bottom, black 45%, transparent 100%)',
           }}
         />
+
         <PageTransition className='relative mx-auto w-full max-w-[1800px] px-3 pt-16 pb-8 sm:px-6 sm:pt-20 sm:pb-10 xl:px-8'>
-          <header className='mx-auto mb-5 max-w-4xl pt-5 text-center sm:mb-10 sm:pt-10'>
-            <div className='enterprise-badge mx-auto w-fit'>
-              <span className='enterprise-badge-dot' />
-              <span className='text-xs font-medium tracking-[0.18em] uppercase'>
-                {t('Enterprise Model Marketplace')}
-              </span>
+          <header className='mx-auto mb-8 max-w-6xl pt-5 sm:mb-10 sm:pt-10'>
+            <div className='mx-auto max-w-4xl text-center'>
+              <div className='enterprise-badge mx-auto w-fit'>
+                <span className='enterprise-badge-dot' />
+                <span className='text-xs font-medium tracking-[0.18em] uppercase'>
+                  {t('Enterprise Model Marketplace')}
+                </span>
+              </div>
+              <h1 className='mt-6 text-[clamp(2.6rem,5.6vw,4.5rem)] leading-[1.05] font-semibold tracking-tight text-white'>
+                <span>{t('Pricing Intelligence')}</span>
+                <br />
+                <span className='tech-gradient-text'>
+                  {t('for AI Platform Decisions')}
+                </span>
+              </h1>
+              <p className='mx-auto mt-5 max-w-3xl text-sm leading-7 text-white/45 sm:text-base'>
+                {t('Compare model cost, provider coverage, endpoint capability and delivery strategy in a directory designed for enterprise selection, routing and commercialization.')}
+              </p>
+              <SearchBar
+                value={searchInput}
+                onChange={setSearchInput}
+                onClear={clearSearch}
+                placeholder={t(
+                  'Search model name, provider, endpoint, or tag...'
+                )}
+                className='mx-auto mt-7 max-w-2xl'
+              />
             </div>
-            <h1 className='mt-6 text-[clamp(2.4rem,5.5vw,4.25rem)] leading-[1.08] font-semibold tracking-tight text-white'>
-              <span className='tech-gradient-text'>{t('Model Pricing')}</span>
-              <br />
-              <span>{t('and Capability Center')}</span>
-            </h1>
-            <p className='mx-auto mt-4 max-w-3xl text-sm leading-7 text-white/45 sm:text-base'>
-              {t('Compare model pricing, routing characteristics and platform delivery options in one enterprise-grade directory experience.')}
-            </p>
-            <p className='mx-auto mt-2 max-w-2xl text-xs leading-7 text-white/30 sm:text-sm'>
-              {t('This site currently has {{count}} models enabled', {
-                count: models?.length || 0,
-              })}
-            </p>
-            <SearchBar
-              value={searchInput}
-              onChange={setSearchInput}
-              onClear={clearSearch}
-              placeholder={t(
-                'Search model name, provider, endpoint, or tag...'
-              )}
-              className='mx-auto mt-6 max-w-2xl sm:mt-7'
-            />
+
+            <div className='mx-auto mt-8 grid max-w-6xl gap-4 lg:grid-cols-[1.2fr_0.8fr]'>
+              <div className='tech-card rounded-[30px] p-6 md:p-7'>
+                <div className='grid gap-4 md:grid-cols-3'>
+                  <div className='rounded-[22px] border border-white/6 bg-white/[0.03] p-4'>
+                    <div className='enterprise-kpi-label'>{t('Models')}</div>
+                    <div className='mt-2 text-3xl font-bold tracking-tight text-white'>
+                      {models?.length || 0}
+                    </div>
+                    <div className='mt-2 text-sm leading-6 text-white/45'>
+                      {t('Active model SKUs available for platform access and business packaging.')}
+                    </div>
+                  </div>
+                  <div className='rounded-[22px] border border-white/6 bg-white/[0.03] p-4'>
+                    <div className='enterprise-kpi-label'>{t('Providers')}</div>
+                    <div className='mt-2 text-3xl font-bold tracking-tight text-white'>
+                      {vendors?.length || 0}
+                    </div>
+                    <div className='mt-2 text-sm leading-6 text-white/45'>
+                      {t('Upstream ecosystem breadth for resilient routing and partner strategy.')}
+                    </div>
+                  </div>
+                  <div className='rounded-[22px] border border-white/6 bg-white/[0.03] p-4'>
+                    <div className='enterprise-kpi-label'>{t('Endpoint Coverage')}</div>
+                    <div className='mt-2 text-3xl font-bold tracking-tight text-white'>
+                      {endpointCoverage}
+                    </div>
+                    <div className='mt-2 text-sm leading-6 text-white/45'>
+                      {t('Capability breadth across chat, embedding, image and other endpoint types.')}
+                    </div>
+                  </div>
+                </div>
+
+                <div className='mt-5 flex flex-wrap items-center gap-2 text-sm text-white/52'>
+                  {(previewVendors.length > 0 ? previewVendors : [t('OpenAI'), t('Claude'), t('Gemini')]).map((name) => (
+                    <div
+                      key={name}
+                      className='rounded-full border border-white/8 bg-white/[0.03] px-3 py-1.5'
+                    >
+                      {name}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className='tech-card rounded-[30px] p-6 md:p-7'>
+                <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>
+                  {t('Selection brief')}
+                </div>
+                <div className='mt-3 text-xl font-semibold tracking-tight text-white'>
+                  {t('Use pricing as a procurement and routing layer, not just a rate sheet')}
+                </div>
+                <div className='mt-4 space-y-4 text-sm leading-7 text-white/45'>
+                  <p>
+                    {t('Shortlist providers for cost efficiency, normalize delivery groups, and evaluate endpoint fit before exposing models to internal teams or customers.')}
+                  </p>
+                  <div className='rounded-[22px] border border-white/6 bg-white/[0.03] p-4'>
+                    <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>
+                      {t('Common delivery groups')}
+                    </div>
+                    <div className='mt-2 text-sm font-semibold text-white'>
+                      {deliverySummary}
+                    </div>
+                  </div>
+                  <div className='rounded-[22px] border border-white/6 bg-white/[0.03] p-4'>
+                    <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>
+                      {t('Filtered scope')}
+                    </div>
+                    <div className='mt-2 text-sm font-semibold text-white'>
+                      {hasActiveFilters
+                        ? t('{{count}} models in the current decision set', {
+                            count: filteredModels.length,
+                          })
+                        : t('Showing the full active model catalog')}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </header>
 
-          <div className='mx-auto mb-5 grid max-w-6xl gap-4 md:grid-cols-3'>
-            <div className='tech-card rounded-[24px] p-5 text-left'>
-              <div className='enterprise-kpi-label'>{t('Models')}</div>
-              <div className='mt-2 text-3xl font-bold tracking-tight text-white'>
-                {models?.length || 0}
-              </div>
-              <div className='mt-2 text-sm leading-7 text-white/45'>
-                {t('Continuously compare active model inventory for different product scenarios.')}
-              </div>
-            </div>
-            <div className='tech-card rounded-[24px] p-5 text-left'>
-              <div className='enterprise-kpi-label'>{t('Providers')}</div>
-              <div className='mt-2 text-3xl font-bold tracking-tight text-white'>
-                {vendors?.length || 0}
-              </div>
-              <div className='mt-2 text-sm leading-7 text-white/45'>
-                {t('Observe upstream ecosystem diversity and plan routing strategy with confidence.')}
-              </div>
-            </div>
-            <div className='tech-card rounded-[24px] p-5 text-left'>
-              <div className='enterprise-kpi-label'>{t('View Scope')}</div>
-              <div className='mt-2 text-3xl font-bold tracking-tight text-white'>
-                {filteredModels.length}
-              </div>
-              <div className='mt-2 text-sm leading-7 text-white/45'>
-                {t('Refine enterprise selection through tags, endpoints, quota type and pricing filters.')}
-              </div>
-            </div>
-          </div>
-
-          <div className='grid gap-4 xl:grid-cols-[330px_minmax(0,1fr)]'>
+          <section className='mx-auto mb-5 grid max-w-6xl gap-4 xl:grid-cols-[330px_minmax(0,1fr)]'>
             <PricingSidebar
               quotaTypeFilter={quotaTypeFilter}
               endpointTypeFilter={endpointTypeFilter}
@@ -257,40 +326,69 @@ export function Pricing() {
             />
 
             <main className='min-w-0 space-y-4'>
-              <PricingToolbar
-                filteredCount={filteredModels.length}
-                totalCount={models?.length}
-                sortBy={sortBy}
-                onSortChange={setSortBy}
-                tokenUnit={tokenUnit}
-                onTokenUnitChange={setTokenUnit}
-                showRechargePrice={showRechargePrice}
-                onRechargePriceChange={setShowRechargePrice}
-                viewMode={viewMode}
-                onViewModeChange={setViewMode}
-                quotaTypeFilter={quotaTypeFilter}
-                endpointTypeFilter={endpointTypeFilter}
-                vendorFilter={vendorFilter}
-                groupFilter={groupFilter}
-                tagFilter={tagFilter}
-                onQuotaTypeChange={setQuotaTypeFilter}
-                onEndpointTypeChange={setEndpointTypeFilter}
-                onVendorChange={setVendorFilter}
-                onGroupChange={setGroupFilter}
-                onTagChange={setTagFilter}
-                vendors={vendors || []}
-                groups={availableGroups}
-                groupRatios={groupRatio}
-                tags={availableTags}
-                models={models || []}
-                hasActiveFilters={hasActiveFilters}
-                activeFilterCount={activeFilterCount}
-                onClearFilters={clearFilters}
-              />
+              <div className='tech-card rounded-[28px] p-4 md:p-5'>
+                <div className='mb-4 flex flex-col gap-3 md:flex-row md:items-end md:justify-between'>
+                  <div>
+                    <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>
+                      {t('Decision workspace')}
+                    </div>
+                    <h2 className='mt-2 text-2xl font-semibold tracking-tight text-white'>
+                      {t('Model catalog and commercial comparison')}
+                    </h2>
+                    <p className='mt-2 max-w-3xl text-sm leading-7 text-white/45'>
+                      {t('Switch between card and table views, adjust token units, compare recharge strategy, and narrow the catalog into a procurement-ready shortlist.')}
+                    </p>
+                  </div>
+                  <div className='rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-3 text-left md:w-[280px]'>
+                    <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>
+                      {t('Current result set')}
+                    </div>
+                    <div className='mt-2 text-2xl font-semibold tracking-tight text-white'>
+                      {filteredModels.length}
+                    </div>
+                    <div className='mt-1 text-xs leading-6 text-white/42'>
+                      {hasActiveFilters
+                        ? t('Scoped by your active search and filter strategy.')
+                        : t('All active catalog entries are currently visible.')}
+                    </div>
+                  </div>
+                </div>
+
+                <PricingToolbar
+                  filteredCount={filteredModels.length}
+                  totalCount={models?.length}
+                  sortBy={sortBy}
+                  onSortChange={setSortBy}
+                  tokenUnit={tokenUnit}
+                  onTokenUnitChange={setTokenUnit}
+                  showRechargePrice={showRechargePrice}
+                  onRechargePriceChange={setShowRechargePrice}
+                  viewMode={viewMode}
+                  onViewModeChange={setViewMode}
+                  quotaTypeFilter={quotaTypeFilter}
+                  endpointTypeFilter={endpointTypeFilter}
+                  vendorFilter={vendorFilter}
+                  groupFilter={groupFilter}
+                  tagFilter={tagFilter}
+                  onQuotaTypeChange={setQuotaTypeFilter}
+                  onEndpointTypeChange={setEndpointTypeFilter}
+                  onVendorChange={setVendorFilter}
+                  onGroupChange={setGroupFilter}
+                  onTagChange={setTagFilter}
+                  vendors={vendors || []}
+                  groups={availableGroups}
+                  groupRatios={groupRatio}
+                  tags={availableTags}
+                  models={models || []}
+                  hasActiveFilters={hasActiveFilters}
+                  activeFilterCount={activeFilterCount}
+                  onClearFilters={clearFilters}
+                />
+              </div>
 
               {renderPricingContent()}
             </main>
-          </div>
+          </section>
 
           {selectedModel && (
             <ModelDetailsDrawer

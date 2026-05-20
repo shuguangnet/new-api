@@ -244,7 +244,7 @@ export function PricingSidebar(props: PricingSidebarProps) {
   ]
 
   return (
-    <aside className={cn('glass-panel rounded-2xl p-3', props.className)}>
+    <aside className={cn('rounded-[24px] border border-white/6 bg-[#0b0d12]/92 p-3 shadow-[0_18px_48px_rgba(0,0,0,0.28)] backdrop-blur-sm', props.className)}>
       <div className='mb-2.5 flex items-center justify-between gap-2'>
         <div>
           <h2 className='text-foreground text-sm font-bold'>{t('Filter')}</h2>
