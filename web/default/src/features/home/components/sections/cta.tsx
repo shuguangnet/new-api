@@ -37,18 +37,48 @@ export function CTA(props: CTAProps) {
   return (
     <section className='relative z-10 overflow-hidden px-4 py-24 md:py-28'>
       <AnimateInView className='mx-auto max-w-5xl' animation='scale-in'>
-        <div className='tech-card rounded-[32px] px-6 py-10 text-center md:px-10 md:py-14'>
-          <p className='tech-gradient-text mb-3 text-xs font-medium tracking-[0.24em] uppercase'>
-            {t('Ready to Launch')}
-          </p>
-          <h2 className='mx-auto max-w-3xl text-3xl font-semibold tracking-tight text-white md:text-5xl'>
-            {t('Upgrade your product into an enterprise-ready Big Model Platform')}
-          </h2>
-          <p className='mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/45 md:text-base'>
-            {t('Start with a unified model gateway, then extend into governance, operations, pricing and customer-facing platform capabilities.')}
-          </p>
+        <div className='tech-card rounded-[32px] px-6 py-10 md:px-10 md:py-14'>
+          <div className='grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end'>
+            <div className='max-w-3xl'>
+              <p className='mb-3 text-xs font-medium tracking-[0.24em] text-white/38 uppercase'>
+                {t('Ready to Launch')}
+              </p>
+              <h2 className='max-w-3xl text-3xl font-semibold tracking-tight text-white md:text-5xl'>
+                {t('Upgrade your product into an enterprise-ready Big Model Platform')}
+              </h2>
+              <p className='mt-5 max-w-2xl text-sm leading-7 text-white/45 md:text-base'>
+                {t('Start with a unified model gateway, then extend into governance, operations, pricing and customer-facing platform capabilities.')}
+              </p>
+            </div>
+            <div className='grid gap-3 sm:grid-cols-3 lg:w-[420px] lg:grid-cols-1'>
+              <div className='rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-4'>
+                <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>{t('Delivery')}</div>
+                <div className='mt-2 text-sm font-semibold text-white'>{t('Self-hosted or enterprise deployment')}</div>
+              </div>
+              <div className='rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-4'>
+                <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>{t('Business')}</div>
+                <div className='mt-2 text-sm font-semibold text-white'>{t('Quota, recharge and pricing ready')}</div>
+              </div>
+              <div className='rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-4'>
+                <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>{t('Experience')}</div>
+                <div className='mt-2 text-sm font-semibold text-white'>{t('Enterprise console + customer-facing workflow')}</div>
+              </div>
+            </div>
+          </div>
 
-          <div className='mt-8 flex flex-wrap items-center justify-center gap-4'>
+          <div className='mt-8 flex flex-wrap items-center gap-3 text-sm text-white/52'>
+            <div className='rounded-full border border-white/8 bg-white/[0.03] px-3 py-1.5'>
+              {t('OpenAI-compatible integration')}
+            </div>
+            <div className='rounded-full border border-white/8 bg-white/[0.03] px-3 py-1.5'>
+              {t('Enterprise operations console')}
+            </div>
+            <div className='rounded-full border border-white/8 bg-white/[0.03] px-3 py-1.5'>
+              {t('Model commercialization capability')}
+            </div>
+          </div>
+
+          <div className='mt-8 flex flex-wrap items-center gap-4'>
             <Button
               className='group h-12 rounded-xl bg-blue-600 px-6 text-sm font-medium shadow-lg shadow-blue-600/20 transition-all duration-300 hover:bg-blue-500 hover:shadow-blue-500/30'
               render={<Link to='/sign-up' />}
