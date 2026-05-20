@@ -185,10 +185,10 @@ export function Features(_props: FeaturesProps) {
 
       <div className='mx-auto max-w-6xl'>
         <AnimateInView className='mb-16 max-w-lg'>
-          <p className='gradient-text mb-3 text-xs font-medium tracking-widest uppercase'>
+          <p className='tech-gradient-text mb-3 text-xs font-medium tracking-widest uppercase'>
             {t('Core Features')}
           </p>
-          <h2 className='gradient-text text-2xl leading-tight font-bold tracking-tight md:text-3xl'>
+          <h2 className='tech-gradient-text text-2xl leading-tight font-bold tracking-tight md:text-3xl'>
             {t('Built for developers,')}
             <br />
             {t('designed for scale')}
@@ -202,10 +202,10 @@ export function Features(_props: FeaturesProps) {
               key={f.id}
               delay={i * 100}
               animation='scale-in'
-              className={`glass-panel card-float group hover:bg-primary/5 p-7 transition-all duration-500 md:p-8 ${f.span}`}
+              className={`tech-card group p-7 transition-all duration-500 md:p-8 ${f.span}`}
             >
               <div className='mb-3 flex items-center gap-3'>
-                <span className='bg-gradient-to-br from-[oklch(0.5_0.2_270_/_15%)] to-[oklch(0.5_0.15_300_/_10%)] rounded-xl p-3'>
+                <span className='tech-icon-box'>
                   {f.icon}
                 </span>
                 <h3 className='text-sm font-semibold'>{f.title}</h3>
@@ -227,7 +227,7 @@ export function Features(_props: FeaturesProps) {
               animation='fade-up'
               className='flex flex-col items-center text-center'
             >
-              <div className='bg-gradient-to-br from-[oklch(0.5_0.2_270_/_15%)] to-[oklch(0.5_0.15_300_/_10%)] rounded-xl p-3 text-muted-foreground group-hover:text-foreground mb-3 flex size-12 items-center justify-center transition-colors'>
+              <div className='tech-icon-box mb-3 mx-auto size-12'>
                 {f.icon}
               </div>
               <h3 className='mb-1.5 text-sm font-semibold'>{f.title}</h3>

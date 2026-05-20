@@ -105,15 +105,15 @@ export function Stats(_props: StatsProps) {
   ]
 
   return (
-    <div className='glass-panel rounded-2xl relative z-10'>
-      <div className='mx-auto max-w-6xl px-6 py-10 md:py-12'>
-        <div className='divide-x divide-[oklch(0.5_0.1_280_/_15%)] grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-12'>
-          {stats.map((s) => (
+    <div className='relative z-10 mx-auto max-w-5xl px-6'>
+      <div className='rounded-2xl border border-white/[0.04] bg-[#0c0c12]/80 px-6 py-10 backdrop-blur-sm md:py-12'>
+        <div className='grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-0'>
+          {stats.map((s, i) => (
             <div
               key={s.label}
-              className='hover-lift flex flex-col items-center text-center'
+              className={`flex flex-col items-center text-center ${i > 0 ? 'md:border-l md:border-white/[0.05]' : ''}`}
             >
-              <span className='stat-glow gradient-text text-2xl font-bold tracking-tight md:text-3xl'>
+              <span className='tech-stat text-2xl font-bold tracking-tight md:text-3xl'>
                 <Counter end={s.end} suffix={s.suffix} decimals={s.decimals} />
               </span>
               <span className='text-muted-foreground mt-1.5 text-xs'>

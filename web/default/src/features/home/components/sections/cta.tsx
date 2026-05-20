@@ -36,23 +36,23 @@ export function CTA(props: CTAProps) {
 
   return (
     <section className='relative z-10 overflow-hidden py-24 px-4'>
-      {/* Gradient mesh background */}
+      {/* Dark tech glow background */}
       <div
         aria-hidden
-        className='absolute inset-0 -z-10 opacity-20 dark:opacity-[0.08]'
+        className='absolute inset-0 -z-10'
         style={{
           background: [
-            'radial-gradient(ellipse 50% 50% at 30% 50%, oklch(0.7 0.15 250 / 70%) 0%, transparent 70%)',
-            'radial-gradient(ellipse 40% 40% at 70% 40%, oklch(0.65 0.12 200 / 50%) 0%, transparent 70%)',
+            'radial-gradient(ellipse 50% 50% at 30% 50%, rgba(59,130,246,0.06) 0%, transparent 70%)',
+            'radial-gradient(ellipse 40% 40% at 70% 40%, rgba(6,182,212,0.04) 0%, transparent 70%)',
           ].join(', '),
         }}
       />
 
       <AnimateInView
-        className='glass-panel rounded-2xl hover-lift mx-auto max-w-2xl text-center p-8 md:p-12'
+        className='tech-card group mx-auto max-w-2xl text-center p-8 md:p-12 rounded-2xl'
         animation='scale-in'
       >
-        <h2 className='gradient-text text-2xl leading-tight font-bold tracking-tight md:text-4xl'>
+        <h2 className='tech-gradient-text text-2xl leading-tight font-bold tracking-tight md:text-4xl'>
           {t('Ready to simplify')}
           <br />
           <span>
@@ -65,21 +65,21 @@ export function CTA(props: CTAProps) {
           )}
         </p>
         <div className='mt-8 flex items-center justify-center gap-3'>
-          <Button className='btn-shine group rounded-lg' render={<Link to='/sign-up' />}>
+          <Button
+            className='group rounded-lg bg-blue-600 px-6 shadow-lg shadow-blue-600/20 transition-all duration-300 hover:bg-blue-500 hover:shadow-xl hover:shadow-blue-500/30'
+            render={<Link to='/sign-up' />}
+          >
             {t('Get Started')}
             <ArrowRight className='ml-1 size-3.5 transition-transform duration-200 group-hover:translate-x-0.5' />
           </Button>
           <Button
             variant='outline'
-            className='border-border/50 hover:border-border hover:bg-muted/50 rounded-lg'
+            className='rounded-lg border border-white/10 bg-white/[0.02] px-6 text-white/60 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.05] hover:text-white/80'
             render={<Link to='/pricing' />}
           >
             {t('View Pricing')}
           </Button>
         </div>
-
-        {/* Gradient divider line at bottom */}
-        <div className='section-divider mx-auto mt-8 max-w-sm' />
       </AnimateInView>
     </section>
   )

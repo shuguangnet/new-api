@@ -959,3 +959,447 @@ For commercial licensing, please contact support@quantumnous.com
     animation: none !important;
   }
 }
+
+
+/* ============================================================
+   ENTERPRISE MINIMAL OVERRIDE — Linear/Vercel/Stripe aesthetic
+   覆盖层：将 Nebula 紫蓝科技风替换为企业级极简暗色
+   ============================================================ */
+
+@layer components {
+  /* ── 1. Glass panel → solid dark card ── */
+  .glass-panel {
+    background: #111111;
+    backdrop-filter: none;
+    border: 1px solid hsl(240 4% 16%);
+    box-shadow: none;
+  }
+  .dark .glass-panel {
+    background: #0e0e0e;
+    backdrop-filter: none;
+    border: 1px solid hsl(240 4% 14%);
+    box-shadow: none;
+  }
+
+  /* ── 2. Gradient border → solid subtle border ── */
+  .gradient-border::before {
+    display: none;
+  }
+  .gradient-border {
+    border: 1px solid hsl(240 4% 16%);
+  }
+
+  /* ── 3. Glow pulse → remove glow, keep subtle opacity pulse ── */
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: none; }
+    50%   { box-shadow: none; }
+  }
+
+  /* ── 4. Gradient text → solid white or blue ── */
+  .gradient-text {
+    background: none;
+    -webkit-background-clip: initial;
+    -webkit-text-fill-color: initial;
+    background-clip: initial;
+    color: #ffffff;
+  }
+
+  /* ── 5. Hover lift → subtle dark shadow, no purple glow ── */
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  /* ── 6. Sidebar glass → solid dark ── */
+  .sidebar-glass {
+    background: #0a0a0a;
+    backdrop-filter: none;
+    border-right: 1px solid hsl(240 4% 12%);
+  }
+
+  /* ── 7. Button shine → subtle neutral shine ── */
+  .btn-shine {
+    background-image: linear-gradient(
+      120deg,
+      transparent 0%,
+      transparent 40%,
+      rgba(255,255,255,0.06) 50%,
+      transparent 60%,
+      transparent 100%
+    );
+  }
+
+  /* ── 8. Card float → subtle neutral shadow, no purple glow ── */
+  .card-float {
+    border: 1px solid hsl(240 4% 14%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .card-float:hover {
+    transform: translateY(-3px);
+    border-color: hsl(240 4% 22%);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  }
+
+  /* ── 9. Input glow → crisp blue focus ring ── */
+  .input-glow:focus,
+  .input-glow:focus-within {
+    border-color: hsl(217 91% 60% / 50%);
+    box-shadow: 0 0 0 2px hsl(217 91% 60% / 20%);
+    outline: none;
+  }
+
+  /* ── 10. Nav blur → solid dark, no gradient divider ── */
+  .nav-blur {
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom: 1px solid hsl(240 4% 12%);
+    border-image: none;
+    box-shadow: none;
+  }
+  .dark .nav-blur {
+    background: rgba(10, 10, 10, 0.98);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  /* ── 11. Sidebar item glow → blue left border indicator ── */
+  .sidebar-item-glow:hover,
+  .sidebar-item-glow[data-state="active"],
+  .sidebar-item-glow[aria-current="page"] {
+    border-left: 2px solid #2563eb;
+    border-image: none;
+    background: linear-gradient(90deg, hsl(217 91% 60% / 6%), transparent 80%);
+    box-shadow: none;
+  }
+
+  /* ── 12. Stat glow → no glow ── */
+  .stat-glow {
+    text-shadow: none;
+  }
+
+  /* ── 13. Section divider → neutral gray gradient ── */
+  .section-divider {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(240 4% 20% / 60%) 15%,
+      hsl(240 4% 25% / 80%) 50%,
+      hsl(240 4% 20% / 60%) 85%,
+      transparent 100%
+    );
+  }
+
+  /* ── 14. Badge glow → subtle blue badge ── */
+  .badge-glow {
+    background: hsl(217 91% 60% / 12%);
+    color: hsl(217 91% 70%);
+    border: 1px solid hsl(217 91% 60% / 18%);
+    box-shadow: none;
+    transition: background 0.2s ease;
+  }
+  .badge-glow:hover {
+    background: hsl(217 91% 60% / 18%);
+    box-shadow: none;
+  }
+
+  /* ── 15. Table row hover → neutral ── */
+  .table-row-hover::before {
+    background: #2563eb;
+    opacity: 0;
+  }
+  .table-row-hover:hover {
+    background: linear-gradient(90deg, hsl(240 4% 16% / 40%), hsl(240 4% 14% / 20%), transparent 80%);
+  }
+  .table-row-hover:hover::before {
+    opacity: 1;
+  }
+
+  /* ── 16. Hero mesh → neutral dark grid ── */
+  .hero-mesh {
+    background:
+      radial-gradient(ellipse at 50% 50%, rgba(37, 99, 235, 0.04) 0%, transparent 70%),
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 100% 100%, 48px 48px, 48px 48px;
+  }
+
+  /* ── 17. Orb → very subtle blue-gray ghost ── */
+  .orb {
+    background: radial-gradient(
+      circle at 35% 35%,
+      rgba(37, 99, 235, 0.12),
+      rgba(37, 99, 235, 0.05),
+      transparent
+    );
+    filter: blur(40px);
+    opacity: 0.3;
+    animation: none;
+  }
+  .orb::after {
+    display: none;
+  }
+
+  /* ── 18. Nebula animations → neutralized ── */
+  @keyframes nebula-core-pulse {
+    0%, 100% {
+      opacity: 0.6;
+      transform: scale(1);
+      box-shadow: none;
+    }
+    50% {
+      opacity: 0.9;
+      transform: scale(1.1);
+      box-shadow: none;
+    }
+  }
+
+  /* ── 19. Glass utilities → solid neutral ── */
+  .glass-1 {
+    background: linear-gradient(to bottom, #111111, #0e0e0e);
+    border: 1px solid hsl(240 4% 14%);
+  }
+  .glass-2 {
+    background: linear-gradient(to bottom, #111111, #0f0f0f);
+    border: 1px solid hsl(240 4% 14%);
+  }
+  .glass-3 {
+    background: linear-gradient(to bottom, rgba(37,99,235,0.04), rgba(37,99,235,0.02));
+    border: 1px solid hsl(240 4% 14%);
+  }
+  .glass-4 {
+    background: linear-gradient(to bottom, rgba(37,99,235,0.06), rgba(37,99,235,0.03));
+    border: 1px solid hsl(240 4% 14%);
+    border-bottom-color: hsl(240 4% 12%);
+  }
+  .glass-5 {
+    background: linear-gradient(to bottom, rgba(37,99,235,0.08), rgba(37,99,235,0.04));
+    border: 1px solid hsl(240 4% 14%);
+    border-bottom-color: hsl(240 4% 12%);
+  }
+}
+
+
+/* ============================================================
+   TECH THEME — Sci-fi visual effects for landing page
+   ============================================================ */
+
+/* Horizontal scanning line animation */
+@keyframes tech-scan {
+  0% { transform: translateY(-100vh); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+.tech-scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #3b82f6 50%, transparent 100%);
+  animation: tech-scan 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Scanning line glow underneath */
+.tech-scan-line::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(180deg, transparent 0%, rgba(59,130,246,0.06) 50%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Tech grid overlay */
+.tech-grid {
+  background-image: 
+    linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at 50% 40%, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black 30%, transparent 70%);
+}
+
+/* Glow orb - electric blue */
+.tech-glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  opacity: 0.4;
+}
+.tech-glow-orb-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(59,130,246,0.2), transparent 70%);
+  top: -200px;
+  right: -100px;
+}
+.tech-glow-orb-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(6,182,212,0.1), transparent 70%);
+  bottom: -150px;
+  left: -100px;
+}
+
+/* Glowing gradient text - electric blue/cyan */
+.tech-gradient-text {
+  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 40%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Tech badge */
+.tech-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.375rem 1rem;
+  font-size: 0.875rem;
+  border: 1px solid rgba(59,130,246,0.2);
+  background: rgba(59,130,246,0.05);
+  color: rgba(96,165,250,0.8);
+}
+.tech-badge-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #3b82f6;
+  box-shadow: 0 0 6px #3b82f6, 0 0 12px rgba(59,130,246,0.4);
+  animation: tech-dot-pulse 2s ease-in-out infinite;
+}
+@keyframes tech-dot-pulse {
+  0%, 100% { box-shadow: 0 0 6px #3b82f6, 0 0 12px rgba(59,130,246,0.4); }
+  50% { box-shadow: 0 0 10px #3b82f6, 0 0 20px rgba(59,130,246,0.6), 0 0 30px rgba(59,130,246,0.2); }
+}
+
+/* Tech feature card */
+.tech-card {
+  position: relative;
+  border: 1px solid hsl(240 6% 14%);
+  background: linear-gradient(180deg, rgba(17,17,17,0.8) 0%, rgba(10,10,10,0.95) 100%);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+.tech-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, transparent 0%, transparent 40%, rgba(59,130,246,0.08) 50%, transparent 60%, transparent 100%);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.tech-card:hover {
+  border-color: rgba(59,130,246,0.25);
+  box-shadow: 0 0 30px rgba(59,130,246,0.06);
+}
+.tech-card:hover::before {
+  opacity: 1;
+}
+
+/* Tech icon container */
+.tech-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(59,130,246,0.15);
+  background: rgba(59,130,246,0.06);
+  color: #60a5fa;
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+.tech-card:hover .tech-icon-box {
+  border-color: rgba(59,130,246,0.3);
+  background: rgba(59,130,246,0.1);
+  box-shadow: 0 0 16px rgba(59,130,246,0.08);
+}
+
+/* Glowing stat number */
+.tech-stat {
+  background: linear-gradient(135deg, #ffffff 0%, #93c5fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 12px rgba(59,130,246,0.15));
+}
+
+/* Corner decorations for hero */
+.tech-corner-decoration {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-color: rgba(59,130,246,0.15);
+  pointer-events: none;
+}
+.tech-corner-tl {
+  top: 60px;
+  left: 20px;
+  border-top: 1px solid;
+  border-left: 1px solid;
+}
+.tech-corner-tr {
+  top: 60px;
+  right: 20px;
+  border-top: 1px solid;
+  border-right: 1px solid;
+}
+.tech-corner-bl {
+  bottom: 60px;
+  left: 20px;
+  border-bottom: 1px solid;
+  border-left: 1px solid;
+}
+.tech-corner-br {
+  bottom: 60px;
+  right: 20px;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+}
+
+/* Subtle data stream effect */
+@keyframes tech-data-stream {
+  0% { opacity: 0; transform: translateY(-20px); }
+  20% { opacity: 0.4; }
+  80% { opacity: 0.4; }
+  100% { opacity: 0; transform: translateY(20px); }
+}
+.tech-data-dot {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #3b82f6;
+  border-radius: 50%;
+  animation: tech-data-stream 3s ease-in-out infinite;
+}
+
+/* Floating particles */
+@keyframes tech-float-particle {
+  0%, 100% { transform: translate(0, 0); opacity: 0; }
+  10% { opacity: 0.3; }
+  90% { opacity: 0.3; }
+  100% { transform: translate(var(--tx, 20px), var(--ty, -20px)); opacity: 0; }
+}
+.tech-particle {
+  position: absolute;
+  width: 1px;
+  height: 30px;
+  background: linear-gradient(180deg, transparent, rgba(59,130,246,0.15), transparent);
+  animation: tech-float-particle 4s ease-in-out infinite;
+  pointer-events: none;
+}

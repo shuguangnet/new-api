@@ -52,7 +52,7 @@ export function HowItWorks() {
     <section className='relative z-10 px-6 py-24 md:py-32'>
       <div className='mx-auto max-w-6xl'>
         <AnimateInView className='mb-16 text-center md:mb-20'>
-          <p className='gradient-text mb-3 text-xs font-medium tracking-widest uppercase'>
+          <p className='tech-gradient-text mb-3 text-xs font-medium tracking-widest uppercase'>
             {t('How It Works')}
           </p>
           <h2 className='text-2xl font-bold tracking-tight md:text-3xl'>
@@ -66,13 +66,13 @@ export function HowItWorks() {
               key={step.num}
               delay={i * 150}
               animation='fade-up'
-              className='glass-panel hover-lift relative flex flex-col items-center text-center p-6 rounded-2xl'
+              className='tech-card group relative flex flex-col items-center text-center p-6 rounded-2xl'
             >
               <div className='relative mb-6'>
-                <div className='text-primary border-primary/20 bg-primary/5 flex size-16 items-center justify-center rounded-2xl border glow-pulse'>
+                <div className='flex size-16 items-center justify-center rounded-2xl border border-blue-500/15 bg-blue-500/5 text-blue-400 transition-all duration-300 group-hover:border-blue-500/25 group-hover:bg-blue-500/10 group-hover:shadow-lg group-hover:shadow-blue-500/10'>
                   {step.icon}
                 </div>
-                <div className='bg-gradient-to-br from-[oklch(0.65_0.25_270)] to-[oklch(0.55_0.2_300)] text-white rounded-full w-10 h-10 flex items-center justify-center font-bold absolute -top-2 -right-2'>
+                <div className='flex size-8 items-center justify-center rounded-full bg-blue-600 shadow-lg shadow-blue-500/20 text-white text-xs font-bold absolute -top-1 -right-1'>
                   {step.num}
                 </div>
               </div>
@@ -82,7 +82,7 @@ export function HowItWorks() {
               </p>
               {/* Connection line between steps on desktop */}
               {i < steps.length - 1 && (
-                <div className='bg-gradient-to-b from-[oklch(0.5_0.2_270_/_40%)] to-[oklch(0.5_0.2_300_/_40%)] hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-12 h-0.5' />
+                <div className='hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-12 h-px bg-gradient-to-r from-blue-500/20 to-transparent' />
               )}
             </AnimateInView>
           ))}
