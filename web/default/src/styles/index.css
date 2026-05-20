@@ -132,6 +132,51 @@ For commercial licensing, please contact support@quantumnous.com
     background: oklch(0.13 0.02 270 / 80%);
     backdrop-filter: blur(20px) saturate(150%);
   }
+  
+  /* ── Nebula Orbital Spinner ─────────────────── */
+  .animate-nebula-core-pulse {
+    animation: nebula-core-pulse 2s ease-in-out infinite;
+  }
+  
+  .animate-nebula-orbit-1 {
+    animation: nebula-orbit-1 1.4s linear infinite;
+  }
+  
+  .animate-nebula-orbit-2 {
+    animation: nebula-orbit-2 1.8s linear infinite;
+  }
+  
+  .animate-nebula-orbit-3 {
+    animation: nebula-orbit-3 2.2s linear infinite;
+  }
+  
+  @keyframes nebula-core-pulse {
+    0%, 100% {
+      opacity: 0.8;
+      transform: scale(1);
+      box-shadow: 0 0 8px oklch(0.55 0.2 280 / 50%), 0 0 16px oklch(0.55 0.15 280 / 25%);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.15);
+      box-shadow: 0 0 12px oklch(0.55 0.2 280 / 60%), 0 0 24px oklch(0.55 0.15 280 / 30%);
+    }
+  }
+  
+  @keyframes nebula-orbit-1 {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  @keyframes nebula-orbit-2 {
+    0%   { transform: rotate(120deg); }
+    100% { transform: rotate(480deg); }
+  }
+  
+  @keyframes nebula-orbit-3 {
+    0%   { transform: rotate(240deg); }
+    100% { transform: rotate(600deg); }
+  }
 }
 
 /* Vercel Geist-style skeleton shimmer */
@@ -176,6 +221,12 @@ For commercial licensing, please contact support@quantumnous.com
   .auto-skeleton-fade [class^='skeleton-'] {
     animation: none !important;
     background: var(--skeleton-base) !important;
+  }
+  .animate-nebula-core-pulse,
+  .animate-nebula-orbit-1,
+  .animate-nebula-orbit-2,
+  .animate-nebula-orbit-3 {
+    animation: none !important;
   }
 }
 
