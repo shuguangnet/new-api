@@ -24,7 +24,7 @@ import { ROLE } from '@/lib/roles'
 import { useLayout } from '@/context/layout-provider'
 import { useSidebarConfig } from '@/hooks/use-sidebar-config'
 import { useSidebarData } from '@/hooks/use-sidebar-data'
-import { Sidebar, SidebarContent, SidebarRail } from '@/components/ui/sidebar'
+import { Sidebar, SidebarContent, SidebarFooter, SidebarRail } from '@/components/ui/sidebar'
 import { getNavGroupsForPath } from '../lib/workspace-registry'
 import { NavGroup } from './nav-group'
 
@@ -62,14 +62,15 @@ export function AppSidebar() {
   }, [configFilteredNavGroups, userRole])
 
   return (
-    <Sidebar collapsible={collapsible} variant={variant} className="sidebar-glass border-r-0">
-      <SidebarContent className='py-3 gap-1'>
+    <Sidebar collapsible={collapsible} variant={variant} className='border-r border-[oklch(0.5_0.1_280_/_8%)]'>
+      <SidebarContent className='sidebar-glass py-3 gap-1'>
         {currentNavGroups.map((props) => {
           const key = props.id || props.title
           return <NavGroup key={key} {...props} />
         })}
       </SidebarContent>
       <SidebarRail />
+      <SidebarFooter className='border-t border-[oklch(0.5_0.1_280_/_10%)]' />
     </Sidebar>
   )
 }

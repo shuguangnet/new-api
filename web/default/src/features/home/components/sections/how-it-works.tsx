@@ -66,13 +66,13 @@ export function HowItWorks() {
               key={step.num}
               delay={i * 150}
               animation='fade-up'
-              className='relative flex flex-col items-center text-center'
+              className='glass-panel hover-lift relative flex flex-col items-center text-center p-6 rounded-2xl'
             >
               <div className='relative mb-6'>
                 <div className='text-primary border-primary/20 bg-primary/5 flex size-16 items-center justify-center rounded-2xl border glow-pulse'>
                   {step.icon}
                 </div>
-                <div className='bg-primary text-primary-foreground absolute -top-2 -right-2 flex size-6 items-center justify-center rounded-full text-xs font-bold'>
+                <div className='bg-gradient-to-br from-[oklch(0.65_0.25_270)] to-[oklch(0.55_0.2_300)] text-white rounded-full w-10 h-10 flex items-center justify-center font-bold absolute -top-2 -right-2'>
                   {step.num}
                 </div>
               </div>
@@ -80,6 +80,10 @@ export function HowItWorks() {
               <p className='text-muted-foreground max-w-[240px] text-sm leading-relaxed'>
                 {step.desc}
               </p>
+              {/* Connection line between steps on desktop */}
+              {i < steps.length - 1 && (
+                <div className='bg-gradient-to-b from-[oklch(0.5_0.2_270_/_40%)] to-[oklch(0.5_0.2_300_/_40%)] hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-12 h-0.5' />
+              )}
             </AnimateInView>
           ))}
         </div>

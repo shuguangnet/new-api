@@ -20,7 +20,6 @@ import { Link } from '@tanstack/react-router'
 import { ArrowRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/ui/button'
-import { HeroTerminalDemo } from '../hero-terminal-demo'
 
 interface HeroProps {
   className?: string
@@ -32,120 +31,99 @@ export function Hero(props: HeroProps) {
 
   return (
     <section className='relative z-10 flex flex-col items-center overflow-hidden px-6 pt-28 pb-16 md:pt-36 md:pb-24'>
-      {/* Layer 1: Deep dark gradient mesh background */}
+      {/* Background: deep dark gradient */}
       <div
         aria-hidden
         className='pointer-events-none absolute inset-0 -z-10'
         style={{
-          background: [
-            'radial-gradient(ellipse 80% 60% at 15% 25%, rgba(59,130,246,0.25) 0%, transparent 70%)',
-            'radial-gradient(ellipse 70% 50% at 75% 10%, rgba(139,92,246,0.2) 0%, transparent 70%)',
-            'radial-gradient(ellipse 60% 45% at 50% 85%, rgba(124,58,237,0.15) 0%, transparent 70%)',
-            'radial-gradient(ellipse 50% 40% at 90% 60%, rgba(99,102,241,0.12) 0%, transparent 70%)',
-            'radial-gradient(ellipse 40% 30% at 10% 70%, rgba(168,85,247,0.1) 0%, transparent 70%)',
-          ].join(', '),
+          background:
+            'linear-gradient(to bottom, oklch(0.12 0.02 280), oklch(0.08 0.01 260), oklch(0.06 0.005 240))',
         }}
       />
-      {/* Layer 2: Enhanced grid pattern */}
+
+      {/* Background: fine grid mesh */}
+      <div aria-hidden className='hero-mesh pointer-events-none absolute inset-0 -z-[9]' />
+
+      {/* Background: upper-right blurred orb */}
       <div
         aria-hidden
-        className='absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(99,102,241,0.15)_1px,transparent_1px),linear-gradient(to_bottom,rgba(99,102,241,0.15)_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_30%,black_20%,transparent_100%)] bg-[size:4rem_4rem] opacity-[0.15]'
+        className='pointer-events-none absolute -right-32 -top-32 -z-[8] h-[600px] w-[600px] rounded-full blur-[120px]'
+        style={{ background: 'oklch(0.5 0.2 280 / 5%)' }}
       />
 
-      {/* Layer 3: Particle-connection decoration */}
-      <div aria-hidden className='pointer-events-none absolute inset-0 -z-[5]'>
-        {/* Particle 1 */}
-        <div className='absolute left-[15%] top-[20%] size-2 animate-pulse rounded-full bg-blue-400/40' />
-        {/* Particle 2 */}
-        <div className='absolute left-[55%] top-[12%] size-2 animate-pulse rounded-full bg-blue-400/40' style={{ animationDelay: '0.6s' }} />
-        {/* Particle 3 */}
-        <div className='absolute left-[80%] top-[35%] size-2 animate-pulse rounded-full bg-blue-400/40' style={{ animationDelay: '1.2s' }} />
+      {/* Background: lower-left blurred orb */}
+      <div
+        aria-hidden
+        className='pointer-events-none absolute -bottom-40 -left-40 -z-[8] h-[500px] w-[500px] rounded-full blur-[120px]'
+        style={{ background: 'oklch(0.4 0.15 200 / 4%)' }}
+      />
 
-        {/* Connection line: Particle 1 → Particle 2 */}
-        <div
-          className='absolute h-px bg-gradient-to-r from-blue-400/20 via-violet-400/15 to-transparent'
-          style={{
-            top: '21%',
-            left: '15%',
-            width: '40%',
-            transform: 'rotate(-6deg)',
-            transformOrigin: 'left center',
-          }}
-        />
-        {/* Connection line: Particle 2 → Particle 3 */}
-        <div
-          className='absolute h-px bg-gradient-to-r from-violet-400/15 via-blue-400/20 to-transparent'
-          style={{
-            top: '14%',
-            left: '55%',
-            width: '25%',
-            transform: 'rotate(18deg)',
-            transformOrigin: 'left center',
-          }}
-        />
-      </div>
-
-      <div className='flex max-w-3xl flex-col items-center text-center'>
-        <h1
-          className='landing-animate-fade-up text-[clamp(2.5rem,7vw,4.5rem)] leading-[1.15] font-bold tracking-tight drop-shadow-[0_0_30px_oklch(0.6_0.2_280/30%)]'
-          style={{ animationDelay: '0ms' }}
-        >
-          {t('Unified API Gateway for')}
-          <br />
-          <span className='bg-gradient-to-r from-blue-400 via-violet-500 to-fuchsia-400 bg-clip-text text-transparent'>
-            {t('All Your AI Models')}
-          </span>
-        </h1>
-
-        <div
-          className='landing-animate-fade-up mt-6 opacity-0'
-          style={{ animationDelay: '80ms' }}
-        >
-          <div className='glass-panel inline-block rounded-xl px-6 py-4'>
-            <p className='text-muted-foreground/80 max-w-lg text-base leading-relaxed md:text-lg'>
-              {t('Power AI applications, manage digital assets, connect the Future')}
-            </p>
-          </div>
+      {/* Content container */}
+      <div className='flex max-w-4xl flex-col items-center gap-8 text-center'>
+        {/* Badge */}
+        <div className='badge-glow inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 text-sm text-white/60'>
+          <span className='inline-block size-2 rounded-full bg-violet-400 animate-pulse-soft' />
+          {t('AI-Powered API Gateway')}
         </div>
 
-        <div
-          className='landing-animate-fade-up mt-8 flex items-center gap-4 opacity-0'
-          style={{ animationDelay: '160ms' }}
-        >
+        {/* Main heading */}
+        <h1 className='gradient-text text-5xl font-extrabold leading-tight tracking-tight md:text-7xl'>
+          {t('Next-Gen AI Platform')}
+        </h1>
+
+        {/* Subtitle */}
+        <p className='text-xl text-white/50 max-w-2xl'>
+          {t('Unified gateway for 40+ AI providers. One API. Infinite possibilities.')}
+        </p>
+
+        {/* CTA buttons */}
+        <div className='flex items-center gap-4'>
           {props.isAuthenticated ? (
             <Button
-              className='glow-pulse group rounded-lg'
+              className='btn-shine group rounded-lg px-6'
               render={<Link to='/dashboard' />}
             >
               {t('Go to Dashboard')}
-              <ArrowRight className='ml-1 size-3.5 transition-transform duration-200 group-hover:translate-x-0.5' />
+              <ArrowRight className='ml-1.5 size-4 transition-transform duration-200 group-hover:translate-x-0.5' />
             </Button>
           ) : (
             <>
               <Button
-                className='glow-pulse group rounded-lg'
+                className='btn-shine group rounded-lg px-6'
                 render={<Link to='/sign-up' />}
               >
                 {t('Get Started')}
-                <ArrowRight className='ml-1 size-3.5 transition-transform duration-200 group-hover:translate-x-0.5' />
+                <ArrowRight className='ml-1.5 size-4 transition-transform duration-200 group-hover:translate-x-0.5' />
               </Button>
               <Button
                 variant='outline'
-                className='gradient-border glass-panel border-border/50 hover:border-border hover:bg-muted/50 rounded-lg'
+                className='gradient-border glass-panel border-border/50 hover:border-border hover:bg-muted/50 rounded-lg px-6'
                 render={<Link to='/pricing' />}
               >
-                {t('View Pricing')}
+                <svg className='mr-1.5 size-4' viewBox='0 0 24 24' fill='currentColor'><path d='M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z'/></svg>
+                {t('View on GitHub')}
               </Button>
             </>
           )}
         </div>
-      </div>
 
-      <div
-        className='hover-lift glass-panel landing-animate-fade-up mt-12 w-full rounded-xl p-3 opacity-0'
-        style={{ animationDelay: '300ms' }}
-      >
-        <HeroTerminalDemo />
+        {/* Stats bar */}
+        <div className='mt-4 flex items-center gap-6 text-sm text-white/40 md:gap-10'>
+          <div className='flex flex-col items-center gap-1'>
+            <span className='stat-glow text-2xl font-bold text-white/80'>40+</span>
+            <span>Providers</span>
+          </div>
+          <div className='h-8 w-px bg-white/10' />
+          <div className='flex flex-col items-center gap-1'>
+            <span className='stat-glow text-2xl font-bold text-white/80'>99.9%</span>
+            <span>Uptime</span>
+          </div>
+          <div className='h-8 w-px bg-white/10' />
+          <div className='flex flex-col items-center gap-1'>
+            <span className='stat-glow text-2xl font-bold text-white/80'>10M+</span>
+            <span>Requests/Day</span>
+          </div>
+        </div>
       </div>
     </section>
   )

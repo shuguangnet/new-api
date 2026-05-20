@@ -35,7 +35,7 @@ export function CTA(props: CTAProps) {
   }
 
   return (
-    <section className='relative z-10 overflow-hidden px-6 py-24 md:py-32'>
+    <section className='relative z-10 overflow-hidden py-24 px-4'>
       {/* Gradient mesh background */}
       <div
         aria-hidden
@@ -49,7 +49,7 @@ export function CTA(props: CTAProps) {
       />
 
       <AnimateInView
-        className='glass-panel hover-lift mx-auto max-w-2xl text-center'
+        className='glass-panel rounded-2xl hover-lift mx-auto max-w-2xl text-center p-8 md:p-12'
         animation='scale-in'
       >
         <h2 className='gradient-text text-2xl leading-tight font-bold tracking-tight md:text-4xl'>
@@ -65,7 +65,7 @@ export function CTA(props: CTAProps) {
           )}
         </p>
         <div className='mt-8 flex items-center justify-center gap-3'>
-          <Button className='glow-pulse group rounded-lg' render={<Link to='/sign-up' />}>
+          <Button className='btn-shine group rounded-lg' render={<Link to='/sign-up' />}>
             {t('Get Started')}
             <ArrowRight className='ml-1 size-3.5 transition-transform duration-200 group-hover:translate-x-0.5' />
           </Button>
@@ -77,6 +77,9 @@ export function CTA(props: CTAProps) {
             {t('View Pricing')}
           </Button>
         </div>
+
+        {/* Gradient divider line at bottom */}
+        <div className='section-divider mx-auto mt-8 max-w-sm' />
       </AnimateInView>
     </section>
   )

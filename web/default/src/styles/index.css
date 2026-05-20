@@ -73,14 +73,16 @@ For commercial licensing, please contact support@quantumnous.com
   /* 毛玻璃效果 */
   .glass-panel {
     background: oklch(0.2 0.02 270 / 60%);
-    backdrop-filter: blur(16px) saturate(180%);
-    border: 1px solid oklch(0.5 0.04 270 / 10%);
-    box-shadow: 0 4px 24px oklch(0.15 0.03 270 / 40%);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid oklch(0.6 0.08 280 / 15%);
+    box-shadow: 0 4px 24px oklch(0.15 0.03 270 / 40%), inset 0 0 0 1px oklch(0.6 0.1 280 / 8%);
   }
   
   .dark .glass-panel {
     background: oklch(0.15 0.03 270 / 50%);
-    border: 1px solid oklch(0.5 0.06 270 / 8%);
+    backdrop-filter: blur(24px) saturate(200%);
+    border: 1px solid oklch(0.6 0.1 280 / 12%);
+    box-shadow: 0 4px 32px oklch(0.15 0.05 270 / 50%), inset 0 0 0 1px oklch(0.6 0.1 280 / 10%);
   }
   
   /* 渐变边框效果 */
@@ -92,9 +94,9 @@ For commercial licensing, please contact support@quantumnous.com
     content: '';
     position: absolute;
     inset: 0;
-    padding: 1px;
+    padding: 2px;
     border-radius: inherit;
-    background: linear-gradient(135deg, oklch(0.55 0.2 280), oklch(0.6 0.2 330), oklch(0.55 0.15 200));
+    background: linear-gradient(135deg, oklch(0.65 0.25 280), oklch(0.7 0.28 330), oklch(0.6 0.22 200), oklch(0.65 0.2 260));
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask-composite: exclude;
     pointer-events: none;
@@ -106,8 +108,8 @@ For commercial licensing, please contact support@quantumnous.com
   }
   
   @keyframes glow-pulse {
-    0%, 100% { box-shadow: 0 0 20px oklch(0.55 0.15 280 / 10%); }
-    50% { box-shadow: 0 0 40px oklch(0.55 0.15 280 / 25%); }
+    0%, 100% { box-shadow: 0 0 20px oklch(0.55 0.15 280 / 8%), 0 0 40px oklch(0.55 0.15 280 / 4%); }
+    50% { box-shadow: 0 0 30px oklch(0.55 0.15 280 / 20%), 0 0 60px oklch(0.55 0.15 280 / 10%), 0 0 100px oklch(0.55 0.15 280 / 5%); }
   }
   
   /* 渐变文字 */
@@ -120,11 +122,14 @@ For commercial licensing, please contact support@quantumnous.com
   
   /* 悬浮卡片效果 */
   .hover-lift {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
   }
   .hover-lift:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px oklch(0.15 0.05 270 / 50%);
+    transform: translateY(-4px);
+    box-shadow:
+      0 4px 8px oklch(0.15 0.03 270 / 20%),
+      0 8px 24px oklch(0.15 0.05 270 / 35%),
+      0 16px 48px oklch(0.2 0.08 280 / 25%);
   }
   
   /* 侧边栏毛玻璃层 */
@@ -177,6 +182,252 @@ For commercial licensing, please contact support@quantumnous.com
     0%   { transform: rotate(240deg); }
     100% { transform: rotate(600deg); }
   }
+
+  /* ── Advanced Visual Effects ────────────────────── */
+
+  /* 1. Button shine sweep effect */
+  .btn-shine {
+    background-size: 200% 100%;
+    background-image: linear-gradient(
+      120deg,
+      transparent 0%,
+      transparent 40%,
+      oklch(0.85 0.08 280 / 40%) 50%,
+      transparent 60%,
+      transparent 100%
+    );
+    transition: background-position 0.6s ease;
+  }
+  .btn-shine:hover {
+    background-position: -100% 0;
+  }
+
+  /* 2. Card float — deep shadow + subtle border glow */
+  .card-float {
+    border: 1px solid oklch(0.6 0.08 280 / 10%);
+    box-shadow:
+      0 2px 4px oklch(0.15 0.02 270 / 10%),
+      0 8px 24px oklch(0.15 0.04 270 / 15%),
+      0 24px 48px oklch(0.15 0.06 270 / 10%);
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  }
+  .card-float:hover {
+    transform: translateY(-6px);
+    border-color: oklch(0.65 0.15 280 / 25%);
+    box-shadow:
+      0 4px 8px oklch(0.15 0.02 270 / 10%),
+      0 12px 32px oklch(0.15 0.05 270 / 20%),
+      0 32px 64px oklch(0.15 0.08 270 / 15%),
+      0 0 24px oklch(0.55 0.15 280 / 8%);
+  }
+
+  /* 3. Input glow — purple-blue ring on focus */
+  .input-glow {
+    transition: box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .input-glow:focus,
+  .input-glow:focus-within {
+    border-color: oklch(0.65 0.18 280 / 60%);
+    box-shadow:
+      0 0 0 2px oklch(0.65 0.18 280 / 25%),
+      0 0 12px oklch(0.65 0.18 280 / 15%),
+      0 0 24px oklch(0.55 0.15 280 / 8%);
+    outline: none;
+  }
+
+  /* 4. Nav blur — enhanced frosted glass with gradient divider */
+  .nav-blur {
+    background: oklch(0.15 0.02 270 / 70%);
+    backdrop-filter: blur(24px) saturate(200%);
+    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    border-bottom: 1px solid transparent;
+    border-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      oklch(0.55 0.15 280 / 20%) 20%,
+      oklch(0.6 0.2 330 / 25%) 50%,
+      oklch(0.55 0.15 280 / 20%) 80%,
+      transparent 100%
+    ) 1;
+    box-shadow: 0 1px 24px oklch(0.15 0.05 270 / 30%);
+  }
+  .dark .nav-blur {
+    background: oklch(0.12 0.03 270 / 60%);
+    backdrop-filter: blur(28px) saturate(220%);
+    -webkit-backdrop-filter: blur(28px) saturate(220%);
+  }
+
+  /* 5. Sidebar item glow — active item with left border gradient + glow bg */
+  .sidebar-item-glow {
+    position: relative;
+    border-left: 2px solid transparent;
+    background: transparent;
+    transition: all 0.25s ease;
+  }
+  .sidebar-item-glow:hover,
+  .sidebar-item-glow[data-state="active"],
+  .sidebar-item-glow[aria-current="page"] {
+    border-image: linear-gradient(180deg, oklch(0.65 0.2 280), oklch(0.6 0.22 330)) 1;
+    background: linear-gradient(90deg, oklch(0.55 0.1 280 / 8%), transparent 80%);
+    box-shadow: inset 2px 0 8px oklch(0.55 0.15 280 / 10%);
+  }
+
+  /* 6. Stat glow — numeric text with subtle shadow glow */
+  .stat-glow {
+    text-shadow:
+      0 0 8px oklch(0.65 0.15 280 / 15%),
+      0 0 20px oklch(0.55 0.12 280 / 8%);
+  }
+
+  /* 7. Section divider — purple-blue gradient, 1px, 60% width centered */
+  .section-divider {
+    height: 1px;
+    width: 60%;
+    margin-inline: auto;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      oklch(0.55 0.15 280 / 30%) 15%,
+      oklch(0.6 0.2 330 / 40%) 50%,
+      oklch(0.55 0.15 280 / 30%) 85%,
+      transparent 100%
+    );
+    border: none;
+  }
+
+  /* 8. Badge glow — translucent purple-blue bg + box-shadow glow */
+  .badge-glow {
+    background: oklch(0.55 0.12 280 / 15%);
+    color: oklch(0.75 0.15 280);
+    border: 1px solid oklch(0.55 0.12 280 / 20%);
+    box-shadow:
+      0 0 8px oklch(0.55 0.15 280 / 10%),
+      inset 0 0 8px oklch(0.55 0.1 280 / 5%);
+    transition: box-shadow 0.25s ease, background 0.25s ease;
+  }
+  .badge-glow:hover {
+    background: oklch(0.55 0.12 280 / 22%);
+    box-shadow:
+      0 0 12px oklch(0.55 0.15 280 / 18%),
+      0 0 24px oklch(0.55 0.15 280 / 8%),
+      inset 0 0 12px oklch(0.55 0.1 280 / 8%);
+  }
+
+  /* 9. Table row hover — ultra-light purple-blue bg + left 2px indicator */
+  .table-row-hover {
+    position: relative;
+    transition: background 0.2s ease;
+  }
+  .table-row-hover::before {
+    content: '';
+    position: absolute;
+    inset-block-start: 0;
+    inset-block-end: 0;
+    inset-inline-start: 0;
+    width: 2px;
+    background: linear-gradient(180deg, oklch(0.65 0.2 280), oklch(0.6 0.22 330));
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    border-radius: 1px;
+  }
+  .table-row-hover:hover {
+    background: linear-gradient(90deg, oklch(0.55 0.1 280 / 6%), oklch(0.55 0.08 330 / 3%), transparent 80%);
+  }
+  .table-row-hover:hover::before {
+    opacity: 1;
+  }
+
+  /* 10. Hero mesh — large purple-blue grid + radial gradient overlay */
+  .hero-mesh {
+    background:
+      radial-gradient(ellipse at 50% 50%, oklch(0.2 0.05 280 / 30%) 0%, transparent 70%),
+      linear-gradient(
+        oklch(0.5 0.12 280 / 8%) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        oklch(0.5 0.12 280 / 8%) 1px,
+        transparent 1px
+      );
+    background-size: 100% 100%, 48px 48px, 48px 48px;
+  }
+
+  /* 11. Orb — decorative floating sphere */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle at 35% 35%,
+      oklch(0.75 0.18 280 / 60%),
+      oklch(0.55 0.2 280 / 40%),
+      oklch(0.45 0.15 330 / 30%)
+    );
+    filter: blur(16px);
+    opacity: 0.5;
+    pointer-events: none;
+    animation: animate-float 8s ease-in-out infinite;
+  }
+  .orb::after {
+    content: '';
+    position: absolute;
+    inset: 15%;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle at 40% 40%,
+      oklch(0.85 0.12 280 / 30%),
+      transparent 70%
+    );
+  }
+
+  /* 12. Text balance */
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* ── Keyframe Animations ────────────────────────── */
+
+/* 13. Float animation */
+@keyframes animate-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+.animate-float {
+  animation: animate-float 6s ease-in-out infinite;
+}
+
+/* 14. Shimmer animation */
+@keyframes animate-shimmer {
+  0% {
+    background-position: -200% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+.animate-shimmer {
+  background-size: 200% 100%;
+  animation: animate-shimmer 3s ease-in-out infinite;
+}
+
+/* 15. Soft pulse animation (gentler than default pulse) */
+@keyframes animate-pulse-soft {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.02);
+  }
+}
+.animate-pulse-soft {
+  animation: animate-pulse-soft 4s ease-in-out infinite;
 }
 
 /* Vercel Geist-style skeleton shimmer */
@@ -225,7 +476,12 @@ For commercial licensing, please contact support@quantumnous.com
   .animate-nebula-core-pulse,
   .animate-nebula-orbit-1,
   .animate-nebula-orbit-2,
-  .animate-nebula-orbit-3 {
+  .animate-nebula-orbit-3,
+  .animate-float,
+  .animate-shimmer,
+  .animate-pulse-soft,
+  .glow-pulse,
+  .orb {
     animation: none !important;
   }
 }
@@ -485,6 +741,9 @@ For commercial licensing, please contact support@quantumnous.com
   .animate-appear-zoom,
   .animate-scroll-up,
   .animate-scroll-down,
+  .animate-float,
+  .animate-shimmer,
+  .animate-pulse-soft,
   [data-slot='table'] tbody tr {
     animation: none !important;
     opacity: 1;

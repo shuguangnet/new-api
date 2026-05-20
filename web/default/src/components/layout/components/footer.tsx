@@ -57,7 +57,7 @@ function FooterLinkItem(props: { link: FooterLink }) {
         href={props.link.href}
         target='_blank'
         rel='noopener noreferrer'
-        className='text-muted-foreground hover:bg-gradient-to-r hover:from-violet-400/10 hover:to-blue-400/10 hover:text-foreground rounded-md px-1.5 py-0.5 text-sm transition-all duration-200'
+        className='text-muted-foreground hover:text-[oklch(0.65_0.2_280)] hover:bg-gradient-to-r hover:from-violet-400/10 hover:to-blue-400/10 rounded-md px-1.5 py-0.5 text-sm transition-all duration-200'
       >
         {label}
       </a>
@@ -67,7 +67,7 @@ function FooterLinkItem(props: { link: FooterLink }) {
   return (
     <Link
       to={props.link.href}
-      className='text-muted-foreground hover:bg-gradient-to-r hover:from-violet-400/10 hover:to-blue-400/10 hover:text-foreground rounded-md px-1.5 py-0.5 text-sm transition-all duration-200'
+      className='text-muted-foreground hover:text-[oklch(0.65_0.2_280)] hover:bg-gradient-to-r hover:from-violet-400/10 hover:to-blue-400/10 rounded-md px-1.5 py-0.5 text-sm transition-all duration-200'
     >
       {label}
     </Link>
@@ -78,14 +78,14 @@ function ProjectAttribution(props: { currentYear: number }) {
   const { t } = useTranslation()
 
   return (
-    <div className='text-muted-foreground/45 text-center text-xs sm:text-right'>
-      <span className='text-muted-foreground/45'>
+    <div className='text-[oklch(0.5_0.05_280_/_40%)] text-center text-xs sm:text-right'>
+      <span className='text-[oklch(0.5_0.05_280_/_40%)]'>
         &copy; {props.currentYear}{' '}
         <a
           href='https://github.com/QuantumNous/new-api'
           target='_blank'
           rel='noopener noreferrer'
-          className='text-foreground/70 hover:text-foreground font-medium transition-colors'
+          className='text-foreground/70 hover:text-[oklch(0.65_0.2_280)] font-medium transition-colors'
         >
           {t('New API')}
         </a>
@@ -198,13 +198,13 @@ export function Footer(props: FooterProps) {
       {/* Bottom gradient line */}
       <div
         aria-hidden
-        className='absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-violet-500/40 to-transparent'
+        className='absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[oklch(0.5_0.15_280_/_40%)] to-transparent'
       />
       <div className='mx-auto max-w-6xl px-6 py-12 md:py-16'>
         <div className='flex flex-col justify-between gap-10 md:flex-row md:gap-16'>
           {/* Brand column */}
           <div className='shrink-0'>
-            <Link to='/' className='group flex items-center gap-2.5'>
+            <Link to='/' className='group flex items-center gap-2.5 transition-all hover:drop-shadow-[0_0_8px_oklch(0.5_0.2_280_/_50%)]'>
               <img
                 src={displayLogo}
                 alt={displayName}
@@ -241,8 +241,9 @@ export function Footer(props: FooterProps) {
         </div>
 
         {/* Bottom section */}
-        <div className='border-border/30 mt-12 flex flex-col items-center justify-between gap-3 border-t pt-6 sm:flex-row'>
-          <p className='text-muted-foreground/40 text-xs'>
+        <div className='bg-gradient-to-r from-transparent via-[oklch(0.5_0.15_280_/_20%)] to-transparent h-px mb-8' />
+        <div className='border-border/30 flex flex-col items-center justify-between gap-3 border-t pt-6 sm:flex-row'>
+          <p className='text-[oklch(0.5_0.05_280_/_40%)] text-xs'>
             &copy; {currentYear} {displayName}.{' '}
             {props.copyright ?? t('footer.defaultCopyright')}
           </p>

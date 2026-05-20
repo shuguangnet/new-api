@@ -66,7 +66,7 @@ export function AuthLayout({ children }: AuthLayoutProps) {
       </div>
 
       {/* Right - Login form area */}
-      <div className="flex flex-col bg-background">
+      <div className="flex flex-col bg-gradient-to-b from-background to-[oklch(0.12_0.02_280)]">
         {/* Mobile-only logo & name */}
         <Link
           to="/"
@@ -94,11 +94,12 @@ export function AuthLayout({ children }: AuthLayoutProps) {
         <div className="flex flex-1 items-center justify-center">
           <div className="mx-auto flex w-full flex-col justify-center space-y-2 px-4 py-8 sm:w-[480px] sm:p-8">
             {children}
+            <div className="bg-gradient-to-r from-transparent via-[oklch(0.5_0.15_280_/_15%)] to-transparent h-px mt-6" />
           </div>
         </div>
 
         {/* Bottom copyright */}
-        <div className="p-4 text-center text-xs text-muted-foreground sm:p-6">
+        <div className="p-4 text-center text-xs text-[oklch(0.5_0.05_280_/_40%)] sm:p-6">
           © {new Date().getFullYear()} QuantumNous. All rights reserved.
         </div>
       </div>

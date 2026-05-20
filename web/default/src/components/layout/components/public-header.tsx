@@ -181,7 +181,7 @@ export function PublicHeader(props: PublicHeaderProps) {
 
   return (
     <>
-      <header className='pointer-events-none fixed inset-x-0 top-0 z-50'>
+      <header className='nav-blur pointer-events-none fixed inset-x-0 top-0 z-50 border-b border-[oklch(0.5_0.1_280_/_8%)]'>
         <div
           className={cn(
             'pointer-events-auto mx-auto transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]',
@@ -215,7 +215,7 @@ export function PublicHeader(props: PublicHeaderProps) {
                   />
                 )}
               </div>
-              <span className='text-sm font-semibold tracking-tight'>
+              <span className='gradient-text text-sm font-semibold tracking-tight'>
                 {loading ? <Skeleton className='h-4 w-16' /> : displaySiteName}
               </span>
             </Link>
@@ -235,7 +235,7 @@ export function PublicHeader(props: PublicHeaderProps) {
                       tabIndex={link.disabled ? -1 : undefined}
                       onClick={(event) => handleNavLinkClick(event, link)}
                       className={cn(
-                        'text-muted-foreground rounded-lg px-3 py-1.5 text-[13px] font-medium transition-all duration-200 hover:bg-gradient-to-r hover:from-violet-400/10 hover:to-blue-400/10 hover:text-foreground',
+                        'text-muted-foreground rounded-lg px-3 py-1.5 text-[13px] font-medium transition-all duration-200 hover:bg-gradient-to-r hover:from-violet-400/10 hover:to-blue-400/10 hover:text-[oklch(0.65_0.2_280)]',
                         link.disabled && 'pointer-events-none opacity-50'
                       )}
                     >
@@ -250,7 +250,7 @@ export function PublicHeader(props: PublicHeaderProps) {
                     disabled={link.disabled}
                     onClick={(event) => handleNavLinkClick(event, link)}
                     className={cn(
-                      'rounded-lg px-3 py-1.5 text-[13px] font-medium transition-all duration-200 hover:bg-gradient-to-r hover:from-violet-400/10 hover:to-blue-400/10',
+                      'rounded-lg px-3 py-1.5 text-[13px] font-medium transition-all duration-200 hover:bg-gradient-to-r hover:from-violet-400/10 hover:to-blue-400/10 hover:text-[oklch(0.65_0.2_280)]',
                       isActive
                         ? 'text-foreground'
                         : 'text-muted-foreground hover:text-foreground',
@@ -287,7 +287,7 @@ export function PublicHeader(props: PublicHeaderProps) {
                   ) : (
                     <Button
                       size='sm'
-                      className='h-8 rounded-lg px-3.5 text-xs font-medium'
+                      className='btn-shine h-8 rounded-lg px-3.5 text-xs font-medium'
                       render={<Link to='/sign-in' />}
                     >
                       {t('Sign in')}
@@ -406,7 +406,7 @@ export function PublicHeader(props: PublicHeaderProps) {
               <Link
                 to={isAuthenticated ? '/dashboard' : '/sign-in'}
                 onClick={() => setMobileOpen(false)}
-                className='bg-foreground text-background inline-flex h-10 items-center justify-center rounded-lg text-sm font-medium transition-opacity hover:opacity-90 active:opacity-80'
+                className='btn-shine bg-foreground text-background inline-flex h-10 items-center justify-center rounded-lg text-sm font-medium transition-opacity hover:opacity-90 active:opacity-80'
               >
                 {isAuthenticated ? t('Go to Dashboard') : t('Sign in')}
               </Link>

@@ -122,7 +122,7 @@ function SidebarMenuLink({ item, href }: { item: NavLink; href: string }) {
   const { setOpenMobile } = useSidebar()
   const isActive = checkIsActive(href, item)
   return (
-    <SidebarMenuItem className={isActive ? 'relative before:absolute before:left-0 before:inset-y-1 before:w-[3px] before:rounded-full before:bg-gradient-to-b before:from-blue-400 before:via-violet-500 before:to-fuchsia-400' : ''}>
+    <SidebarMenuItem className={isActive ? 'sidebar-item-glow relative before:absolute before:left-0 before:inset-y-1 before:w-[3px] before:rounded-full before:bg-gradient-to-b before:from-blue-400 before:via-violet-500 before:to-fuchsia-400' : ''}>
       <SidebarMenuButton
         isActive={isActive}
         tooltip={item.title}
@@ -180,7 +180,7 @@ function SidebarMenuCollapsible({
       <CollapsibleContent className='CollapsibleContent'>
         <SidebarMenuSub>
           {item.items.map((subItem) => (
-            <SidebarMenuSubItem key={subItem.title} className={checkIsActive(href, subItem) ? 'relative before:absolute before:left-0 before:inset-y-1 before:w-[3px] before:rounded-full before:bg-gradient-to-b before:from-blue-400 before:via-violet-500 before:to-fuchsia-400' : ''}>
+            <SidebarMenuSubItem key={subItem.title} className={checkIsActive(href, subItem) ? 'sidebar-item-glow relative before:absolute before:left-0 before:inset-y-1 before:w-[3px] before:rounded-full before:bg-gradient-to-b before:from-blue-400 before:via-violet-500 before:to-fuchsia-400' : ''}>
               <SidebarMenuSubButton
                 isActive={checkIsActive(href, subItem)}
                 className='hover:bg-gradient-to-r hover:from-purple-500/10 hover:via-fuchsia-500/10 hover:to-purple-500/10'

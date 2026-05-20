@@ -179,13 +179,16 @@ export function Features(_props: FeaturesProps) {
   ]
 
   return (
-    <section className='relative z-10 px-6 py-24 md:py-32'>
+    <section className='relative z-10 py-24 px-4'>
+      {/* Section divider */}
+      <div className='section-divider mx-auto mb-16 max-w-6xl' />
+
       <div className='mx-auto max-w-6xl'>
         <AnimateInView className='mb-16 max-w-lg'>
           <p className='gradient-text mb-3 text-xs font-medium tracking-widest uppercase'>
             {t('Core Features')}
           </p>
-          <h2 className='text-2xl leading-tight font-bold tracking-tight md:text-3xl'>
+          <h2 className='gradient-text text-2xl leading-tight font-bold tracking-tight md:text-3xl'>
             {t('Built for developers,')}
             <br />
             {t('designed for scale')}
@@ -193,17 +196,17 @@ export function Features(_props: FeaturesProps) {
         </AnimateInView>
 
         {/* Bento grid */}
-        <div className='glass-panel grid gap-px overflow-hidden rounded-xl md:grid-cols-3'>
+        <div className='grid gap-3 md:grid-cols-3'>
           {features.map((f, i) => (
             <AnimateInView
               key={f.id}
               delay={i * 100}
               animation='scale-in'
-              className={`bg-background/60 group hover:bg-primary/5 backdrop-blur-sm p-7 transition-all duration-500 md:p-8 ${f.span}`}
+              className={`glass-panel card-float group hover:bg-primary/5 p-7 transition-all duration-500 md:p-8 ${f.span}`}
             >
               <div className='mb-3 flex items-center gap-3'>
-                <span className='border-border/30 bg-primary/10 text-primary flex size-7 items-center justify-center rounded-md border text-[10px] font-semibold tabular-nums'>
-                  {f.num}
+                <span className='bg-gradient-to-br from-[oklch(0.5_0.2_270_/_15%)] to-[oklch(0.5_0.15_300_/_10%)] rounded-xl p-3'>
+                  {f.icon}
                 </span>
                 <h3 className='text-sm font-semibold'>{f.title}</h3>
               </div>
@@ -224,7 +227,7 @@ export function Features(_props: FeaturesProps) {
               animation='fade-up'
               className='flex flex-col items-center text-center'
             >
-              <div className='text-muted-foreground border-border/30 bg-primary/5 hover:bg-primary/10 group-hover:text-foreground mb-3 flex size-12 items-center justify-center rounded-xl border transition-colors'>
+              <div className='bg-gradient-to-br from-[oklch(0.5_0.2_270_/_15%)] to-[oklch(0.5_0.15_300_/_10%)] rounded-xl p-3 text-muted-foreground group-hover:text-foreground mb-3 flex size-12 items-center justify-center transition-colors'>
                 {f.icon}
               </div>
               <h3 className='mb-1.5 text-sm font-semibold'>{f.title}</h3>

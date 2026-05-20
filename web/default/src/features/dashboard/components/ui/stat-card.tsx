@@ -65,7 +65,7 @@ const LINE_TONE_CLASSES: Record<StatCardTone, string> = {
 const DETAIL_TONE_CLASSES: Record<StatCardDetailTone, string> = {
   default: 'text-foreground',
   muted: 'text-muted-foreground',
-  success: 'text-success',
+  success: 'text-[oklch(0.65_0.2_280)]',
   warning: 'text-warning',
   destructive: 'text-destructive',
 }
@@ -209,13 +209,15 @@ export function StatCard(props: StatCardProps) {
   const sparklineVariant = props.sparklineVariant ?? 'bars'
 
   return (
-    <div className='group flex min-h-32 flex-col justify-between gap-3 hover-lift'>
+    <div className='group flex min-h-32 flex-col justify-between gap-3 hover-lift glass-panel card-float ring-1 ring-[oklch(0.5_0.15_280_/_15%)]'>
       <div className='flex items-start justify-between gap-1'>
         <div className='text-muted-foreground flex items-center gap-1.5 text-xs font-medium sm:gap-2'>
-          <Icon
-            className='text-muted-foreground/60 size-3.5 shrink-0'
-            aria-hidden='true'
-          />
+          <span className='bg-gradient-to-br from-[oklch(0.5_0.2_270_/_12%)] to-[oklch(0.45_0.15_310_/_8%)] rounded-xl p-2'>
+            <Icon
+              className='text-muted-foreground/60 size-3.5 shrink-0'
+              aria-hidden='true'
+            />
+          </span>
           <span className='line-clamp-2 leading-snug'>{props.title}</span>
         </div>
         {props.action && <div className='shrink-0'>{props.action}</div>}
@@ -237,7 +239,7 @@ export function StatCard(props: StatCardProps) {
         </div>
       ) : (
         <div className='flex flex-col gap-1'>
-          <div className='text-foreground font-mono text-2xl font-semibold tracking-tight break-all tabular-nums gradient-text'>
+          <div className='text-foreground font-mono text-2xl font-semibold tracking-tight break-all tabular-nums stat-glow gradient-text'>
             {props.value}
           </div>
           <p className='text-muted-foreground/60 text-xs leading-relaxed'>
