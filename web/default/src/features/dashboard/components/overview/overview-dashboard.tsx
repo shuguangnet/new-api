@@ -123,6 +123,12 @@ interface OperatingBriefItem {
   icon: LucideIcon
 }
 
+interface OperationsFocusItem {
+  label: string
+  value: string
+  description: string
+}
+
 function getSavedSetupGuideExpanded(): boolean | null {
   if (typeof window === 'undefined') return null
   const saved = window.localStorage.getItem(SETUP_GUIDE_VISIBILITY_STORAGE_KEY)
@@ -419,6 +425,9 @@ function OperatingBriefCard(props: {
   summaryBody: string
   summaryCta: string
   summaryTo: DashboardActionPath
+  operationsTitle: string
+  operationsBody: string
+  operationsFocus: OperationsFocusItem[]
 }) {
   const { t } = useTranslation()
 
@@ -482,18 +491,59 @@ function OperatingBriefCard(props: {
 
       <CardStaggerItem className='bg-card overflow-hidden rounded-2xl border shadow-xs'>
         <div className='from-background to-muted/35 flex h-full flex-col justify-between gap-4 bg-linear-to-b p-4 sm:p-5'>
-          <div className='flex flex-col gap-3'>
-            <div>
-              <div className='text-muted-foreground text-xs font-medium tracking-[0.18em] uppercase'>
-                {t('Control recommendation')}
+          <div className='flex flex-col gap-4'>
+            <div className='flex flex-col gap-3'>
+              <div>
+                <div className='text-muted-foreground text-xs font-medium tracking-[0.18em] uppercase'>
+                  {t('Control recommendation')}
+                </div>
+                <h3 className='mt-2 text-lg font-semibold tracking-tight'>
+                  {props.summaryTitle}
+                </h3>
               </div>
-              <h3 className='mt-2 text-lg font-semibold tracking-tight'>
-                {props.summaryTitle}
-              </h3>
+              <p className='text-muted-foreground text-sm leading-relaxed'>
+                {props.summaryBody}
+              </p>
             </div>
-            <p className='text-muted-foreground text-sm leading-relaxed'>
-              {props.summaryBody}
-            </p>
+
+            <div className='rounded-2xl border border-border/70 bg-background/75 p-3.5'>
+              <div className='flex items-start justify-between gap-3'>
+                <div className='min-w-0'>
+                  <div className='text-muted-foreground text-[11px] font-medium tracking-[0.18em] uppercase'>
+                    {t('Operations cadence')}
+                  </div>
+                  <h4 className='mt-1 text-sm font-semibold tracking-tight'>
+                    {props.operationsTitle}
+                  </h4>
+                </div>
+                <span className='rounded-full border border-primary/20 bg-primary/8 px-2.5 py-1 text-[11px] font-medium text-primary'>
+                  {t('Live workspace')}
+                </span>
+              </div>
+              <p className='text-muted-foreground mt-2 text-xs leading-relaxed'>
+                {props.operationsBody}
+              </p>
+              <div className='mt-3 grid gap-2'>
+                {props.operationsFocus.map((item) => (
+                  <div
+                    key={item.label}
+                    className='rounded-xl border border-border/60 bg-muted/20 px-3 py-2.5'
+                  >
+                    <div className='flex items-center justify-between gap-3'>
+                      <span className='text-[11px] font-medium tracking-[0.16em] text-muted-foreground uppercase'>
+                        {item.label}
+                      </span>
+                      <span className='text-sm font-semibold tracking-tight'>
+                        {item.value}
+                      </span>
+                    </div>
+                    <p className='text-muted-foreground mt-1.5 text-xs leading-relaxed'>
+                      {item.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className='bg-background/70 rounded-2xl border p-3'>
@@ -800,6 +850,81 @@ export function OverviewDashboard() {
     }
   }, [preferredKey, remainQuota, requestCount, t])
 
+  const operationsFocusItems = useMemo<OperationsFocusItem[]>(() => {
+    const activeModels = modelsQuery.data?.length ?? 0
+    const balanceStatus =
+      remainQuota > 0
+        ? t('Funded and callable')
+        : usedQuota > 0
+          ? t('Needs budget recovery')
+          : t('Waiting for credits')
+
+    return [
+      {
+        label: t('Access layer'),
+        value: preferredKey ? t('Protected') : t('Open task'),
+        description: preferredKey
+          ? t('Keys are in place, so internal teams and customer workloads can connect with a governed credential path.')
+          : t('Issue the first API key to move from workspace setup into a routable service surface.'),
+      },
+      {
+        label: t('Model estate'),
+        value:
+          activeModels > 0
+            ? t('{{count}} models online', { count: activeModels })
+            : t('Routing pending'),
+        description:
+          activeModels > 0
+            ? t('Visible default and optional models keep product, operations, and support aligned on delivery scope.')
+            : t('Connect at least one available model so downstream teams can validate the production route.'),
+      },
+      {
+        label: t('Budget posture'),
+        value: balanceStatus,
+        description:
+          remainQuota > 0
+            ? t('Recharge pressure is low enough for verification traffic, demonstrations, and controlled rollout work.')
+            : t('Quota is the limiting factor for dependable traffic. Resolve it before presenting the workspace as a stable platform.'),
+      },
+    ]
+  }, [modelsQuery.data, preferredKey, remainQuota, t, usedQuota])
+
+  const operationsCadence = useMemo(() => {
+    if (!preferredKey) {
+      return {
+        title: t('Foundation stage: secure access before scale'),
+        body: t(
+          'The workspace should progress from credential issuance to funded validation, then into monitored delivery. This sequence reduces risk when teams begin routing real traffic.'
+        ),
+      }
+    }
+
+    if (remainQuota <= 0) {
+      return {
+        title: t('Commercial readiness: restore budget continuity'),
+        body: t(
+          'Access and routing may already exist, but balance coverage now determines whether demos, pilots, and internal workloads remain dependable.'
+        ),
+      }
+    }
+
+    if (requestCount <= 0) {
+      return {
+        title: t('Activation stage: convert setup into proven traffic'),
+        body: t(
+          'A funded and configured workspace still needs one validated request path before it can be treated as a reliable service endpoint.'
+        ),
+      }
+    }
+
+    return {
+      title: t('Operational stage: review margin, quality, and traffic signals'),
+      body: t(
+        'Once traffic exists, the overview should guide teams toward pricing posture, usage evidence, and service health instead of repeating setup steps.'
+      ),
+    }
+  }, [preferredKey, remainQuota, requestCount, t])
+
   const handleSetupGuideToggle = () => {
     const nextExpanded = !setupGuideExpanded
     setManualSetupGuideExpanded(nextExpanded)
@@ -944,6 +1069,9 @@ export function OverviewDashboard() {
         summaryBody={operationalSummary.body}
         summaryCta={operationalSummary.cta}
         summaryTo={operationalSummary.to}
+        operationsTitle={operationsCadence.title}
+        operationsBody={operationsCadence.body}
+        operationsFocus={operationsFocusItems}
       />
 
       <SummaryCards />

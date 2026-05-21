@@ -241,16 +241,42 @@ export function SummaryCards() {
 
   return (
     <div className='glass-panel overflow-hidden rounded-2xl hover-lift'>
-      <div className='grid xl:grid-cols-[minmax(0,1fr)_19rem]'>
+      <div className='grid xl:grid-cols-[minmax(0,1fr)_21rem]'>
         <div className='flex flex-col gap-3 p-4 sm:p-5'>
           <div className='flex flex-wrap items-start justify-between gap-3'>
-            <div className='flex flex-col gap-1'>
-              <h3 className='text-base font-semibold'>
-                {t('Usage at a glance')}
+            <div className='flex max-w-2xl flex-col gap-1'>
+              <span className='text-muted-foreground text-[11px] font-medium tracking-[0.18em] uppercase'>
+                {t('Commercial posture')}
+              </span>
+              <h3 className='text-base font-semibold tracking-tight sm:text-lg'>
+                {t('Usage, liquidity, and request momentum')}
               </h3>
-              <p className='text-muted-foreground text-sm'>
-                {t('Monitor balance, usage, and request volume')}
+              <p className='text-muted-foreground text-sm leading-relaxed'>
+                {t(
+                  'Use this strip as the financial and demand baseline before adjusting routing, pricing, or customer delivery scope.'
+                )}
               </p>
+            </div>
+            <div className='flex min-w-[12rem] flex-col items-start gap-1 rounded-2xl border border-primary/12 bg-primary/6 px-3 py-2.5'>
+              <span className='text-muted-foreground text-[11px] font-medium tracking-[0.16em] uppercase'>
+                {t('Liquidity signal')}
+              </span>
+              <span className='text-sm font-semibold tracking-tight'>
+                {runwayDays !== null
+                  ? runwayDays < 1
+                    ? t('Less than 1 day left')
+                    : runwayDays > 999
+                      ? `999+ ${t('days')}`
+                      : `~${formatNumber(Math.floor(runwayDays))} ${t('days')}`
+                  : remainQuota <= 0
+                    ? t('Balance depleted')
+                    : t('No recent usage')}
+              </span>
+              <span className='text-muted-foreground text-xs leading-relaxed'>
+                {remainQuota > 0
+                  ? t('Current credit coverage based on the latest observed usage window.')
+                  : t('Add balance before treating this workspace as a stable external service.')}
+              </span>
             </div>
           </div>
           <StaggerContainer className='grid gap-3 md:grid-cols-3'>
@@ -275,9 +301,9 @@ export function SummaryCards() {
         </div>
 
         <div className='bg-primary/5 flex flex-col justify-between gap-4 border-t border-primary/10 p-4 sm:p-5 xl:border-t-0 xl:border-l'>
-          <div className='flex flex-col gap-3'>
+          <div className='flex flex-col gap-4'>
             <div className='flex items-center justify-between'>
-              <span className='text-muted-foreground text-xs font-medium'>
+              <span className='text-muted-foreground text-xs font-medium tracking-[0.16em] uppercase'>
                 {t('Credit remaining')}
               </span>
               <span className='flex items-center gap-1.5'>
@@ -295,38 +321,14 @@ export function SummaryCards() {
               {formatQuota(remainQuota)}
             </div>
 
-            <div className='grid grid-cols-2 gap-2'>
-              <div className='bg-background/60 rounded-lg px-2.5 py-2'>
-                <div className='text-muted-foreground flex items-center gap-1 text-[11px] leading-none font-medium'>
-                  <span className='bg-gradient-to-br from-[oklch(0.5_0.2_270_/_15%)] to-[oklch(0.5_0.15_300_/_10%)] rounded-xl p-2'>
-                    <Flame className='size-3 shrink-0' aria-hidden='true' />
-                  </span>
-                  <span className='truncate'>{t('Last 24h usage')}</span>
-                </div>
-                <div className='text-foreground mt-1.5 truncate text-xs font-semibold tabular-nums'>
-                  {formatQuota(recentUsage)}
-                </div>
-              </div>
-              <div className='bg-background/60 rounded-lg px-2.5 py-2'>
-                <div className='text-muted-foreground flex items-center gap-1 text-[11px] leading-none font-medium'>
-                  <span className='bg-gradient-to-br from-[oklch(0.5_0.2_270_/_15%)] to-[oklch(0.5_0.15_300_/_10%)] rounded-xl p-2'>
-                    {runwayDays !== null && runwayDays < 3 ? (
-                      <TrendingDown
-                        className='size-3 shrink-0'
-                        aria-hidden='true'
-                      />
-                    ) : (
-                      <ShieldCheck
-                        className='size-3 shrink-0'
-                        aria-hidden='true'
-                      />
-                    )}
-                  </span>
-                  <span className='truncate'>{t('Runway')}</span>
+            <div className='grid gap-2'>
+              <div className='rounded-2xl border border-border/60 bg-background/70 p-3'>
+                <div className='text-muted-foreground text-[11px] font-medium tracking-[0.16em] uppercase'>
+                  {t('Runway outlook')}
                 </div>
                 <div
                   className={cn(
-                    'mt-1.5 truncate text-xs font-semibold tabular-nums',
+                    'mt-2 text-sm font-semibold tracking-tight',
                     healthLevel === 'critical' && 'text-destructive',
                     healthLevel === 'caution' && 'text-warning'
                   )}
@@ -340,6 +342,52 @@ export function SummaryCards() {
                     : remainQuota <= 0
                       ? t('Balance depleted')
                       : t('No recent usage')}
+                </div>
+                <p className='text-muted-foreground mt-1.5 text-xs leading-relaxed'>
+                  {remainQuota > 0
+                    ? t('Projects, demos, and routed workloads should stay within this liquidity window unless new demand accelerates.')
+                    : t('Balance coverage is the main blocker for dependable traffic and should be addressed before wider rollout.')}
+                </p>
+              </div>
+
+              <div className='grid grid-cols-2 gap-2'>
+                <div className='bg-background/60 rounded-lg px-2.5 py-2'>
+                  <div className='text-muted-foreground flex items-center gap-1 text-[11px] leading-none font-medium'>
+                    <span className='bg-gradient-to-br from-[oklch(0.5_0.2_270_/_15%)] to-[oklch(0.5_0.15_300_/_10%)] rounded-xl p-2'>
+                      <Flame className='size-3 shrink-0' aria-hidden='true' />
+                    </span>
+                    <span className='truncate'>{t('Last 24h usage')}</span>
+                  </div>
+                  <div className='text-foreground mt-1.5 truncate text-xs font-semibold tabular-nums'>
+                    {formatQuota(recentUsage)}
+                  </div>
+                </div>
+                <div className='bg-background/60 rounded-lg px-2.5 py-2'>
+                  <div className='text-muted-foreground flex items-center gap-1 text-[11px] leading-none font-medium'>
+                    <span className='bg-gradient-to-br from-[oklch(0.5_0.2_270_/_15%)] to-[oklch(0.5_0.15_300_/_10%)] rounded-xl p-2'>
+                      {runwayDays !== null && runwayDays < 3 ? (
+                        <TrendingDown
+                          className='size-3 shrink-0'
+                          aria-hidden='true'
+                        />
+                      ) : (
+                        <ShieldCheck
+                          className='size-3 shrink-0'
+                          aria-hidden='true'
+                        />
+                      )}
+                    </span>
+                    <span className='truncate'>{t('Credit health')}</span>
+                  </div>
+                  <div
+                    className={cn(
+                      'mt-1.5 truncate text-xs font-semibold tabular-nums',
+                      healthLevel === 'critical' && 'text-destructive',
+                      healthLevel === 'caution' && 'text-warning'
+                    )}
+                  >
+                    {t(healthCfg.labelKey)}
+                  </div>
                 </div>
               </div>
             </div>
