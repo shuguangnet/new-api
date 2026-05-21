@@ -17,6 +17,13 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 For commercial licensing, please contact support@quantumnous.com
 */
 import { useState, useCallback, useMemo, lazy, Suspense } from 'react'
+import {
+  ArrowRight,
+  BarChart3,
+  BriefcaseBusiness,
+  ShieldCheck,
+  Sparkles,
+} from 'lucide-react'
 import { getRouteApi, useNavigate } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { useAuthStore } from '@/stores/auth-store'
@@ -139,8 +146,9 @@ const SECTION_META: Record<
     descriptionKey: 'View dashboard overview and statistics',
   },
   models: {
-    titleKey: 'Model Call Analytics',
-    descriptionKey: 'View model call count analytics and charts',
+    titleKey: 'Model operations workspace',
+    descriptionKey:
+      'Review model demand, throughput, and delivery structure for enterprise routing decisions.',
   },
   users: {
     titleKey: 'User Analytics',
@@ -232,6 +240,35 @@ export function Dashboard() {
         />
       </>
     ) : null
+  const modelWorkspaceStats = useMemo(
+    () => [
+      {
+        label: t('Decision lens'),
+        value: t('Enterprise routing view'),
+        description: t(
+          'Focus on traffic concentration, model efficiency, and commercial sustainability.'
+        ),
+        icon: BriefcaseBusiness,
+      },
+      {
+        label: t('Monitoring scope'),
+        value: t('Demand + performance'),
+        description: t(
+          'Combine request trends with latency and success posture to spot delivery risk earlier.'
+        ),
+        icon: BarChart3,
+      },
+      {
+        label: t('Operational outcome'),
+        value: t('Stable service margin'),
+        description: t(
+          'Keep pricing, routing, and quality signals aligned before expanding user traffic.'
+        ),
+        icon: ShieldCheck,
+      },
+    ],
+    [t]
+  )
 
   return (
     <SectionPageLayout>
@@ -307,49 +344,161 @@ export function Dashboard() {
           )}
           {activeSection === 'overview' && <OverviewDashboard />}
           {activeSection === 'models' && (
-            <>
+            <div className='space-y-4'>
               <FadeIn>
-                <Suspense fallback={<LogStatCardsFallback />}>
-                  <LazyLogStatCards
-                    filters={modelFilters}
-                    onDataUpdate={handleDataUpdate}
+                <div className='relative overflow-hidden rounded-[28px] border border-slate-200/85 bg-[linear-gradient(135deg,rgba(255,255,255,0.98)_0%,rgba(248,250,252,0.96)_52%,rgba(239,246,255,0.78)_100%)] p-5 shadow-[0_20px_60px_rgba(15,23,42,0.06)] sm:p-6'>
+                  <div
+                    className='pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-sky-300/80 to-transparent'
+                    aria-hidden='true'
                   />
-                </Suspense>
+                  <div className='grid gap-4 xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.9fr)]'>
+                    <div className='space-y-4'>
+                      <div className='inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50/85 px-3 py-1 text-[11px] font-medium tracking-[0.18em] text-sky-700 uppercase'>
+                        <Sparkles className='size-3.5' aria-hidden='true' />
+                        {t('Model decision workspace')}
+                      </div>
+                      <div className='max-w-3xl space-y-2'>
+                        <h2 className='text-xl font-semibold tracking-tight text-slate-950 sm:text-2xl'>
+                          {t('Use analytics as the operating panel for model routing and delivery quality')}
+                        </h2>
+                        <p className='text-sm leading-7 text-slate-600 sm:text-[15px]'>
+                          {t(
+                            'This section reframes raw model charts into an enterprise review workspace so operations, product, and finance can evaluate demand concentration, response quality, and quota structure from one place.'
+                          )}
+                        </p>
+                      </div>
+                      <div className='grid gap-3 md:grid-cols-3'>
+                        {modelWorkspaceStats.map((item) => {
+                          const Icon = item.icon
+                          return (
+                            <div
+                              key={item.label}
+                              className='rounded-2xl border border-slate-200/85 bg-white/88 px-4 py-3.5 shadow-[0_10px_28px_rgba(15,23,42,0.04)]'
+                            >
+                              <div className='flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase'>
+                                <Icon className='size-3.5 text-sky-600' aria-hidden='true' />
+                                {item.label}
+                              </div>
+                              <div className='mt-2 text-sm font-semibold text-slate-950'>
+                                {item.value}
+                              </div>
+                              <p className='mt-1 text-xs leading-6 text-slate-500'>
+                                {item.description}
+                              </p>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
+                    <div className='rounded-[24px] border border-slate-200/85 bg-white/92 p-4 shadow-[0_14px_34px_rgba(15,23,42,0.05)] sm:p-5'>
+                      <div className='flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase'>
+                        <ShieldCheck className='size-3.5 text-emerald-600' aria-hidden='true' />
+                        {t('Review brief')}
+                      </div>
+                      <div className='mt-3 space-y-3'>
+                        <div className='rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-3'>
+                          <div className='text-sm font-semibold text-slate-900'>
+                            {t('Recommended review order')}
+                          </div>
+                          <p className='mt-1 text-sm leading-6 text-slate-600'>
+                            {t(
+                              'First confirm overall demand and quota distribution, then inspect model performance, and finally compare detailed trend charts before adjusting routing or pricing strategy.'
+                            )}
+                          </p>
+                        </div>
+                        <div className='space-y-2'>
+                          {[
+                            t('Look for concentration risk in high-volume models.'),
+                            t('Check whether latency and success metrics still support the current pricing posture.'),
+                            t('Use the detailed charts below to decide whether to rebalance traffic or refine delivery tiers.'),
+                          ].map((point) => (
+                            <div
+                              key={point}
+                              className='flex items-start gap-2 rounded-xl border border-slate-200/80 bg-white px-3 py-2.5'
+                            >
+                              <ArrowRight
+                                className='mt-0.5 size-3.5 shrink-0 text-sky-600'
+                                aria-hidden='true'
+                              />
+                              <span className='text-sm leading-6 text-slate-600'>
+                                {point}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </FadeIn>
-              {isAdmin && (
-                <FadeIn delay={0.05}>
-                  <Suspense fallback={<PerformanceOverviewFallback />}>
-                    <LazyPerformanceOverview />
-                  </Suspense>
-                </FadeIn>
-              )}
-              <FadeIn delay={0.1}>
-                <Suspense fallback={<ModelChartsFallback />}>
-                  <LazyConsumptionDistributionChart
-                    data={modelData}
-                    loading={dataLoading}
-                    defaultChartType={
-                      chartPreferences.consumptionDistributionChart
-                    }
-                    timeGranularity={
-                      modelFilters.time_granularity || DEFAULT_TIME_GRANULARITY
-                    }
-                  />
-                </Suspense>
+              <FadeIn delay={0.05}>
+                <div className='overflow-hidden rounded-[28px] border border-slate-200/85 bg-white/95 shadow-[0_18px_48px_rgba(15,23,42,0.05)]'>
+                  <div className='flex flex-col gap-4 border-b border-slate-200/85 bg-slate-50/75 px-4 py-4 sm:px-5 lg:flex-row lg:items-end lg:justify-between'>
+                    <div className='space-y-1'>
+                      <div className='text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase'>
+                        {t('Analytics workspace')}
+                      </div>
+                      <h3 className='text-lg font-semibold tracking-tight text-slate-950'>
+                        {t('Model delivery analytics board')}
+                      </h3>
+                      <p className='max-w-3xl text-sm leading-6 text-slate-600'>
+                        {t(
+                          'All cards and charts below are grouped as one decision surface, helping teams move from descriptive statistics to concrete routing and commercial actions.'
+                        )}
+                      </p>
+                    </div>
+                    {modelActions != null && (
+                      <div className='flex shrink-0 flex-wrap items-center gap-1.5 sm:gap-2'>
+                        {modelActions}
+                      </div>
+                    )}
+                  </div>
+                  <div className='space-y-4 p-4 sm:p-5'>
+                    <FadeIn>
+                      <Suspense fallback={<LogStatCardsFallback />}>
+                        <LazyLogStatCards
+                          filters={modelFilters}
+                          onDataUpdate={handleDataUpdate}
+                        />
+                      </Suspense>
+                    </FadeIn>
+                    {isAdmin && (
+                      <FadeIn delay={0.05}>
+                        <Suspense fallback={<PerformanceOverviewFallback />}>
+                          <LazyPerformanceOverview />
+                        </Suspense>
+                      </FadeIn>
+                    )}
+                    <FadeIn delay={0.1}>
+                      <Suspense fallback={<ModelChartsFallback />}>
+                        <LazyConsumptionDistributionChart
+                          data={modelData}
+                          loading={dataLoading}
+                          defaultChartType={
+                            chartPreferences.consumptionDistributionChart
+                          }
+                          timeGranularity={
+                            modelFilters.time_granularity || DEFAULT_TIME_GRANULARITY
+                          }
+                        />
+                      </Suspense>
+                    </FadeIn>
+                    <FadeIn delay={0.15}>
+                      <Suspense fallback={<ModelChartsFallback />}>
+                        <LazyModelCharts
+                          data={modelData}
+                          loading={dataLoading}
+                          defaultChartTab={chartPreferences.modelAnalyticsChart}
+                          timeGranularity={
+                            modelFilters.time_granularity || DEFAULT_TIME_GRANULARITY
+                          }
+                        />
+                      </Suspense>
+                    </FadeIn>
+                  </div>
+                </div>
               </FadeIn>
-              <FadeIn delay={0.15}>
-                <Suspense fallback={<ModelChartsFallback />}>
-                  <LazyModelCharts
-                    data={modelData}
-                    loading={dataLoading}
-                    defaultChartTab={chartPreferences.modelAnalyticsChart}
-                    timeGranularity={
-                      modelFilters.time_granularity || DEFAULT_TIME_GRANULARITY
-                    }
-                  />
-                </Suspense>
-              </FadeIn>
-            </>
+            </div>
           )}
           {activeSection === 'users' && (
             <FadeIn>
