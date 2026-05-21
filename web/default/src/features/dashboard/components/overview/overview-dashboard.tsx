@@ -319,12 +319,12 @@ function RequestPreview(props: {
           </span>
           <div className='min-w-0'>
             <div className='truncate text-sm font-medium'>
-              {t('First API request')}
+              {t('首条 API 请求')}
             </div>
             <div className='text-muted-foreground truncate text-xs'>
               {props.example.ready
                 ? props.example.keyName
-                : t('Create an API key to unlock the real request')}
+                : t('先创建 API 密钥后，再解锁可直接执行的真实请求示例')}
             </div>
           </div>
         </div>
@@ -334,15 +334,15 @@ function RequestPreview(props: {
             variant='outline'
             size='sm'
             className='h-7 gap-1.5 px-2 text-xs'
-            tooltip={t('Copy ready-to-run curl')}
-            successTooltip={t('Copied!')}
-            aria-label={t('Copy ready-to-run curl')}
+            tooltip={t('复制可直接运行的 curl 示例')}
+            successTooltip={t('已复制')}
+            aria-label={t('复制可直接运行的 curl 示例')}
           >
-            {t('Copy')}
+            {t('复制')}
           </CopyButton>
         ) : (
           <Button size='sm' variant='outline' render={<Link to='/keys' />}>
-            {t('Create API Key')}
+            {t('创建 API 密钥')}
           </Button>
         )}
       </div>
@@ -443,14 +443,14 @@ function OperatingBriefCard(props: {
             <div className='flex flex-wrap items-start justify-between gap-3'>
               <div className='flex max-w-2xl flex-col gap-1'>
                 <span className='text-muted-foreground text-xs font-medium tracking-[0.2em] uppercase'>
-                  {t('Operational brief')}
+                  {t('运营简报')}
                 </span>
                 <h3 className='text-lg font-semibold tracking-tight sm:text-xl'>
-                  {t('See readiness, coverage, and funding before traffic scales')}
+                  {t('在放量前先看清就绪度、覆盖面与预算安全垫')}
                 </h3>
                 <p className='text-muted-foreground text-sm leading-relaxed'>
                   {t(
-                    'This workspace is structured as an operating surface, so teams can validate launch readiness without opening multiple modules.'
+                    '这里不再只是传统统计卡片，而是一个面向交付与运营协同的首页简报区，帮助团队在进入其他模块前先确认关键条件。'
                   )}
                 </p>
               </div>
@@ -495,7 +495,7 @@ function OperatingBriefCard(props: {
             <div className='flex flex-col gap-3'>
               <div>
                 <div className='text-muted-foreground text-xs font-medium tracking-[0.18em] uppercase'>
-                  {t('Control recommendation')}
+                  {t('控制建议')}
                 </div>
                 <h3 className='mt-2 text-lg font-semibold tracking-tight'>
                   {props.summaryTitle}
@@ -510,14 +510,14 @@ function OperatingBriefCard(props: {
               <div className='flex items-start justify-between gap-3'>
                 <div className='min-w-0'>
                   <div className='text-muted-foreground text-[11px] font-medium tracking-[0.18em] uppercase'>
-                    {t('Operations cadence')}
+                    {t('运营节奏')}
                   </div>
                   <h4 className='mt-1 text-sm font-semibold tracking-tight'>
                     {props.operationsTitle}
                   </h4>
                 </div>
                 <span className='rounded-full border border-primary/20 bg-primary/8 px-2.5 py-1 text-[11px] font-medium text-primary'>
-                  {t('Live workspace')}
+                  {t('实时工作台')}
                 </span>
               </div>
               <p className='text-muted-foreground mt-2 text-xs leading-relaxed'>
@@ -548,7 +548,7 @@ function OperatingBriefCard(props: {
 
           <div className='bg-background/70 rounded-2xl border p-3'>
             <div className='text-muted-foreground text-xs leading-relaxed'>
-              {t('Recommended next workspace')}
+              {t('推荐下一步工作区')}
             </div>
             <Button
               variant='ghost'
@@ -558,7 +558,7 @@ function OperatingBriefCard(props: {
               <span className='flex flex-col items-start gap-0.5'>
                 <span className='text-sm font-medium'>{props.summaryCta}</span>
                 <span className='text-muted-foreground text-xs'>
-                  {t('Open the next decision area directly from overview')}
+                  {t('从总览页直接进入下一个关键决策区域，保持运营动作连续推进。')}
                 </span>
               </span>
               <ArrowRight className='size-4 shrink-0' aria-hidden='true' />
@@ -642,22 +642,22 @@ export function OverviewDashboard() {
   const startSteps = useMemo<StartStep[]>(
     () => [
       {
-        title: t('Create API Key'),
-        description: t('Create a key for your app or service'),
+        title: t('创建 API 密钥'),
+        description: t('为应用、团队或交付环境签发访问凭证'),
         to: '/keys',
         icon: KeyRound,
         completed: Boolean(preferredKey),
       },
       {
-        title: t('Add credits'),
-        description: t('Keep enough balance before production traffic'),
+        title: t('补充余额'),
+        description: t('在正式流量接入前准备稳定可用的额度缓冲'),
         to: '/wallet',
         icon: CreditCard,
         completed: remainQuota > 0 || usedQuota > 0,
       },
       {
-        title: t('Send a request'),
-        description: t('Verify routing with Playground or your client'),
+        title: t('发起验证请求'),
+        description: t('通过 Playground 或业务客户端验证首条调用链路'),
         to: '/playground',
         icon: TerminalSquare,
         completed: requestCount > 0,
@@ -669,27 +669,27 @@ export function OverviewDashboard() {
   const quickActions = useMemo<QuickAction[]>(
     () => [
       {
-        title: t('Playground'),
-        description: t('Test models and prompts from the browser'),
+        title: t('即时调试台'),
+        description: t('直接在浏览器中测试模型、提示词与响应效果'),
         to: '/playground',
         icon: Play,
       },
       {
-        title: t('Channels'),
-        description: t('Configure upstream providers and routing.'),
+        title: t('渠道编排'),
+        description: t('配置上游供应商、路由策略与交付链路。'),
         to: '/channels',
         icon: RadioTower,
         adminOnly: true,
       },
       {
-        title: t('Usage Logs'),
-        description: t('Inspect requests, errors, and billing details'),
+        title: t('调用日志'),
+        description: t('查看请求明细、错误状态与计费结果'),
         to: '/usage-logs',
         icon: FileText,
       },
       {
-        title: t('Pricing'),
-        description: t('Review model rates before scaling traffic'),
+        title: t('模型定价目录'),
+        description: t('在放量前审阅模型价格、能力与商业化策略'),
         to: '/pricing',
         icon: BookOpen,
       },
@@ -705,18 +705,18 @@ export function OverviewDashboard() {
   const heroSignals = useMemo<HeroSignal[]>(
     () => [
       {
-        label: t('Route active'),
-        value: apiInfoItems.length > 0 ? t('Online') : t('Current domain'),
+        label: t('路由状态'),
+        value: apiInfoItems.length > 0 ? t('已联通') : t('当前域名可用'),
         icon: RadioTower,
       },
       {
-        label: t('Auth configured'),
-        value: preferredKey ? t('Secured') : t('Needs API key'),
+        label: t('鉴权配置'),
+        value: preferredKey ? t('已加固') : t('待创建密钥'),
         icon: ShieldCheck,
       },
       {
-        label: t('Model selected'),
-        value: modelsQuery.data?.[0] ?? t('Loading'),
+        label: t('默认模型'),
+        value: modelsQuery.data?.[0] ?? t('加载中'),
         icon: Timer,
       },
     ],
@@ -727,7 +727,7 @@ export function OverviewDashboard() {
     const endpoint = normalizeEndpoint(apiInfoItems[0]?.url)
     const model = modelsQuery.data?.[0] ?? 'gpt-4o-mini'
     const apiKey = realKeyQuery.data ?? ''
-    const keyName = preferredKey?.name ?? t('No API key yet')
+    const keyName = preferredKey?.name ?? t('尚未创建 API 密钥')
     const ready = Boolean(apiKey && model)
 
     return {
@@ -750,42 +750,42 @@ export function OverviewDashboard() {
   const operatingBriefItems = useMemo<OperatingBriefItem[]>(
     () => [
       {
-        label: t('Readiness'),
+        label: t('就绪度'),
         value: `${completedStepCount}/${startSteps.length}`,
         description: setupComplete
-          ? t('Foundation tasks are completed and the workspace is ready for delivery traffic.')
-          : t('Complete the onboarding checklist to reduce launch risk before external usage.'),
+          ? t('基础开通动作已完成，当前工作台已具备承接验证流量与交付演示的条件。')
+          : t('优先完成首轮开通清单，降低对外试运行前的接入与运营风险。'),
         icon: ListChecks,
       },
       {
-        label: t('Primary model'),
-        value: modelsQuery.data?.[0] ?? t('Loading'),
+        label: t('主力模型'),
+        value: modelsQuery.data?.[0] ?? t('加载中'),
         description: t(
-          'Keep one default model visible so product, support, and ops share the same routing context.'
+          '保持一个明确的默认模型，有助于产品、交付、支持与运营团队共享同一条路由认知。'
         ),
         icon: Timer,
       },
       {
-        label: t('Balance posture'),
+        label: t('余额态势'),
         value:
           remainQuota > 0
-            ? t('Funded')
+            ? t('额度充足')
             : usedQuota > 0
-              ? t('Previously consumed')
-              : t('Needs credits'),
+              ? t('曾有消耗')
+              : t('待补充余额'),
         description:
           remainQuota > 0
-            ? t('Available quota is present for validation, demos, and controlled production rollout.')
-            : t('Add credits before promoting this workspace as a stable service surface.'),
+            ? t('当前额度足以支撑验证、演示与受控放量阶段的核心流量。')
+            : t('在将工作台作为稳定服务面对团队或客户前，应先完成充值与额度准备。'),
         icon: CreditCard,
       },
       {
-        label: t('Traffic signal'),
-        value: requestCount > 0 ? t('Receiving requests') : t('No recent traffic'),
+        label: t('流量信号'),
+        value: requestCount > 0 ? t('已有请求进入') : t('暂无近期流量'),
         description:
           requestCount > 0
-            ? t('Observed request activity confirms the gateway is already serving active workloads.')
-            : t('Use Playground or your application client to verify the first live request path.'),
+            ? t('已观测到真实调用，说明网关正在承接有效工作负载。')
+            : t('建议通过 Playground 或业务客户端发起首条请求，完成链路闭环验证。'),
         icon: RadioTower,
       },
     ],
@@ -809,43 +809,43 @@ export function OverviewDashboard() {
   const operationalSummary = useMemo(() => {
     if (!preferredKey) {
       return {
-        title: t('Close the access layer first'),
+        title: t('先完成访问层闭环'),
         body: t(
-          'The highest-value action is to issue a production-facing API key so teams can move from configuration into controlled validation.'
+          '当前最具价值的动作，是先签发首个面向生产或测试环境的 API 密钥，让团队从配置阶段进入可验证、可交付的接入阶段。'
         ),
-        cta: t('Go create the first API key'),
+        cta: t('立即创建首个 API 密钥'),
         to: '/keys' as const,
       }
     }
 
     if (remainQuota <= 0) {
       return {
-        title: t('Funding is the current blocker'),
+        title: t('余额是当前放量阻塞点'),
         body: t(
-          'Keys and routing may already exist, but a depleted balance creates avoidable interruptions for demos, pilots, and shared environments.'
+          '即使路由与鉴权已经具备，余额不足仍会给演示、试点与共享环境带来不必要的服务中断风险。'
         ),
-        cta: t('Review wallet and recharge'),
+        cta: t('前往钱包检查并充值'),
         to: '/wallet' as const,
       }
     }
 
     if (requestCount <= 0) {
       return {
-        title: t('Validate one live request path'),
+        title: t('补齐首条真实请求验证'),
         body: t(
-          'The platform is configured, but there is no verified traffic yet. Running a first request turns setup into a usable delivery workflow.'
+          '平台已经完成基本配置，但尚未形成可观测的真实调用。完成首条请求，才能把开通动作转化为可复用的交付流程。'
         ),
-        cta: t('Open Playground for verification'),
+        cta: t('进入 Playground 完成验证'),
         to: '/playground' as const,
       }
     }
 
     return {
-      title: t('Move from setup to operational review'),
+      title: t('从开通视角转向运营复盘'),
       body: t(
-        'Initial readiness is in place. The next leverage point is reviewing usage logs and pricing so routing, margin, and service quality stay aligned.'
+        '当前基础能力已具备，下一步重点应转向调用日志与定价结构复盘，确保路由策略、毛利空间与服务质量保持一致。'
       ),
-      cta: t('Review usage and pricing posture'),
+      cta: t('查看调用与定价态势'),
       to: '/usage-logs' as const,
     }
   }, [preferredKey, remainQuota, requestCount, t])
@@ -854,37 +854,37 @@ export function OverviewDashboard() {
     const activeModels = modelsQuery.data?.length ?? 0
     const balanceStatus =
       remainQuota > 0
-        ? t('Funded and callable')
+        ? t('可调用且额度充足')
         : usedQuota > 0
-          ? t('Needs budget recovery')
-          : t('Waiting for credits')
+          ? t('需恢复预算连续性')
+          : t('等待充值开通')
 
     return [
       {
-        label: t('Access layer'),
-        value: preferredKey ? t('Protected') : t('Open task'),
+        label: t('访问层'),
+        value: preferredKey ? t('已保护') : t('待完成'),
         description: preferredKey
-          ? t('Keys are in place, so internal teams and customer workloads can connect with a governed credential path.')
-          : t('Issue the first API key to move from workspace setup into a routable service surface.'),
+          ? t('密钥已建立，内部团队与客户流量均可通过受控凭证接入统一网关。')
+          : t('先发放首个 API 密钥，让工作台从配置态进入可路由的服务态。'),
       },
       {
-        label: t('Model estate'),
+        label: t('模型资产'),
         value:
           activeModels > 0
-            ? t('{{count}} models online', { count: activeModels })
-            : t('Routing pending'),
+            ? t('已上线 {{count}} 个模型', { count: activeModels })
+            : t('待配置路由'),
         description:
           activeModels > 0
-            ? t('Visible default and optional models keep product, operations, and support aligned on delivery scope.')
-            : t('Connect at least one available model so downstream teams can validate the production route.'),
+            ? t('清晰可见的默认模型与候选模型，有助于产品、运营与支持团队对外统一交付范围。')
+            : t('至少接入一个可用模型，便于下游团队验证真实生产路由。'),
       },
       {
-        label: t('Budget posture'),
+        label: t('预算态势'),
         value: balanceStatus,
         description:
           remainQuota > 0
-            ? t('Recharge pressure is low enough for verification traffic, demonstrations, and controlled rollout work.')
-            : t('Quota is the limiting factor for dependable traffic. Resolve it before presenting the workspace as a stable platform.'),
+            ? t('当前充值压力较低，足以支持验证流量、演示场景与受控放量。')
+            : t('额度是稳定流量承接的核心限制项，应先解决后再将其视作可长期交付的平台。'),
       },
     ]
   }, [modelsQuery.data, preferredKey, remainQuota, t, usedQuota])
@@ -892,35 +892,35 @@ export function OverviewDashboard() {
   const operationsCadence = useMemo(() => {
     if (!preferredKey) {
       return {
-        title: t('Foundation stage: secure access before scale'),
+        title: t('基础阶段：先加固访问，再考虑放量'),
         body: t(
-          'The workspace should progress from credential issuance to funded validation, then into monitored delivery. This sequence reduces risk when teams begin routing real traffic.'
+          '建议工作台按照“密钥签发—额度准备—首条验证—持续监控”的节奏推进，这样能在接入真实流量前显著降低上线风险。'
         ),
       }
     }
 
     if (remainQuota <= 0) {
       return {
-        title: t('Commercial readiness: restore budget continuity'),
+        title: t('商业准备阶段：恢复预算连续性'),
         body: t(
-          'Access and routing may already exist, but balance coverage now determines whether demos, pilots, and internal workloads remain dependable.'
+          '当访问与路由已经具备后，余额覆盖能力就成为演示、试点与内部协作是否稳定的关键条件。'
         ),
       }
     }
 
     if (requestCount <= 0) {
       return {
-        title: t('Activation stage: convert setup into proven traffic'),
+        title: t('激活阶段：把配置转化为真实流量'),
         body: t(
-          'A funded and configured workspace still needs one validated request path before it can be treated as a reliable service endpoint.'
+          '即使已经完成充值与配置，仍需要至少一条真实调用链路，才能证明当前入口是可交付、可复用的服务端点。'
         ),
       }
     }
 
     return {
-      title: t('Operational stage: review margin, quality, and traffic signals'),
+      title: t('运营阶段：持续复盘成本、质量与流量'),
       body: t(
-        'Once traffic exists, the overview should guide teams toward pricing posture, usage evidence, and service health instead of repeating setup steps.'
+        '当真实流量已经进入后，首页应把团队引导到定价结构、调用证据与服务健康等高价值运营视角，而不是重复开通动作。'
       ),
     }
   }, [preferredKey, remainQuota, requestCount, t])
@@ -942,16 +942,16 @@ export function OverviewDashboard() {
                 <div className='flex min-w-0 flex-col gap-5'>
                   <div className='flex flex-wrap items-start justify-between gap-3'>
                     <div className='flex max-w-2xl flex-col gap-1'>
-                      <div className='text-muted-foreground flex items-center gap-2 text-xs font-medium tracking-wider uppercase'>
+                      <div className='mb-3 inline-flex items-center gap-1.5 rounded-full border border-slate-300/80 bg-white/75 px-3 py-1 text-[11px] font-semibold tracking-[0.2em] text-slate-500 uppercase shadow-sm backdrop-blur'>
                         <ListChecks className='size-3.5' aria-hidden='true' />
-                        {t('Get started')}
+                        {t('快速开通')}
                       </div>
                       <h3 className='text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl'>
-                        {t('Complete the core launch setup in one screen')}
+                        {t('在一个页面内完成核心上线准备')}
                       </h3>
                       <p className='max-w-xl text-sm leading-relaxed text-slate-600'>
                         {t(
-                          'Unify key issuance, balance readiness, route verification, and service status into the same operational starting point.'
+                          '将密钥签发、额度准备、链路验证与服务状态收束在同一入口，帮助团队以更低认知成本完成上线前准备。'
                         )}
                       </p>
                     </div>
@@ -962,11 +962,11 @@ export function OverviewDashboard() {
                         onClick={handleSetupGuideToggle}
                       >
                         <ChevronUp data-icon='inline-start' />
-                        {t('Hide setup guide')}
+                        {t('收起开通指南')}
                       </Button>
                       <Button size='sm' render={<Link to='/keys' />}>
                         <KeyRound data-icon='inline-start' />
-                        {t('Create API Key')}
+                        {t('创建 API 密钥')}
                       </Button>
                     </div>
                   </div>
@@ -995,10 +995,10 @@ export function OverviewDashboard() {
             <div className='flex h-full flex-col gap-4'>
               <div className='flex flex-col gap-1'>
                 <div className='text-muted-foreground text-xs font-medium tracking-wider uppercase'>
-                  {t('Recommended actions')}
+                  {t('推荐动作')}
                 </div>
                 <h3 className='text-lg font-semibold tracking-tight text-slate-900'>
-                  {t('Keep the platform in delivery-ready state')}
+                  {t('让平台始终保持可交付状态')}
                 </h3>
               </div>
               <div className='grid gap-2'>
@@ -1023,11 +1023,11 @@ export function OverviewDashboard() {
                     <div className='flex items-center gap-2'>
                       <h3 className='gradient-text truncate text-sm font-semibold'>
                         {setupComplete
-                          ? t('Setup guide complete')
-                          : t('Setup guide')}
+                          ? t('开通指南已完成')
+                          : t('开通指南')}
                       </h3>
                       <span className='text-muted-foreground bg-background/60 rounded-md border px-2 py-0.5 text-xs'>
-                        {t('Setup progress: {{completed}}/{{total}}', {
+                        {t('开通进度：{{completed}}/{{total}}', {
                           completed: completedStepCount,
                           total: startSteps.length,
                         })}
@@ -1036,9 +1036,9 @@ export function OverviewDashboard() {
                     <p className='text-muted-foreground line-clamp-1 text-xs'>
                       {setupComplete
                         ? t(
-                            'Your setup guide is collapsed so usage stays in focus.'
+                            '已折叠开通指南，让首页更聚焦真实调用、预算与运营观察。'
                           )
-                        : t('Setup guide is collapsed. Expand it anytime.')}
+                        : t('开通指南当前已收起，你可以随时展开继续完成准备动作。')}
                     </p>
                   </div>
                 </div>
@@ -1054,7 +1054,7 @@ export function OverviewDashboard() {
                     onClick={handleSetupGuideToggle}
                   >
                     <ChevronDown data-icon='inline-start' />
-                    {t('Show setup guide')}
+                    {t('展开开通指南')}
                   </Button>
                 </div>
               </div>
