@@ -62,7 +62,7 @@ export function AppSidebar() {
   }, [configFilteredNavGroups, userRole])
 
   return (
-    <Sidebar collapsible={collapsible} variant={variant} className='border-r border-[oklch(0.5_0.1_280_/_8%)]'>
+    <Sidebar collapsible={collapsible} variant={variant} className='border-r border-border'>
       <SidebarContent className='sidebar-glass py-3 gap-1'>
         {currentNavGroups.map((props) => {
           const key = props.id || props.title
@@ -70,7 +70,7 @@ export function AppSidebar() {
         })}
       </SidebarContent>
       <SidebarRail />
-      <SidebarFooter className='border-t border-[oklch(0.5_0.1_280_/_10%)]' />
+      <SidebarFooter className='border-t border-border' />
     </Sidebar>
   )
 }

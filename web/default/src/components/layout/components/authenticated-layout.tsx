@@ -45,7 +45,7 @@ export function AuthenticatedLayout(props: AuthenticatedLayoutProps) {
               <AppSidebar />
               <SidebarInset
                 className={cn(
-                  '@container/content bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.05),_transparent_34%),linear-gradient(180deg,rgba(248,250,252,0.96),rgba(244,247,251,0.92))]',
+                  '@container/content bg-white',
                   'h-[calc(100svh-var(--app-header-height,0px))]',
                   'peer-data-[variant=inset]:h-[calc(100svh-var(--app-header-height,0px)-(var(--spacing)*4))]'
                 )}
