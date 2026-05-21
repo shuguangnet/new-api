@@ -19,7 +19,15 @@ For commercial licensing, please contact support@quantumnous.com
 import { useMemo } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useNavigate, useParams, useSearch } from '@tanstack/react-router'
-import { ArrowLeft, Code2, HeartPulse, Info, Timer } from 'lucide-react'
+import {
+  ArrowLeft,
+  Code2,
+  HeartPulse,
+  Info,
+  ShieldCheck,
+  Sparkles,
+  Timer,
+} from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { getLobeIcon } from '@/lib/lobe-icon'
 import { cn } from '@/lib/utils'
@@ -260,6 +268,95 @@ function OverviewSummaryGrid(props: { model: PricingModel }) {
   )
 }
 
+function WorkspaceSignalCard(props: {
+  icon: React.ComponentType<{ className?: string }>
+  eyebrow: string
+  title: string
+  description: string
+}) {
+  const Icon = props.icon
+
+  return (
+    <div className='rounded-2xl border border-white/60 bg-white/80 p-4 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-white/5'>
+      <div className='mb-3 flex size-10 items-center justify-center rounded-2xl bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900'>
+        <Icon className='size-4' aria-hidden='true' />
+      </div>
+      <p className='text-muted-foreground text-[11px] font-semibold tracking-[0.24em] uppercase'>
+        {props.eyebrow}
+      </p>
+      <h3 className='mt-2 text-sm font-semibold'>{props.title}</h3>
+      <p className='text-muted-foreground mt-1 text-xs leading-5'>
+        {props.description}
+      </p>
+    </div>
+  )
+}
+
+function DecisionBriefCard(props: { model: PricingModel }) {
+  const { t } = useTranslation()
+  const hasStructuredPricing =
+    isDynamicPricingModel(props.model) ||
+    props.model.quota_type === QUOTA_TYPE_VALUES.TOKEN
+
+  return (
+    <aside className='relative overflow-hidden rounded-[28px] border border-slate-200/80 bg-slate-950 p-5 text-slate-50 shadow-[0_32px_80px_-42px_rgba(15,23,42,0.72)] dark:border-white/10'>
+      <div
+        className='pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(96,165,250,0.28),transparent_34%),radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.22),transparent_32%)]'
+        aria-hidden='true'
+      />
+      <div className='relative space-y-5'>
+        <div>
+          <p className='text-xs font-semibold tracking-[0.28em] text-slate-300 uppercase'>
+            {t('Selection brief')}
+          </p>
+          <h3 className='mt-2 text-lg font-semibold tracking-tight'>
+            {t('Operational fit summary')}
+          </h3>
+          <p className='mt-2 text-sm leading-6 text-slate-300'>
+            {t(
+              'Use this workspace to validate pricing posture, delivery stability, and API readiness before exposing the model to internal teams or commercial tenants.'
+            )}
+          </p>
+        </div>
+
+        <div className='grid gap-3 sm:grid-cols-2 lg:grid-cols-1'>
+          <div className='rounded-2xl border border-white/10 bg-white/5 p-3.5'>
+            <p className='text-[11px] font-semibold tracking-[0.22em] text-slate-400 uppercase'>
+              {t('Commercial posture')}
+            </p>
+            <p className='mt-2 text-sm font-medium text-white'>
+              {hasStructuredPricing
+                ? t('Ready for tiered packaging and internal margin design')
+                : t('Best for simple request-based packaging and lightweight routing')}
+            </p>
+          </div>
+          <div className='rounded-2xl border border-white/10 bg-white/5 p-3.5'>
+            <p className='text-[11px] font-semibold tracking-[0.22em] text-slate-400 uppercase'>
+              {t('Governance signal')}
+            </p>
+            <p className='mt-2 text-sm font-medium text-white'>
+              {props.model.enable_groups?.length
+                ? t('Group availability is configured, supporting segmented delivery policies')
+                : t('No explicit group scope found, so rollout should be validated before broad exposure')}
+            </p>
+          </div>
+        </div>
+
+        <div className='rounded-2xl border border-dashed border-white/15 px-4 py-3'>
+          <p className='text-[11px] font-semibold tracking-[0.22em] text-slate-400 uppercase'>
+            {t('Recommended review path')}
+          </p>
+          <ol className='mt-3 space-y-2 text-sm text-slate-200'>
+            <li>1. {t('Confirm base and group pricing alignment with your package strategy.')}</li>
+            <li>2. {t('Inspect latency and success trends before enabling production routing.')}</li>
+            <li>3. {t('Hand off the API section to delivery teams for endpoint and SDK rollout.')}</li>
+          </ol>
+        </div>
+      </div>
+    </aside>
+  )
+}
+
 // ----------------------------------------------------------------------------
 // Model header (always visible above the detail sections)
 // ----------------------------------------------------------------------------
@@ -278,59 +375,107 @@ function ModelHeader(props: { model: PricingModel }) {
     getDynamicPricingTiers(model).length === 0
 
   return (
-    <header className='pb-4'>
-      <div className='flex items-center gap-2.5'>
-        {vendorIcon}
-        <h1 className='font-mono text-xl font-bold tracking-tight sm:text-2xl'>
-          {model.model_name}
-        </h1>
-        <CopyButton
-          value={model.model_name || ''}
-          className='size-6'
-          iconClassName='size-3'
-          tooltip={t('Copy model name')}
-          successTooltip={t('Copied!')}
-          aria-label={t('Copy model name')}
+    <header className='grid gap-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.85fr)] lg:items-start'>
+      <div className='relative overflow-hidden rounded-[28px] border border-slate-200/80 bg-[linear-gradient(135deg,rgba(255,255,255,0.96),rgba(241,245,249,0.92))] p-5 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.35)] dark:border-white/10 dark:bg-[linear-gradient(135deg,rgba(15,23,42,0.96),rgba(15,23,42,0.84))]'>
+        <div
+          className='pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.16),transparent_34%),radial-gradient(circle_at_right,rgba(168,85,247,0.14),transparent_32%)]'
+          aria-hidden='true'
+        />
+        <div className='relative'>
+          <div className='flex flex-wrap items-center gap-2 text-[11px] font-semibold tracking-[0.22em] uppercase'>
+            <span className='rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-slate-700 dark:border-white/10 dark:bg-white/10 dark:text-slate-200'>
+              {t('Model operating dossier')}
+            </span>
+            <span className='text-muted-foreground'>
+              {model.vendor_name || t('Managed catalog')}
+            </span>
+          </div>
+
+          <div className='mt-4 flex items-start gap-3'>
+            <div className='bg-background/85 flex size-12 shrink-0 items-center justify-center rounded-2xl border border-white/60 shadow-sm dark:border-white/10'>
+              {vendorIcon ?? <Sparkles className='size-5' aria-hidden='true' />}
+            </div>
+            <div className='min-w-0'>
+              <div className='flex flex-wrap items-center gap-2.5'>
+                <h1 className='font-mono text-2xl font-bold tracking-tight sm:text-[2rem]'>
+                  {model.model_name}
+                </h1>
+                <CopyButton
+                  value={model.model_name || ''}
+                  className='size-7 rounded-full border border-slate-200 bg-white/80 dark:border-white/10 dark:bg-white/10'
+                  iconClassName='size-3.5'
+                  tooltip={t('Copy model name')}
+                  successTooltip={t('Copied!')}
+                  aria-label={t('Copy model name')}
+                />
+              </div>
+
+              <div className='text-muted-foreground mt-2 flex flex-wrap items-center gap-2 text-xs'>
+                {model.vendor_name && <span>{model.vendor_name}</span>}
+                <span className='text-muted-foreground/30'>•</span>
+                <span>
+                  {model.quota_type === QUOTA_TYPE_VALUES.TOKEN
+                    ? t('Token-based')
+                    : t('Per Request')}
+                </span>
+                {model.billing_mode === 'tiered_expr' && model.billing_expr && (
+                  <span className='rounded-full bg-amber-100 px-2.5 py-1 text-[10px] font-medium text-amber-700 dark:bg-amber-500/20 dark:text-amber-300'>
+                    {isSpecialExpression
+                      ? t('Special billing expression')
+                      : t('Dynamic Pricing')}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {description && (
+            <p className='text-muted-foreground mt-4 max-w-3xl text-sm leading-7'>
+              {description}
+            </p>
+          )}
+
+          {tags.length > 0 && (
+            <div className='mt-4 flex flex-wrap gap-2'>
+              {tags.map((tag) => (
+                <span
+                  key={tag}
+                  className='rounded-full border border-slate-200/80 bg-white/70 px-3 py-1 text-[11px] font-medium text-slate-700 dark:border-white/10 dark:bg-white/8 dark:text-slate-200'
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className='grid gap-3 sm:grid-cols-3 lg:grid-cols-1'>
+        <WorkspaceSignalCard
+          icon={Info}
+          eyebrow={t('Catalog context')}
+          title={t('Commercial selection ready')}
+          description={t(
+            'Condenses vendor, pricing mode, and model metadata into a single handoff surface for platform and procurement teams.'
+          )}
+        />
+        <WorkspaceSignalCard
+          icon={ShieldCheck}
+          eyebrow={t('Governance')}
+          title={t('Group-aware delivery review')}
+          description={t(
+            'Highlight whether the model can be segmented across customer tiers, internal groups, or rollout policies.'
+          )}
+        />
+        <WorkspaceSignalCard
+          icon={Code2}
+          eyebrow={t('Activation')}
+          title={t('API rollout handoff')}
+          description={t(
+            'Keep operational detail, performance, and integration references in one workspace before enabling routing.'
+          )}
         />
       </div>
-      <div className='mt-1 flex flex-wrap items-center gap-1.5 text-xs'>
-        {model.vendor_name && (
-          <span className='text-muted-foreground'>{model.vendor_name}</span>
-        )}
-        <span className='text-muted-foreground/30'>·</span>
-        <span className='text-muted-foreground/70'>
-          {model.quota_type === QUOTA_TYPE_VALUES.TOKEN
-            ? t('Token-based')
-            : t('Per Request')}
-        </span>
-        {model.billing_mode === 'tiered_expr' && model.billing_expr && (
-          <>
-            <span className='text-muted-foreground/30'>·</span>
-            <span className='rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-700 dark:bg-amber-500/20 dark:text-amber-300'>
-              {isSpecialExpression
-                ? t('Special billing expression')
-                : t('Dynamic Pricing')}
-            </span>
-          </>
-        )}
-      </div>
-      {description && (
-        <p className='text-muted-foreground mt-2 text-sm leading-relaxed'>
-          {description}
-        </p>
-      )}
-      {tags.length > 0 && (
-        <div className='mt-2.5 flex flex-wrap gap-1'>
-          {tags.map((tag) => (
-            <span
-              key={tag}
-              className='bg-muted text-muted-foreground rounded px-2 py-0.5 text-[11px] font-medium'
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      )}
     </header>
   )
 }
@@ -916,75 +1061,105 @@ export function ModelDetailsContent(props: ModelDetailsContentProps) {
     Boolean(props.model.billing_expr)
 
   return (
-    <div className='@container/details space-y-4'>
+    <div className='@container/details space-y-5'>
       <ModelHeader model={props.model} />
 
-      <Tabs defaultValue='overview' className='gap-4'>
-        <TabsList className='bg-muted/60 grid w-full grid-cols-3 gap-1 rounded-lg p-1 group-data-horizontal/tabs:h-auto'>
-          {TAB_VALUES.map((value) => {
-            const Icon = TAB_META[value].icon
-            return (
-              <TabsTrigger
-                key={value}
-                value={value}
-                className='h-8 min-w-0 gap-1.5 rounded-md px-3 text-xs sm:text-sm'
-              >
-                <Icon className='size-3.5' />
-                <span className='truncate'>{t(TAB_META[value].labelKey)}</span>
-              </TabsTrigger>
-            )
-          })}
-        </TabsList>
+      <section className='grid gap-5 xl:grid-cols-[minmax(0,1.45fr)_360px]'>
+        <div className='space-y-4'>
+          <div className='rounded-[28px] border border-slate-200/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(248,250,252,0.94))] p-4 shadow-[0_28px_80px_-48px_rgba(15,23,42,0.4)] dark:border-white/10 dark:bg-[linear-gradient(180deg,rgba(15,23,42,0.9),rgba(15,23,42,0.72))]'>
+            <div className='mb-4 flex flex-col gap-3 border-b border-slate-200/80 pb-4 dark:border-white/10 sm:flex-row sm:items-end sm:justify-between'>
+              <div>
+                <p className='text-muted-foreground text-[11px] font-semibold tracking-[0.24em] uppercase'>
+                  {t('Decision workspace')}
+                </p>
+                <h2 className='mt-2 text-lg font-semibold tracking-tight'>
+                  {t('Model evaluation and delivery readiness')}
+                </h2>
+                <p className='text-muted-foreground mt-1 text-sm leading-6'>
+                  {t(
+                    'Review pricing, performance, and API activation in a single enterprise workspace before publishing this model to teams or customers.'
+                  )}
+                </p>
+              </div>
+              <div className='bg-background/80 inline-flex items-center gap-2 rounded-full border border-slate-200/80 px-3 py-1.5 text-xs text-slate-600 dark:border-white/10 dark:bg-white/5 dark:text-slate-300'>
+                <Sparkles className='size-3.5' aria-hidden='true' />
+                <span>{t('High-salience review surface')}</span>
+              </div>
+            </div>
 
-        <TabsContent value='overview' className='space-y-6 outline-none'>
-          <OverviewSummaryGrid model={props.model} />
+            <Tabs defaultValue='overview' className='gap-4'>
+              <TabsList className='bg-muted/60 grid w-full grid-cols-3 gap-1 rounded-xl p-1 group-data-horizontal/tabs:h-auto'>
+                {TAB_VALUES.map((value) => {
+                  const Icon = TAB_META[value].icon
+                  return (
+                    <TabsTrigger
+                      key={value}
+                      value={value}
+                      className='h-8 min-w-0 gap-1.5 rounded-md px-3 text-xs sm:text-sm'
+                    >
+                      <Icon className='size-3.5' />
+                      <span className='truncate'>{t(TAB_META[value].labelKey)}</span>
+                    </TabsTrigger>
+                  )
+                })}
+              </TabsList>
 
-          <section className='bg-card/60 space-y-5 rounded-xl border p-4 shadow-sm'>
-            <SectionTitle>{t('Pricing')}</SectionTitle>
-            <PriceSection
-              model={props.model}
-              priceRate={props.priceRate}
-              usdExchangeRate={props.usdExchangeRate}
-              tokenUnit={props.tokenUnit}
-              showRechargePrice={showRechargePrice}
-            />
-            {isDynamic && (
-              <DynamicPricingBreakdown billingExpr={props.model.billing_expr} />
-            )}
-            <GroupPricingSection
-              model={props.model}
-              groupRatio={props.groupRatio}
-              usableGroup={props.usableGroup}
-              autoGroups={props.autoGroups}
-              priceRate={props.priceRate}
-              usdExchangeRate={props.usdExchangeRate}
-              tokenUnit={props.tokenUnit}
-              showRechargePrice={showRechargePrice}
-            />
-          </section>
+              <TabsContent value='overview' className='space-y-6 pt-2 outline-none'>
+                <OverviewSummaryGrid model={props.model} />
 
-          <ModelDetailsQuickStats metadata={metadata} />
+                <section className='bg-card/70 space-y-5 rounded-2xl border border-slate-200/80 p-4 shadow-sm dark:border-white/10'>
+                  <SectionTitle>{t('Pricing')}</SectionTitle>
+                  <PriceSection
+                    model={props.model}
+                    priceRate={props.priceRate}
+                    usdExchangeRate={props.usdExchangeRate}
+                    tokenUnit={props.tokenUnit}
+                    showRechargePrice={showRechargePrice}
+                  />
+                  {isDynamic && (
+                    <DynamicPricingBreakdown billingExpr={props.model.billing_expr} />
+                  )}
+                  <GroupPricingSection
+                    model={props.model}
+                    groupRatio={props.groupRatio}
+                    usableGroup={props.usableGroup}
+                    autoGroups={props.autoGroups}
+                    priceRate={props.priceRate}
+                    usdExchangeRate={props.usdExchangeRate}
+                    tokenUnit={props.tokenUnit}
+                    showRechargePrice={showRechargePrice}
+                  />
+                </section>
 
-          <ModelSignalsSection
-            capabilities={metadata.capabilities}
-            input={metadata.input_modalities}
-            output={metadata.output_modalities}
-          />
+                <ModelDetailsQuickStats metadata={metadata} />
 
-          <ModelDetailsProviderInfo model={props.model} />
-        </TabsContent>
+                <ModelSignalsSection
+                  capabilities={metadata.capabilities}
+                  input={metadata.input_modalities}
+                  output={metadata.output_modalities}
+                />
 
-        <TabsContent value='performance' className='outline-none'>
-          <ModelDetailsPerformance model={props.model} />
-        </TabsContent>
+                <ModelDetailsProviderInfo model={props.model} />
+              </TabsContent>
 
-        <TabsContent value='api' className='outline-none'>
-          <ModelDetailsApi
-            model={props.model}
-            endpointMap={props.endpointMap}
-          />
-        </TabsContent>
-      </Tabs>
+              <TabsContent value='performance' className='pt-2 outline-none'>
+                <ModelDetailsPerformance model={props.model} />
+              </TabsContent>
+
+              <TabsContent value='api' className='pt-2 outline-none'>
+                <ModelDetailsApi
+                  model={props.model}
+                  endpointMap={props.endpointMap}
+                />
+              </TabsContent>
+            </Tabs>
+          </div>
+        </div>
+
+        <div className='xl:sticky xl:top-6 xl:self-start'>
+          <DecisionBriefCard model={props.model} />
+        </div>
+      </section>
     </div>
   )
 }
@@ -1006,13 +1181,13 @@ export function ModelDetailsDrawer(props: ModelDetailsDrawerProps) {
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
         side='right'
-        className='flex h-dvh w-full overflow-hidden p-0 sm:max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-5xl'
+        className='flex h-dvh w-full overflow-hidden border-l border-slate-200/80 bg-[linear-gradient(180deg,rgba(248,250,252,0.98),rgba(255,255,255,0.94))] p-0 sm:max-w-2xl lg:max-w-4xl xl:max-w-[88rem] dark:border-white/10 dark:bg-[linear-gradient(180deg,rgba(2,6,23,0.98),rgba(15,23,42,0.94))]'
       >
         <SheetHeader className='sr-only'>
           <SheetTitle>{props.model.model_name}</SheetTitle>
           <SheetDescription>{t('Model details')}</SheetDescription>
         </SheetHeader>
-        <div className='flex-1 overflow-y-auto px-4 pt-11 pb-5 sm:px-6 sm:pt-12 sm:pb-6'>
+        <div className='flex-1 overflow-y-auto px-4 pt-11 pb-6 sm:px-6 sm:pt-12 sm:pb-8'>
           <ModelDetailsContent {...contentProps} />
         </div>
       </SheetContent>
@@ -1052,7 +1227,7 @@ export function ModelDetails() {
   if (isLoading) {
     return (
       <PublicLayout>
-        <div className='mx-auto max-w-5xl px-4 sm:px-6'>
+        <div className='mx-auto max-w-7xl px-4 sm:px-6'>
           <Skeleton className='mb-4 h-5 w-16' />
           <div className='space-y-2'>
             <Skeleton className='h-7 w-64' />
@@ -1094,7 +1269,7 @@ export function ModelDetails() {
 
   return (
     <PublicLayout>
-      <div className='mx-auto max-w-5xl px-4 sm:px-6'>
+      <div className='mx-auto max-w-7xl px-4 sm:px-6'>
         <Button
           variant='ghost'
           size='sm'
