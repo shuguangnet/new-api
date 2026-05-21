@@ -103,6 +103,12 @@ export function PublicHeader(props: PublicHeaderProps) {
   const isAuthenticated = !!user
   const displaySiteName = customSiteName || systemName
   const links = dynamicLinks.length > 0 ? dynamicLinks : navLinks
+  const platformSignal = isAuthenticated
+    ? t('Console access enabled')
+    : t('Public workspace available')
+  const platformStatus = isAuthenticated
+    ? t('Signed in')
+    : t('Visitor mode')
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -185,45 +191,76 @@ export function PublicHeader(props: PublicHeaderProps) {
         <div
           className={cn(
             'pointer-events-auto mx-auto transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]',
-            scrolled ? 'max-w-[52rem] px-3 pt-3' : 'max-w-7xl px-4 pt-0 md:px-6'
+            scrolled
+              ? 'max-w-[82rem] px-3 pt-3'
+              : 'max-w-[90rem] px-4 pt-0 md:px-6'
           )}
         >
           <nav
             className={cn(
-              'glass-panel flex items-center justify-between transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]',
+              'glass-panel public-header-shell transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]',
               scrolled
-                ? 'h-12 rounded-2xl pr-1.5 pl-4'
-                : 'h-16 px-2'
+                ? 'public-header-shell-scrolled min-h-[4.5rem] rounded-[1.7rem] px-3 py-2.5'
+                : 'min-h-[5.4rem] rounded-[2rem] px-3 py-3 md:px-4'
             )}
           >
-            {/* Logo */}
-            <Link
-              to={homeUrl}
-              className='group flex shrink-0 items-center gap-3'
-            >
-              <div className='flex size-7 shrink-0 items-center justify-center transition-all duration-300 group-hover:scale-105'>
-                {loading ? (
-                  <Skeleton className='size-full rounded-lg' />
-                ) : customLogo ? (
-                  customLogo
-                ) : (
-                  <HeaderLogo
-                    src={systemLogo}
-                    loading={loading}
-                    logoLoaded={logoLoaded}
-                    className='size-full rounded-lg object-contain'
-                  />
-                )}
-              </div>
-              <span className='text-sm font-semibold tracking-tight text-white'>
-                {loading ? <Skeleton className='h-4 w-16' /> : displaySiteName}
-              </span>
-            </Link>
+            <div className='flex min-w-0 flex-1 items-center gap-3 md:gap-5'>
+              <Link
+                to={homeUrl}
+                className='group flex min-w-0 shrink-0 items-center gap-3.5'
+              >
+                <div className='public-header-logo-wrap'>
+                  {loading ? (
+                    <Skeleton className='size-full rounded-[1.1rem]' />
+                  ) : customLogo ? (
+                    customLogo
+                  ) : (
+                    <HeaderLogo
+                      src={systemLogo}
+                      loading={loading}
+                      logoLoaded={logoLoaded}
+                      className='size-full rounded-[1.1rem] object-contain'
+                    />
+                  )}
+                </div>
+                <div className='hidden min-w-0 sm:block'>
+                  <div className='public-header-eyebrow'>
+                    {t('Enterprise AI Workspace')}
+                  </div>
+                  <div className='mt-1 flex min-w-0 items-center gap-2'>
+                    <span className='truncate text-sm font-semibold tracking-tight text-white'>
+                      {loading ? (
+                        <Skeleton className='h-4 w-20' />
+                      ) : (
+                        displaySiteName
+                      )}
+                    </span>
+                    <span className='public-header-status-pill'>
+                      <span className='public-header-status-dot' aria-hidden='true' />
+                      {platformStatus}
+                    </span>
+                  </div>
+                </div>
+              </Link>
 
-            {/* Desktop nav */}
-            <div className='hidden items-center gap-0.5 sm:flex'>
+              <div className='public-header-command hidden xl:flex'>
+                <div className='public-header-command-kicker'>
+                  {t('Control plane')}
+                </div>
+                <div className='public-header-command-body'>
+                  <span className='truncate'>{platformSignal}</span>
+                  <span className='text-white/18'>/</span>
+                  <span className='truncate text-white/44'>
+                    {t('Navigation, pricing and access paths aligned')}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className='hidden min-w-0 items-center justify-center gap-1 lg:flex'>
               {links.map((link, i) => {
                 const isActive = pathname === link.href
+                const linkLabel = t(link.title)
                 if (link.external) {
                   return (
                     <a
@@ -235,11 +272,11 @@ export function PublicHeader(props: PublicHeaderProps) {
                       tabIndex={link.disabled ? -1 : undefined}
                       onClick={(event) => handleNavLinkClick(event, link)}
                       className={cn(
-                        'rounded-full border border-transparent px-3.5 py-2 text-[13px] font-medium text-white/58 transition-all duration-200 hover:border-white/8 hover:bg-white/[0.04] hover:text-white',
+                        'public-header-nav-link',
                         link.disabled && 'pointer-events-none opacity-50'
                       )}
                     >
-                      {t(link.title)}
+                      <span>{linkLabel}</span>
                     </a>
                   )
                 }
@@ -250,22 +287,22 @@ export function PublicHeader(props: PublicHeaderProps) {
                     disabled={link.disabled}
                     onClick={(event) => handleNavLinkClick(event, link)}
                     className={cn(
-                      'rounded-full border px-3.5 py-2 text-[13px] font-medium transition-all duration-200',
-                      isActive
-                        ? 'border-white/10 bg-white/[0.05] text-white'
-                        : 'border-transparent text-white/58 hover:border-white/8 hover:bg-white/[0.04] hover:text-white',
+                      'public-header-nav-link',
+                      isActive && 'public-header-nav-link-active',
                       link.disabled && 'pointer-events-none opacity-50'
                     )}
                   >
-                    {t(link.title)}
+                    <span>{linkLabel}</span>
                   </Link>
                 )
               })}
+            </div>
 
+            <div className='hidden shrink-0 items-center gap-2 sm:flex'>
               {(showLanguageSwitcher ||
                 showThemeSwitch ||
                 showNotifications) && (
-                <div className='bg-border/40 mx-2 h-4 w-px' />
+                <div className='bg-border/40 mx-1 h-5 w-px' />
               )}
 
               {showLanguageSwitcher && <LanguageSwitcher />}
@@ -279,26 +316,35 @@ export function PublicHeader(props: PublicHeaderProps) {
 
               {showAuthButtons && (
                 <>
-                  <div className='bg-border/40 mx-1 h-4 w-px' />
+                  <div className='bg-border/40 mx-1 h-5 w-px' />
                   {loading ? (
-                    <Skeleton className='h-8 w-20 rounded-lg' />
+                    <Skeleton className='h-10 w-28 rounded-full' />
                   ) : isAuthenticated ? (
                     <ProfileDropdown />
                   ) : (
-                    <Button
-                      size='sm'
-                      className='h-9 rounded-full bg-blue-600 px-4 text-xs font-medium text-white shadow-[0_12px_30px_rgba(37,99,235,0.28)] transition-all duration-200 hover:bg-blue-500'
-                      render={<Link to='/sign-in' />}
-                    >
-                      {t('Sign in')}
-                    </Button>
+                    <div className='flex items-center gap-2'>
+                      <Button
+                        variant='ghost'
+                        size='sm'
+                        className='h-10 rounded-full px-4 text-xs font-medium text-white/68 transition-colors hover:bg-white/[0.05] hover:text-white'
+                        render={<Link to='/pricing' />}
+                      >
+                        {t('Explore pricing')}
+                      </Button>
+                      <Button
+                        size='sm'
+                        className='public-header-primary-cta h-10 rounded-full px-5 text-xs font-semibold text-white'
+                        render={<Link to='/sign-in' />}
+                      >
+                        {t('Sign in')}
+                      </Button>
+                    </div>
                   )}
                 </>
               )}
             </div>
 
-            {/* Mobile: compact actions + hamburger */}
-            <div className='flex items-center gap-2 sm:hidden'>
+            <div className='flex shrink-0 items-center gap-2 sm:hidden'>
               {showThemeSwitch && <ThemeSwitch />}
               {showAuthButtons && !loading && isAuthenticated && (
                 <ProfileDropdown />
@@ -307,7 +353,7 @@ export function PublicHeader(props: PublicHeaderProps) {
                 type='button'
                 variant='ghost'
                 size='icon'
-                className='size-9'
+                className='size-10 rounded-full border border-white/10 bg-white/[0.03]'
                 onClick={() => setMobileOpen((v) => !v)}
                 aria-label={t('Toggle navigation menu')}
               >
