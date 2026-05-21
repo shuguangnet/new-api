@@ -43,6 +43,8 @@ export function ModelCardGrid(props: ModelCardGridProps) {
   const tokenUnit = props.tokenUnit ?? DEFAULT_TOKEN_UNIT
   const totalPages = Math.max(1, Math.ceil(props.models.length / pageSize))
   const currentPage = Math.min(page, totalPages)
+  const pageStart = (currentPage - 1) * pageSize + 1
+  const pageEnd = Math.min(currentPage * pageSize, props.models.length)
 
   const perfQuery = useQuery({
     queryKey: ['perf-metrics-summary', 24],
@@ -70,6 +72,58 @@ export function ModelCardGrid(props: ModelCardGridProps) {
 
   return (
     <div className='space-y-4 sm:space-y-5'>
+      <div className='rounded-[28px] border border-slate-200/80 bg-white/92 p-4 shadow-[0_24px_72px_rgba(148,163,184,0.14)] backdrop-blur md:p-5'>
+        <div className='flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between'>
+          <div>
+            <div className='text-[11px] font-semibold tracking-[0.18em] text-slate-500 uppercase'>
+              {t('卡片决策视图')}
+            </div>
+            <h3 className='mt-2 text-xl font-semibold tracking-tight text-slate-950'>
+              {t('适合做模型选型初筛与供应商横向比较')}
+            </h3>
+            <p className='mt-2 max-w-3xl text-sm leading-7 text-slate-600'>
+              {t('以更高密度的价格、性能与能力摘要快速识别候选模型，再进入详情抽屉完成采购评审、路由判断与交付配置。')}
+            </p>
+          </div>
+
+          <div className='grid gap-3 sm:grid-cols-3 lg:min-w-[520px]'>
+            <div className='rounded-[22px] border border-slate-200 bg-slate-50/90 px-4 py-3'>
+              <div className='text-[11px] font-semibold tracking-[0.18em] text-slate-500 uppercase'>
+                {t('当前页范围')}
+              </div>
+              <div className='mt-2 text-lg font-semibold tracking-tight text-slate-950'>
+                {pageStart}-{pageEnd}
+              </div>
+              <div className='mt-1 text-xs text-slate-600'>
+                {t('帮助团队聚焦当前批次的候选模型。')}
+              </div>
+            </div>
+            <div className='rounded-[22px] border border-slate-200 bg-slate-50/90 px-4 py-3'>
+              <div className='text-[11px] font-semibold tracking-[0.18em] text-slate-500 uppercase'>
+                {t('本页卡片数')}
+              </div>
+              <div className='mt-2 text-lg font-semibold tracking-tight text-slate-950'>
+                {pagedModels.length}
+              </div>
+              <div className='mt-1 text-xs text-slate-600'>
+                {t('单屏即可完成一轮高效比对。')}
+              </div>
+            </div>
+            <div className='rounded-[22px] border border-slate-200 bg-slate-50/90 px-4 py-3'>
+              <div className='text-[11px] font-semibold tracking-[0.18em] text-slate-500 uppercase'>
+                {t('总页数')}
+              </div>
+              <div className='mt-2 text-lg font-semibold tracking-tight text-slate-950'>
+                {totalPages}
+              </div>
+              <div className='mt-1 text-xs text-slate-600'>
+                {t('适用于分批完成目录治理与商业筛选。')}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className='grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3'>
         {pagedModels.map((model) => (
           <ModelCard
@@ -86,9 +140,9 @@ export function ModelCardGrid(props: ModelCardGridProps) {
       </div>
 
       {totalPages > 1 && (
-        <div className='text-muted-foreground flex flex-col items-center justify-between gap-3 border-t px-4 py-3 text-sm sm:flex-row'>
-          <p className='text-muted-foreground'>
-            {t('Page {{current}} of {{total}}', {
+        <div className='flex flex-col items-center justify-between gap-3 rounded-[24px] border border-slate-200/80 bg-white/92 px-4 py-4 text-sm text-slate-600 shadow-[0_18px_48px_rgba(148,163,184,0.12)] sm:flex-row'>
+          <p>
+            {t('第 {{current}} 页，共 {{total}} 页', {
               current: currentPage,
               total: totalPages,
             })}
@@ -100,10 +154,10 @@ export function ModelCardGrid(props: ModelCardGridProps) {
               size='sm'
               onClick={() => setPage((current) => Math.max(1, current - 1))}
               disabled={currentPage <= 1}
-              className='gap-1.5'
+              className='gap-1.5 border-slate-200 bg-white text-slate-700 hover:bg-slate-50'
             >
               <ChevronLeft className='size-4' />
-              {t('Previous page')}
+              {t('上一页')}
             </Button>
             <Button
               type='button'
@@ -113,9 +167,9 @@ export function ModelCardGrid(props: ModelCardGridProps) {
                 setPage((current) => Math.min(totalPages, current + 1))
               }
               disabled={currentPage >= totalPages}
-              className='gap-1.5'
+              className='gap-1.5 border-slate-200 bg-white text-slate-700 hover:bg-slate-50'
             >
-              {t('Next page')}
+              {t('下一页')}
               <ChevronRight className='size-4' />
             </Button>
           </div>
