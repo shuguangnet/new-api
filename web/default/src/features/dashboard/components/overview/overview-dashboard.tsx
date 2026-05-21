@@ -116,6 +116,13 @@ interface HeroSignal {
   icon: LucideIcon
 }
 
+interface OperatingBriefItem {
+  label: string
+  value: string
+  description: string
+  icon: LucideIcon
+}
+
 function getSavedSetupGuideExpanded(): boolean | null {
   if (typeof window === 'undefined') return null
   const saved = window.localStorage.getItem(SETUP_GUIDE_VISIBILITY_STORAGE_KEY)
@@ -406,6 +413,113 @@ function QuickActionItem(props: { action: QuickAction }) {
   )
 }
 
+function OperatingBriefCard(props: {
+  items: OperatingBriefItem[]
+  summaryTitle: string
+  summaryBody: string
+  summaryCta: string
+  summaryTo: DashboardActionPath
+}) {
+  const { t } = useTranslation()
+
+  return (
+    <CardStaggerContainer className='grid gap-4 xl:grid-cols-[minmax(0,1.35fr)_20rem]'>
+      <CardStaggerItem className='bg-card overflow-hidden rounded-2xl border shadow-xs'>
+        <div className='relative p-4 sm:p-5'>
+          <div
+            className='pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[oklch(0.72_0.18_265/.5)] to-transparent'
+            aria-hidden='true'
+          />
+          <div className='flex flex-col gap-4'>
+            <div className='flex flex-wrap items-start justify-between gap-3'>
+              <div className='flex max-w-2xl flex-col gap-1'>
+                <span className='text-muted-foreground text-xs font-medium tracking-[0.2em] uppercase'>
+                  {t('Operational brief')}
+                </span>
+                <h3 className='text-lg font-semibold tracking-tight sm:text-xl'>
+                  {t('See readiness, coverage, and funding before traffic scales')}
+                </h3>
+                <p className='text-muted-foreground text-sm leading-relaxed'>
+                  {t(
+                    'This workspace is structured as an operating surface, so teams can validate launch readiness without opening multiple modules.'
+                  )}
+                </p>
+              </div>
+            </div>
+
+            <div className='grid gap-3 md:grid-cols-2 2xl:grid-cols-4'>
+              {props.items.map((item) => {
+                const Icon = item.icon
+
+                return (
+                  <div
+                    key={item.label}
+                    className='from-background/90 to-muted/35 rounded-2xl border bg-linear-to-b p-4 shadow-xs'
+                  >
+                    <div className='flex items-start justify-between gap-3'>
+                      <div className='min-w-0'>
+                        <div className='text-muted-foreground text-[11px] font-medium tracking-[0.18em] uppercase'>
+                          {item.label}
+                        </div>
+                        <div className='mt-2 text-base font-semibold tracking-tight sm:text-lg'>
+                          {item.value}
+                        </div>
+                      </div>
+                      <span className='bg-muted flex size-9 shrink-0 items-center justify-center rounded-xl border'>
+                        <Icon className='text-muted-foreground size-4' aria-hidden='true' />
+                      </span>
+                    </div>
+                    <p className='text-muted-foreground mt-3 text-xs leading-relaxed'>
+                      {item.description}
+                    </p>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+      </CardStaggerItem>
+
+      <CardStaggerItem className='bg-card overflow-hidden rounded-2xl border shadow-xs'>
+        <div className='from-background to-muted/35 flex h-full flex-col justify-between gap-4 bg-linear-to-b p-4 sm:p-5'>
+          <div className='flex flex-col gap-3'>
+            <div>
+              <div className='text-muted-foreground text-xs font-medium tracking-[0.18em] uppercase'>
+                {t('Control recommendation')}
+              </div>
+              <h3 className='mt-2 text-lg font-semibold tracking-tight'>
+                {props.summaryTitle}
+              </h3>
+            </div>
+            <p className='text-muted-foreground text-sm leading-relaxed'>
+              {props.summaryBody}
+            </p>
+          </div>
+
+          <div className='bg-background/70 rounded-2xl border p-3'>
+            <div className='text-muted-foreground text-xs leading-relaxed'>
+              {t('Recommended next workspace')}
+            </div>
+            <Button
+              variant='ghost'
+              className='mt-2 h-auto w-full justify-between rounded-xl px-0 py-0 text-left'
+              render={<Link to={props.summaryTo} />}
+            >
+              <span className='flex flex-col items-start gap-0.5'>
+                <span className='text-sm font-medium'>{props.summaryCta}</span>
+                <span className='text-muted-foreground text-xs'>
+                  {t('Open the next decision area directly from overview')}
+                </span>
+              </span>
+              <ArrowRight className='size-4 shrink-0' aria-hidden='true' />
+            </Button>
+          </div>
+        </div>
+      </CardStaggerItem>
+    </CardStaggerContainer>
+  )
+}
+
 function CompactQuickAction(props: { action: QuickAction }) {
   const Icon = props.action.icon
 
@@ -582,10 +696,109 @@ export function OverviewDashboard() {
 
   const completedStepCount = startSteps.filter((step) => step.completed).length
   const setupComplete = completedStepCount === startSteps.length
+
+  const operatingBriefItems = useMemo<OperatingBriefItem[]>(
+    () => [
+      {
+        label: t('Readiness'),
+        value: `${completedStepCount}/${startSteps.length}`,
+        description: setupComplete
+          ? t('Foundation tasks are completed and the workspace is ready for delivery traffic.')
+          : t('Complete the onboarding checklist to reduce launch risk before external usage.'),
+        icon: ListChecks,
+      },
+      {
+        label: t('Primary model'),
+        value: modelsQuery.data?.[0] ?? t('Loading'),
+        description: t(
+          'Keep one default model visible so product, support, and ops share the same routing context.'
+        ),
+        icon: Timer,
+      },
+      {
+        label: t('Balance posture'),
+        value:
+          remainQuota > 0
+            ? t('Funded')
+            : usedQuota > 0
+              ? t('Previously consumed')
+              : t('Needs credits'),
+        description:
+          remainQuota > 0
+            ? t('Available quota is present for validation, demos, and controlled production rollout.')
+            : t('Add credits before promoting this workspace as a stable service surface.'),
+        icon: CreditCard,
+      },
+      {
+        label: t('Traffic signal'),
+        value: requestCount > 0 ? t('Receiving requests') : t('No recent traffic'),
+        description:
+          requestCount > 0
+            ? t('Observed request activity confirms the gateway is already serving active workloads.')
+            : t('Use Playground or your application client to verify the first live request path.'),
+        icon: RadioTower,
+      },
+    ],
+    [
+      completedStepCount,
+      modelsQuery.data,
+      remainQuota,
+      requestCount,
+      setupComplete,
+      startSteps.length,
+      t,
+      usedQuota,
+    ]
+  )
+
   const setupGuideExpanded = manualSetupGuideExpanded ?? !setupComplete
   const showLeftContentPanels =
     isAdmin || showApiInfoPanel || showAnnouncementsPanel || showFAQPanel
   const showContentPanels = showLeftContentPanels || showUptimePanel
+
+  const operationalSummary = useMemo(() => {
+    if (!preferredKey) {
+      return {
+        title: t('Close the access layer first'),
+        body: t(
+          'The highest-value action is to issue a production-facing API key so teams can move from configuration into controlled validation.'
+        ),
+        cta: t('Go create the first API key'),
+        to: '/keys' as const,
+      }
+    }
+
+    if (remainQuota <= 0) {
+      return {
+        title: t('Funding is the current blocker'),
+        body: t(
+          'Keys and routing may already exist, but a depleted balance creates avoidable interruptions for demos, pilots, and shared environments.'
+        ),
+        cta: t('Review wallet and recharge'),
+        to: '/wallet' as const,
+      }
+    }
+
+    if (requestCount <= 0) {
+      return {
+        title: t('Validate one live request path'),
+        body: t(
+          'The platform is configured, but there is no verified traffic yet. Running a first request turns setup into a usable delivery workflow.'
+        ),
+        cta: t('Open Playground for verification'),
+        to: '/playground' as const,
+      }
+    }
+
+    return {
+      title: t('Move from setup to operational review'),
+      body: t(
+        'Initial readiness is in place. The next leverage point is reviewing usage logs and pricing so routing, margin, and service quality stay aligned.'
+      ),
+      cta: t('Review usage and pricing posture'),
+      to: '/usage-logs' as const,
+    }
+  }, [preferredKey, remainQuota, requestCount, t])
 
   const handleSetupGuideToggle = () => {
     const nextExpanded = !setupGuideExpanded
@@ -593,7 +806,7 @@ export function OverviewDashboard() {
     saveSetupGuideExpanded(nextExpanded)
   }
 
-    return (
+  return (
     <div className='flex flex-col gap-4 section-divider pt-4'>
       {setupGuideExpanded ? (
         <CardStaggerContainer className='grid items-stretch gap-4 xl:grid-cols-[minmax(0,1fr)_22rem]'>
@@ -724,6 +937,14 @@ export function OverviewDashboard() {
           </CardStaggerItem>
         </CardStaggerContainer>
       )}
+
+      <OperatingBriefCard
+        items={operatingBriefItems}
+        summaryTitle={operationalSummary.title}
+        summaryBody={operationalSummary.body}
+        summaryCta={operationalSummary.cta}
+        summaryTo={operationalSummary.to}
+      />
 
       <SummaryCards />
 
