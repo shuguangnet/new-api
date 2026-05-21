@@ -19,6 +19,7 @@ For commercial licensing, please contact support@quantumnous.com
 import { useCallback, useMemo } from 'react'
 import { getRouteApi, useNavigate } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
+import { Activity, FileSearch, BarChart3 } from 'lucide-react'
 import { useSidebarConfig } from '@/hooks/use-sidebar-config'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { SectionPageLayout } from '@/components/layout'
@@ -44,16 +45,16 @@ const SECTION_META: Record<
   { titleKey: string; descriptionKey: string }
 > = {
   common: {
-    titleKey: 'Common Logs',
-    descriptionKey: 'View and manage your API usage logs',
+    titleKey: '通用日志',
+    descriptionKey: '查看与管理平台 API 调用日志',
   },
   drawing: {
-    titleKey: 'Drawing Logs',
-    descriptionKey: 'View and manage your drawing logs',
+    titleKey: '绘图日志',
+    descriptionKey: '查看与管理绘图请求日志',
   },
   task: {
-    titleKey: 'Task Logs',
-    descriptionKey: 'View and manage your task logs',
+    titleKey: '任务日志',
+    descriptionKey: '查看与管理异步任务执行日志',
   },
 }
 
@@ -76,7 +77,7 @@ function UsageLogsContent() {
   const tabNavGroups = useMemo<NavGroup[]>(
     () => [
       {
-        title: 'Task Logs',
+        title: '任务日志',
         items: TASK_LOG_SECTIONS.map((section) => ({
           title: SECTION_META[section].titleKey,
           url: `/usage-logs/${section}`,
@@ -124,6 +125,66 @@ function UsageLogsContent() {
           {t(pageMeta.descriptionKey)}
         </SectionPageLayout.Description>
         <SectionPageLayout.Content>
+          {/* Enterprise workspace header */}
+          <div className='relative mb-5 overflow-hidden rounded-[28px] border border-slate-200/85 bg-[linear-gradient(135deg,rgba(255,255,255,0.98)_0%,rgba(248,250,252,0.96)_42%,rgba(254,243,199,0.50)_100%)] px-5 py-5 shadow-[0_14px_40px_rgba(15,23,42,0.06)] sm:px-6 sm:py-6'>
+            <div
+              className='pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-amber-400/60 to-transparent'
+              aria-hidden='true'
+            />
+            <div className='flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between'>
+              <div className='max-w-3xl space-y-3'>
+                <div className='inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50/85 px-3 py-1 text-[11px] font-medium tracking-[0.18em] text-amber-700 uppercase'>
+                  <span className='h-2 w-2 rounded-full bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.35)]' />
+                  {t('调用日志中心')}
+                </div>
+                <h2 className='text-xl font-semibold tracking-tight text-slate-950 sm:text-2xl'>
+                  {t('API 请求追踪与用量审计')}
+                </h2>
+                <p className='text-sm leading-7 text-slate-600 sm:text-[15px]'>
+                  {t('在此查看所有 API 调用的详细日志，包括请求参数、响应内容、Token 消耗、延迟数据与错误信息。支持按模型、用户、渠道、状态等维度筛选，是排查问题、审计用量与优化成本的核心入口。')}
+                </p>
+              </div>
+              <div className='grid gap-3 sm:grid-cols-3 lg:min-w-[420px]'>
+                <div className='rounded-2xl border border-slate-200/85 bg-white/88 px-4 py-3 shadow-[0_8px_22px_rgba(15,23,42,0.04)]'>
+                  <div className='flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase'>
+                    <Activity className='size-3.5 text-amber-600' aria-hidden='true' />
+                    {t('实时追踪')}
+                  </div>
+                  <div className='mt-2 text-sm font-semibold text-slate-900'>
+                    {t('全量请求记录')}
+                  </div>
+                  <p className='mt-1 text-xs leading-5 text-slate-500'>
+                    {t('毫秒级请求链路追踪')}
+                  </p>
+                </div>
+                <div className='rounded-2xl border border-slate-200/85 bg-white/88 px-4 py-3 shadow-[0_8px_22px_rgba(15,23,42,0.04)]'>
+                  <div className='flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase'>
+                    <FileSearch className='size-3.5 text-amber-600' aria-hidden='true' />
+                    {t('多维筛选')}
+                  </div>
+                  <div className='mt-2 text-sm font-semibold text-slate-900'>
+                    {t('模型 / 用户 / 渠道')}
+                  </div>
+                  <p className='mt-1 text-xs leading-5 text-slate-500'>
+                    {t('灵活组合定位问题请求')}
+                  </p>
+                </div>
+                <div className='rounded-2xl border border-slate-200/85 bg-white/88 px-4 py-3 shadow-[0_8px_22px_rgba(15,23,42,0.04)]'>
+                  <div className='flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase'>
+                    <BarChart3 className='size-3.5 text-amber-600' aria-hidden='true' />
+                    {t('用量审计')}
+                  </div>
+                  <div className='mt-2 text-sm font-semibold text-slate-900'>
+                    {t('Token 与成本核算')}
+                  </div>
+                  <p className='mt-1 text-xs leading-5 text-slate-500'>
+                    {t('精确到每次调用的用量明细')}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className='space-y-4'>
             {showTaskSwitcher && (
               <Tabs value={activeCategory} onValueChange={handleSectionChange}>
