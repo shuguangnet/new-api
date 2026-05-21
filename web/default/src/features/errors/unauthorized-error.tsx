@@ -18,30 +18,32 @@ For commercial licensing, please contact support@quantumnous.com
 */
 import { useNavigate, useRouter } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
-import { Button } from '@/components/ui/button'
+import { LockKeyhole } from 'lucide-react'
+import { ErrorPage } from './error-page'
 
 export function UnauthorisedError() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const { history } = useRouter()
+
   return (
-    <div className='h-svh'>
-      <div className='m-auto flex h-full w-full flex-col items-center justify-center gap-2'>
-        <h1 className='text-[7rem] leading-tight font-bold'>401</h1>
-        <span className='font-medium'>{t('Unauthorized Access')}</span>
-        <p className='text-muted-foreground text-center'>
-          {t('Please log in with the appropriate credentials')} <br />{' '}
-          {t('to access this resource.')}
-        </p>
-        <div className='mt-6 flex gap-4'>
-          <Button variant='outline' onClick={() => history.go(-1)}>
-            {t('Go Back')}
-          </Button>
-          <Button onClick={() => navigate({ to: '/' })}>
-            {t('Back to Home')}
-          </Button>
-        </div>
-      </div>
-    </div>
+    <ErrorPage
+      statusCode={401}
+      icon={LockKeyhole}
+      title={t('需要身份认证')}
+      description={t('此页面需要登录后才能访问，请使用您的账户凭据进行身份验证。')}
+      hint={t('如您尚未注册，请联系管理员获取访问权限。')}
+      actions={[
+        {
+          label: t('前往登录'),
+          onClick: () => navigate({ to: '/sign-in' }),
+        },
+        {
+          label: t('返回上页'),
+          onClick: () => history.go(-1),
+          variant: 'outline',
+        },
+      ]}
+    />
   )
 }

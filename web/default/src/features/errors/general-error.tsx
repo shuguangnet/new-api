@@ -16,10 +16,12 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 For commercial licensing, please contact support@quantumnous.com
 */
-import { useNavigate, useRouter } from '@tanstack/react-router'
+import { useRouter } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { ErrorPage } from './error-page'
+import { ServerCrash, AlertTriangle } from 'lucide-react'
 
 const FEEDBACK_URL = 'https://github.com/QuantumNous/new-api/issues'
 
@@ -42,57 +44,60 @@ export function GeneralError({
   error,
 }: GeneralErrorProps) {
   const { t } = useTranslation()
-  const navigate = useNavigate()
   const { history } = useRouter()
   const status = getHttpStatus(error)
   const isRateLimited = status === 429
-  const title = isRateLimited
-    ? t('Too many requests')
-    : `${t('Oops! Something went wrong')} ${`:')`}`
-  const description = isRateLimited
-    ? t('Please wait a moment before trying again.')
-    : t('Please try again later.')
+
+  if (minimal) {
+    return (
+      <div className={cn('flex min-h-[200px] items-center justify-center p-8', className)}>
+        <div className='flex flex-col items-center text-center gap-2'>
+          <AlertTriangle className='h-8 w-8 text-destructive' strokeWidth={1.5} />
+          <span className='text-sm font-medium text-foreground'>
+            {isRateLimited ? t('请求过于频繁') : t('出了点问题')}
+          </span>
+          <p className='text-xs text-muted-foreground'>
+            {isRateLimited ? t('请稍后再试。') : t('请稍后再试。')}
+          </p>
+        </div>
+      </div>
+    )
+  }
 
   return (
-    <div className={cn('h-svh w-full', className)}>
-      <div className='m-auto flex h-full w-full flex-col items-center justify-center gap-2'>
-        {!minimal && (
-          <h1 className='text-[7rem] leading-tight font-bold'>
-            {status ?? 500}
-          </h1>
-        )}
-        <span className='font-medium'>{title}</span>
-        <p className='text-muted-foreground text-center'>
-          {t('We apologize for the inconvenience.')} <br /> {description}
-        </p>
-        {!minimal && (
-          <p className='text-muted-foreground text-center text-sm'>
-            {t('If this keeps happening, please report it on GitHub Issues.')}
-          </p>
-        )}
-        {!minimal && (
-          <div className='mt-6 flex flex-wrap justify-center gap-4'>
-            <Button variant='outline' onClick={() => history.go(-1)}>
-              {t('Go Back')}
-            </Button>
-            <Button
-              variant='outline'
-              render={
-                <a
-                  href={FEEDBACK_URL}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                />
-              }
-            >
-              {t('Report an issue')}
-            </Button>
-            <Button onClick={() => navigate({ to: '/' })}>
-              {t('Back to Home')}
-            </Button>
-          </div>
-        )}
-      </div>
-    </div>
+    <ErrorPage
+      className={className}
+      statusCode={status ?? 500}
+      icon={isRateLimited ? AlertTriangle : ServerCrash}
+      title={
+        isRateLimited
+          ? t('请求过于频繁')
+          : t('服务暂时不可用')
+      }
+      description={
+        isRateLimited
+          ? t('您的请求频率超过了系统限制，请等待片刻后再尝试。')
+          : t('服务器遇到了意外错误，我们的技术团队正在努力恢复服务。对于由此造成的不便，我们深表歉意。')
+      }
+      hint={
+        isRateLimited
+          ? undefined
+          : t('如问题持续存在，请在 GitHub Issues 中提交反馈。')
+      }
+      actions={[
+        {
+          label: t('返回上页'),
+          onClick: () => history.go(-1),
+          variant: 'outline',
+        },
+        !isRateLimited
+          ? {
+              label: t('反馈问题'),
+              onClick: () => window.open(FEEDBACK_URL, '_blank', 'noopener noreferrer'),
+              variant: 'secondary',
+            }
+          : undefined,
+      ].filter((a): a is NonNullable<typeof a> => a != null)}
+    />
   )
 }
