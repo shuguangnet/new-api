@@ -51,13 +51,16 @@ function FooterLinkItem(props: { link: FooterLink }) {
   const isExternal = props.link.href.startsWith('http')
   const label = t(props.link.text)
 
+  const linkClass =
+    'text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-md px-1.5 py-0.5 text-sm transition-colors duration-200'
+
   if (isExternal) {
     return (
       <a
         href={props.link.href}
         target='_blank'
         rel='noopener noreferrer'
-        className='text-muted-foreground hover:text-[oklch(0.65_0.2_280)] hover:bg-gradient-to-r hover:from-violet-400/10 hover:to-blue-400/10 rounded-md px-1.5 py-0.5 text-sm transition-all duration-200'
+        className={linkClass}
       >
         {label}
       </a>
@@ -65,10 +68,7 @@ function FooterLinkItem(props: { link: FooterLink }) {
   }
 
   return (
-    <Link
-      to={props.link.href}
-      className='text-muted-foreground hover:text-[oklch(0.65_0.2_280)] hover:bg-gradient-to-r hover:from-violet-400/10 hover:to-blue-400/10 rounded-md px-1.5 py-0.5 text-sm transition-all duration-200'
-    >
+    <Link to={props.link.href} className={linkClass}>
       {label}
     </Link>
   )
@@ -78,14 +78,14 @@ function ProjectAttribution(props: { currentYear: number }) {
   const { t } = useTranslation()
 
   return (
-    <div className='text-[oklch(0.5_0.05_280_/_40%)] text-center text-xs sm:text-right'>
-      <span className='text-[oklch(0.5_0.05_280_/_40%)]'>
+    <div className='text-center text-xs text-slate-400 sm:text-right'>
+      <span>
         &copy; {props.currentYear}{' '}
         <a
           href='https://github.com/QuantumNous/new-api'
           target='_blank'
           rel='noopener noreferrer'
-          className='text-foreground/70 hover:text-[oklch(0.65_0.2_280)] font-medium transition-colors'
+          className='font-medium text-slate-500 transition-colors hover:text-slate-700'
         >
           {t('New API')}
         </a>
@@ -172,17 +172,17 @@ export function Footer(props: FooterProps) {
     return (
       <footer
         className={cn(
-          'relative z-10 border-t border-border/40 bg-gradient-to-b from-background via-background to-muted/30 dark:from-background dark:via-background dark:to-neutral-950/80',
+          'relative z-10 border-t border-slate-200/70 bg-white/80 backdrop-blur-sm',
           props.className
         )}
       >
         <div className='mx-auto w-full max-w-6xl px-6 py-5'>
-          <div className='bg-muted/20 border-border/50 flex flex-col items-center justify-between gap-4 rounded-2xl border px-4 py-4 backdrop-blur-sm sm:flex-row sm:px-5'>
+          <div className='flex flex-col items-center justify-between gap-4 rounded-2xl border border-slate-200/60 bg-slate-50/60 px-4 py-4 sm:flex-row sm:px-5'>
             <div
-              className='custom-footer text-muted-foreground min-w-0 text-center text-sm sm:text-left'
+              className='custom-footer min-w-0 text-center text-sm text-slate-500 sm:text-left'
               dangerouslySetInnerHTML={{ __html: footerHtml }}
             />
-            <div className='border-border/60 w-full border-t pt-4 sm:w-auto sm:border-t-0 sm:border-l sm:pt-0 sm:pl-5'>
+            <div className='w-full border-t border-slate-200/60 pt-4 sm:w-auto sm:border-t-0 sm:border-l sm:pt-0 sm:pl-5'>
               <ProjectAttribution currentYear={currentYear} />
             </div>
           </div>
@@ -193,29 +193,29 @@ export function Footer(props: FooterProps) {
 
   return (
     <footer
-      className={cn('relative z-10 border-t border-border/40 bg-gradient-to-b from-background via-background to-muted/30 dark:from-background dark:via-background dark:to-neutral-950/80', props.className)}
+      className={cn('relative z-10 border-t border-slate-200/70 bg-white/80 backdrop-blur-sm', props.className)}
     >
       {/* Bottom gradient line */}
       <div
         aria-hidden
-        className='absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[oklch(0.5_0.15_280_/_40%)] to-transparent'
+        className='absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-slate-300/40 to-transparent'
       />
       <div className='mx-auto max-w-6xl px-6 py-12 md:py-16'>
         <div className='flex flex-col justify-between gap-10 md:flex-row md:gap-16'>
           {/* Brand column */}
           <div className='shrink-0'>
-            <Link to='/' className='group flex items-center gap-2.5 transition-all hover:drop-shadow-[0_0_8px_oklch(0.5_0.2_280_/_50%)]'>
+            <Link to='/' className='group flex items-center gap-2.5 transition-opacity hover:opacity-85'>
               <img
                 src={displayLogo}
                 alt={displayName}
                 className='size-7 rounded-lg object-contain'
               />
-              <span className='text-sm font-semibold tracking-tight'>
+              <span className='text-sm font-semibold tracking-tight text-slate-900'>
                 {displayName}
               </span>
             </Link>
-            <p className='text-muted-foreground/60 mt-3 max-w-[200px] text-xs leading-relaxed'>
-              {t('Powerful API Management Platform')}
+            <p className='mt-3 max-w-[220px] text-xs leading-relaxed text-slate-400'>
+              {t('企业级大模型 API 管理平台 — 多模型统一接入、治理与运营')}
             </p>
           </div>
 
@@ -224,7 +224,7 @@ export function Footer(props: FooterProps) {
             <div className='grid grid-cols-3 gap-8 md:gap-16'>
               {displayColumns.map((column, index) => (
                 <div key={index}>
-                  <p className='text-muted-foreground/50 mb-3 text-xs font-medium tracking-wider uppercase'>
+                  <p className='mb-3 text-xs font-medium tracking-wider text-slate-400 uppercase'>
                     {t(column.title)}
                   </p>
                   <ul className='space-y-2.5'>
@@ -241,9 +241,9 @@ export function Footer(props: FooterProps) {
         </div>
 
         {/* Bottom section */}
-        <div className='bg-gradient-to-r from-transparent via-[oklch(0.5_0.15_280_/_20%)] to-transparent h-px mb-8' />
-        <div className='border-border/30 flex flex-col items-center justify-between gap-3 border-t pt-6 sm:flex-row'>
-          <p className='text-[oklch(0.5_0.05_280_/_40%)] text-xs'>
+        <div className='mb-8 h-px bg-gradient-to-r from-transparent via-slate-200/60 to-transparent' />
+        <div className='flex flex-col items-center justify-between gap-3 border-t border-slate-200/50 pt-6 sm:flex-row'>
+          <p className='text-xs text-slate-400'>
             &copy; {currentYear} {displayName}.{' '}
             {props.copyright ?? t('footer.defaultCopyright')}
           </p>
