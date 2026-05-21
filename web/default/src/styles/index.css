@@ -1753,6 +1753,107 @@ For commercial licensing, please contact support@quantumnous.com
     filter: brightness(1.03);
   }
 
+  .app-header-brand-shell {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 0.9rem;
+  }
+
+  .app-header-brand-copy {
+    min-width: 0;
+    flex-direction: column;
+    gap: 0.28rem;
+  }
+
+  .app-header-eyebrow {
+    color: oklch(0.5 0.03 250);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .app-header-brand-line {
+    display: inline-flex;
+    min-width: 0;
+    align-items: center;
+    gap: 0.55rem;
+    color: oklch(0.3 0.02 250);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+
+  .app-header-dot {
+    width: 0.28rem;
+    height: 0.28rem;
+    flex-shrink: 0;
+    border-radius: 999px;
+    background: oklch(0.78 0.07 230);
+  }
+
+  .app-header-nav {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .app-header-status-card {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 0.32rem;
+    border: 1px solid oklch(0.92 0.015 250);
+    background: linear-gradient(180deg, oklch(0.995 0.004 250), oklch(0.98 0.008 250));
+    padding: 0.65rem 0.85rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+  }
+
+  .app-header-status-line {
+    display: inline-flex;
+    min-width: 0;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .app-header-status-badge {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    border-radius: 999px;
+    background: oklch(0.95 0.02 240);
+    color: oklch(0.4 0.03 245);
+    padding: 0.22rem 0.55rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .app-header-signal-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .app-header-signal-pill {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    border: 1px solid oklch(0.92 0.014 250);
+    background: oklch(0.985 0.005 250);
+    color: oklch(0.45 0.02 250);
+    padding: 0.48rem 0.75rem;
+    font-size: 0.76rem;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .app-header-action-button {
+    border-radius: 0.9rem;
+  }
+
   @media (max-width: 1279px) {
     .public-header-shell,
     .public-header-shell-scrolled {

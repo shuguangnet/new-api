@@ -16,8 +16,13 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 For commercial licensing, please contact support@quantumnous.com
 */
+import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useAuthStore } from '@/stores/auth-store'
+import { useStatus } from '@/hooks/use-status'
 import { useNotifications } from '@/hooks/use-notifications'
 import { useTopNavLinks } from '@/hooks/use-top-nav-links'
+import { getRoleLabel } from '@/lib/roles'
 import { ConfigDrawer } from '@/components/config-drawer'
 import { LanguageSwitcher } from '@/components/language-switcher'
 import { NotificationButton } from '@/components/notification-button'
@@ -103,45 +108,97 @@ export function AppHeader({
   showConfigDrawer = true,
   showProfileDropdown = true,
 }: AppHeaderProps) {
-  // Prioritize dynamically generated links from backend
+  const { t } = useTranslation()
   const dynamicLinks = useTopNavLinks()
   const links = dynamicLinks.length > 0 ? dynamicLinks : navLinks
-
-  // Notifications hook
   const notifications = useNotifications()
+  const { auth } = useAuthStore()
+  const { status } = useStatus()
+
+  const user = auth.user
+  const roleLabel = getRoleLabel(user?.role)
+  const userName = user?.display_name || user?.username || t('User')
+  const version = status?.version || t('Unknown version')
+
+  const quickSignals = useMemo(
+    () => [
+      t('Overview'),
+      showSearch ? t('Search') : null,
+      showNotifications ? t('Notifications') : null,
+    ].filter((item): item is string => Boolean(item)),
+    [showNotifications, showSearch, t]
+  )
 
   return (
     <>
       <Header>
-        <SystemBrand variant='inline' />
+        <div className='flex min-w-0 flex-1 items-center gap-3 lg:gap-4'>
+          <div className='app-header-brand-shell'>
+            <SystemBrand variant='inline' />
+            <div className='app-header-brand-copy hidden xl:flex'>
+              <span className='app-header-eyebrow'>{t('Management console')}</span>
+              <div className='app-header-brand-line'>
+                <span className='truncate'>{t('Enterprise control center')}</span>
+                <span className='app-header-dot' aria-hidden='true' />
+                <span className='truncate text-muted-foreground'>
+                  {t('Version')} {version}
+                </span>
+              </div>
+            </div>
+          </div>
 
-        {leftContent ? (
-          <div className='ms-2 flex items-center'>{leftContent}</div>
-        ) : null}
+          {leftContent ? (
+            <div className='hidden min-w-0 items-center lg:flex'>{leftContent}</div>
+          ) : null}
+
+          {showTopNav ? (
+            <div className='hidden min-w-0 flex-1 lg:flex'>
+              <TopNav links={links} className='app-header-nav' />
+            </div>
+          ) : null}
+        </div>
 
         {rightContent ?? (
-          <div className='ms-auto flex items-center gap-1 sm:gap-2'>
-            {showTopNav && (
-              <div className='me-1 hidden lg:block'>
-                <TopNav links={links} />
+          <div className='ml-auto flex min-w-0 items-center gap-2'>
+            <div className='hidden items-center gap-2 xl:flex'>
+              <div className='app-header-status-card'>
+                <div className='app-header-eyebrow'>{t('Workspace ready')}</div>
+                <div className='app-header-status-line'>
+                  <span className='truncate font-medium text-foreground'>
+                    {userName}
+                  </span>
+                  <span className='app-header-status-badge'>{roleLabel}</span>
+                </div>
               </div>
-            )}
-            {showSearch && <Search />}
-            {showNotifications && (
+              <div className='app-header-signal-group'>
+                {quickSignals.map((signal) => (
+                  <span key={signal} className='app-header-signal-pill'>
+                    {signal}
+                  </span>
+                ))}
+              </div>
+            </div>
+            {showSearch ? (
+              <Search
+                className='hidden lg:flex lg:w-64 xl:w-72'
+                placeholder={t('Search models, channels, logs')}
+              />
+            ) : null}
+            {showNotifications ? (
               <NotificationButton
                 unreadCount={notifications.unreadCount}
                 onClick={() => notifications.openDialog()}
+                className='app-header-action-button'
               />
-            )}
+            ) : null}
             <LanguageSwitcher />
-            {showConfigDrawer && <ConfigDrawer />}
-            {showProfileDropdown && <ProfileDropdown />}
+            {showConfigDrawer ? <ConfigDrawer /> : null}
+            {showProfileDropdown ? <ProfileDropdown /> : null}
           </div>
         )}
       </Header>
 
-      {/* Notification Dialog */}
-      {showNotifications && (
+      {showNotifications ? (
         <NotificationDialog
           open={notifications.dialogOpen}
           onOpenChange={notifications.setDialogOpen}
@@ -152,7 +209,7 @@ export function AppHeader({
           loading={notifications.loading}
           onCloseToday={notifications.closeToday}
         />
-      )}
+      ) : null}
     </>
   )
 }

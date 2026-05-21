@@ -19,6 +19,7 @@ For commercial licensing, please contact support@quantumnous.com
 import { useMemo } from 'react'
 import { Link } from '@tanstack/react-router'
 import { Menu } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
@@ -38,7 +39,7 @@ type TopNavProps = React.HTMLAttributes<HTMLElement> & {
  * 在大屏幕显示水平导航，在小屏幕显示下拉菜单
  */
 export function TopNav({ className, links, ...props }: TopNavProps) {
-  // 规范化链接，确保所有可选属性都有默认值
+  const { t } = useTranslation()
   const normalizedLinks = useMemo(
     () =>
       links.map((link) => ({
@@ -52,33 +53,50 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
 
   return (
     <>
-      {/* 移动端下拉菜单 */}
       <div className='lg:hidden'>
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger
-            render={<Button size='icon' variant='outline' className='size-7' />}
+            render={
+              <Button
+                size='icon'
+                variant='outline'
+                className='size-9 rounded-xl border-border/70 bg-background shadow-xs'
+                aria-label={t('Open navigation menu')}
+              />
+            }
           >
-            <Menu />
+            <Menu className='size-4.5' />
           </DropdownMenuTrigger>
-          <DropdownMenuContent side='bottom' align='start'>
+          <DropdownMenuContent
+            side='bottom'
+            align='start'
+            className='min-w-56 rounded-2xl border-border/70 p-2'
+          >
             {normalizedLinks.map(
               ({ title, href, isActive, disabled, external }) => (
                 <DropdownMenuItem
                   key={`${title}-${href}`}
+                  className='rounded-xl px-3 py-2'
                   render={
                     external ? (
                       <a
                         href={href}
                         target='_blank'
                         rel='noopener noreferrer'
-                        className={!isActive ? 'text-muted-foreground' : ''}
+                        className={cn(
+                          'flex w-full items-center text-sm font-medium',
+                          !isActive && 'text-muted-foreground'
+                        )}
                       >
                         {title}
                       </a>
                     ) : (
                       <Link
                         to={href}
-                        className={!isActive ? 'text-muted-foreground' : ''}
+                        className={cn(
+                          'flex w-full items-center text-sm font-medium',
+                          !isActive && 'text-muted-foreground'
+                        )}
                         disabled={disabled}
                       >
                         {title}
@@ -92,36 +110,47 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
         </DropdownMenu>
       </div>
 
-      {/* 桌面端水平导航 */}
       <nav
         className={cn(
-          'hidden items-center space-x-4 lg:flex lg:space-x-4 xl:space-x-6',
+          'hidden min-w-0 items-center gap-1 rounded-2xl border border-border/70 bg-muted/25 p-1 lg:flex',
           className
         )}
         {...props}
       >
-        {normalizedLinks.map(({ title, href, isActive, disabled, external }) =>
-          external ? (
-            <a
-              key={`${title}-${href}`}
-              href={href}
-              target='_blank'
-              rel='noopener noreferrer'
-              className={`hover:text-primary text-sm font-medium transition-colors ${isActive ? '' : 'text-muted-foreground'}`}
-            >
-              {title}
-            </a>
-          ) : (
+        {normalizedLinks.map(({ title, href, isActive, disabled, external }) => {
+          const linkClassName = cn(
+            'inline-flex h-10 items-center justify-center rounded-xl px-3.5 text-sm font-medium transition-all duration-200',
+            isActive
+              ? 'bg-background text-foreground shadow-xs'
+              : 'text-muted-foreground hover:bg-background/80 hover:text-foreground',
+            disabled && 'pointer-events-none opacity-45'
+          )
+
+          if (external) {
+            return (
+              <a
+                key={`${title}-${href}`}
+                href={href}
+                target='_blank'
+                rel='noopener noreferrer'
+                className={linkClassName}
+              >
+                {title}
+              </a>
+            )
+          }
+
+          return (
             <Link
               key={`${title}-${href}`}
               to={href}
               disabled={disabled}
-              className={`hover:text-primary text-sm font-medium transition-colors ${isActive ? '' : 'text-muted-foreground'}`}
+              className={linkClassName}
             >
               {title}
             </Link>
           )
-        )}
+        })}
       </nav>
     </>
   )

@@ -41,19 +41,22 @@ export function NotificationButton({
   return (
     <div className='relative'>
       <Button
-        variant='ghost'
+        variant='outline'
         size='icon'
         onClick={onClick}
-        className={cn('h-9 w-9', className)}
+        className={cn(
+          'size-10 rounded-xl border-border/70 bg-background shadow-xs hover:bg-accent/60',
+          className
+        )}
         aria-label={t('Notifications')}
       >
-        <Bell className='size-[1.2rem]' />
+        <Bell className='size-[1.05rem]' />
       </Button>
 
       {unreadCount > 0 && (
         <Badge
           variant='destructive'
-          className='absolute -top-1 -right-1 flex h-5 min-w-5 items-center justify-center px-1 text-[10px] font-semibold tabular-nums'
+          className='absolute -top-1 -right-1 flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[10px] font-semibold tabular-nums shadow-sm'
         >
           {unreadCount > 99 ? '99+' : unreadCount}
         </Badge>

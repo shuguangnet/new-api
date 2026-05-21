@@ -60,18 +60,29 @@ export function SystemBrand(props: SystemBrandProps) {
         to='/'
         aria-label={t('Go to home')}
         className={cn(
-          'text-foreground inline-flex h-7 items-center gap-1.5 rounded-md px-1.5 text-sm font-medium transition-colors outline-none select-none',
-          'hover:bg-accent focus-visible:ring-ring/40 focus-visible:ring-2'
+          'text-foreground inline-flex min-w-0 items-center gap-3 rounded-2xl border border-border/70 bg-background px-2.5 py-2 shadow-xs transition-colors outline-none select-none hover:bg-accent/35 focus-visible:ring-ring/40 focus-visible:ring-2'
         )}
       >
-        <div className='flex size-5 items-center justify-center overflow-hidden rounded-md'>
+        <div className='flex size-10 items-center justify-center overflow-hidden rounded-xl border border-border/70 bg-muted/40'>
           <img
             src={logo}
             alt={t('Logo')}
-            className='size-full rounded-md object-cover'
+            className='size-full rounded-xl object-cover'
           />
         </div>
-        <span className='gradient-text max-w-[12rem] truncate'>{name}</span>
+        <div className='hidden min-w-0 md:block'>
+          <div className='text-muted-foreground text-[0.68rem] font-medium tracking-[0.2em] uppercase'>
+            {t('Enterprise AI workspace')}
+          </div>
+          <div className='mt-0.5 flex min-w-0 items-center gap-2'>
+            <span className='max-w-[11rem] truncate text-sm font-semibold tracking-tight'>
+              {name}
+            </span>
+            <span className='rounded-full bg-muted px-2 py-0.5 text-[0.68rem] text-muted-foreground'>
+              v{version}
+            </span>
+          </div>
+        </div>
       </Link>
     )
   }
