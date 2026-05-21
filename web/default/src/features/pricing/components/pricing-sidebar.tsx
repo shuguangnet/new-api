@@ -244,12 +244,12 @@ export function PricingSidebar(props: PricingSidebarProps) {
   ]
 
   return (
-    <aside className={cn('rounded-[24px] border border-white/6 bg-[#0b0d12]/92 p-3 shadow-[0_18px_48px_rgba(0,0,0,0.28)] backdrop-blur-sm', props.className)}>
+    <aside className={cn('rounded-[24px] border border-slate-200/80 bg-white/92 p-3 shadow-[0_18px_48px_rgba(148,163,184,0.14)] backdrop-blur-sm', props.className)}>
       <div className='mb-2.5 flex items-center justify-between gap-2'>
         <div>
-          <h2 className='text-foreground text-sm font-bold'>{t('Filter')}</h2>
-          <p className='text-muted-foreground mt-1 text-xs'>
-            {t('Refine models by provider, group, type, and tags.')}
+          <h2 className='text-sm font-bold text-slate-950'>{t('筛选条件')}</h2>
+          <p className='mt-1 text-xs text-slate-500'>
+            {t('从供应商、分组、计费类型与标签维度收敛候选模型。')}
           </p>
         </div>
         <Button
@@ -261,43 +261,43 @@ export function PricingSidebar(props: PricingSidebarProps) {
           className='h-7 gap-1.5 px-2 text-xs'
         >
           <RotateCcw className='size-3.5' />
-          {t('Reset')}
+          {t('重置')}
         </Button>
       </div>
 
       {props.hasActiveFilters && (
         <Badge variant='secondary' className='mb-3'>
-          {t('Filters active')}
+          {t('筛选已生效')}
         </Badge>
       )}
 
       <div className='space-y-1'>
         <FilterSection
-          title={t('Groups')}
+          title={t('分组')}
           value={props.groupFilter}
           options={groupOptions}
           onChange={props.onGroupChange}
         />
         <FilterSection
-          title={t('All Vendors')}
+          title={t('供应商')}
           value={props.vendorFilter}
           options={vendorOptions}
           onChange={props.onVendorChange}
         />
         <FilterSection
-          title={t('Model Tags')}
+          title={t('模型标签')}
           value={props.tagFilter}
           options={tagOptions}
           onChange={props.onTagChange}
         />
         <FilterSection
-          title={t('Pricing Type')}
+          title={t('计费类型')}
           value={props.quotaTypeFilter}
           options={quotaOptions}
           onChange={props.onQuotaTypeChange}
         />
         <FilterSection
-          title={t('Endpoint Type')}
+          title={t('接口类型')}
           value={props.endpointTypeFilter}
           options={endpointOptions}
           onChange={props.onEndpointTypeChange}

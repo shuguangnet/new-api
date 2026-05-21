@@ -159,7 +159,7 @@ export function PricingToolbar(props: PricingToolbarProps) {
   )
 
   return (
-    <div className='rounded-[24px] border border-white/6 bg-[#0b0d12]/92 p-3 shadow-[0_18px_48px_rgba(0,0,0,0.28)] backdrop-blur-sm'>
+    <div className='rounded-[24px] border border-slate-200/80 bg-slate-50/90 p-3 shadow-[0_18px_48px_rgba(148,163,184,0.14)] backdrop-blur-sm'>
       <div className='flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between'>
         <div className='flex items-center gap-2'>
           <Button
@@ -170,7 +170,7 @@ export function PricingToolbar(props: PricingToolbarProps) {
             className='gap-1.5 xl:hidden'
           >
             <Filter className='size-4' />
-            {t('Filter')}
+            {t('筛选')}
             {props.activeFilterCount > 0 && (
               <Badge className='ml-0.5 size-5 justify-center p-0 text-[10px]'>
                 {props.activeFilterCount}
@@ -178,14 +178,14 @@ export function PricingToolbar(props: PricingToolbarProps) {
             )}
           </Button>
 
-          <div className='text-muted-foreground flex items-baseline gap-1 text-sm'>
-            <span className='text-foreground font-semibold tabular-nums'>
+          <div className='flex items-baseline gap-1 text-sm text-slate-600'>
+            <span className='font-semibold tabular-nums text-slate-950'>
               {props.filteredCount.toLocaleString()}
             </span>
-            <span>{props.filteredCount === 1 ? t('model') : t('models')}</span>
+            <span>{t('个模型')}</span>
             {props.hasActiveFilters && props.totalCount && (
-              <span className='text-muted-foreground/60 text-xs'>
-                / {props.totalCount.toLocaleString()}
+              <span className='text-xs text-slate-400'>
+                / {t('共 {{count}} 个', { count: props.totalCount })}
               </span>
             )}
           </div>
@@ -195,12 +195,12 @@ export function PricingToolbar(props: PricingToolbarProps) {
           <div className='hidden items-center gap-2 sm:flex'>
             <SegmentedControl
               options={[
-                { value: 'standard', label: t('Standard') },
-                { value: 'recharge', label: t('Recharge') },
+                { value: 'standard', label: t('标准价') },
+                { value: 'recharge', label: t('充值价') },
               ]}
               value={props.showRechargePrice ? 'recharge' : 'standard'}
               onChange={handleRechargePriceChange}
-              ariaLabel={t('Price display mode')}
+              ariaLabel={t('价格显示模式')}
             />
             <SegmentedControl
               options={[
@@ -209,7 +209,7 @@ export function PricingToolbar(props: PricingToolbarProps) {
               ]}
               value={props.tokenUnit}
               onChange={handleTokenUnitChange}
-              ariaLabel={t('Token unit')}
+              ariaLabel={t('Token 单位')}
             />
           </div>
 
@@ -225,7 +225,7 @@ export function PricingToolbar(props: PricingToolbarProps) {
               }
             >
               <ArrowUpDown className='size-3.5' />
-              <span>{sortLabels[props.sortBy as SortOption] || t('Sort')}</span>
+              <span>{sortLabels[props.sortBy as SortOption] || t('排序')}</span>
             </DropdownMenuTrigger>
             <DropdownMenuContent align='end' className='w-44'>
               {Object.entries(sortLabels).map(([value, label]) => (
@@ -251,17 +251,17 @@ export function PricingToolbar(props: PricingToolbarProps) {
               {
                 value: VIEW_MODES.CARD,
                 icon: Grid2X2,
-                tooltip: t('Card view'),
+                tooltip: t('卡片视图'),
               },
               {
                 value: VIEW_MODES.TABLE,
                 icon: Table2,
-                tooltip: t('Table view'),
+                tooltip: t('表格视图'),
               },
             ]}
             value={props.viewMode}
             onChange={handleViewModeChange}
-            ariaLabel={t('View mode')}
+            ariaLabel={t('视图模式')}
           />
         </div>
       </div>
@@ -272,9 +272,9 @@ export function PricingToolbar(props: PricingToolbarProps) {
           className='flex h-dvh w-full flex-col overflow-hidden p-0 sm:max-w-md'
         >
           <SheetHeader className='border-b px-4 py-3 sm:px-6 sm:py-4'>
-            <SheetTitle>{t('Filter')}</SheetTitle>
+            <SheetTitle>{t('筛选模型目录')}</SheetTitle>
             <SheetDescription>
-              {t('Filter models by provider, group, type, endpoint, and tags.')}
+              {t('按供应商、分组、计费方式、接口类型与标签缩小模型比较范围。')}
             </SheetDescription>
           </SheetHeader>
           <div className='flex-1 overflow-y-auto p-3 sm:p-4'>
