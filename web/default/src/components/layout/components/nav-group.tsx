@@ -122,11 +122,11 @@ function SidebarMenuLink({ item, href }: { item: NavLink; href: string }) {
   const { setOpenMobile } = useSidebar()
   const isActive = checkIsActive(href, item)
   return (
-    <SidebarMenuItem className={isActive ? 'sidebar-item-glow relative before:absolute before:left-0 before:inset-y-1 before:w-[3px] before:rounded-full before:bg-gradient-to-b before:from-blue-400 before:via-violet-500 before:to-fuchsia-400' : ''}>
+    <SidebarMenuItem className={isActive ? 'sidebar-item-glow relative before:absolute before:left-0 before:inset-y-1 before:w-[3px] before:rounded-full before:bg-gradient-to-b before:from-blue-500 before:via-blue-600 before:to-sky-500' : ''}>
       <SidebarMenuButton
         isActive={isActive}
         tooltip={item.title}
-        className='hover:bg-gradient-to-r hover:from-purple-500/10 hover:via-fuchsia-500/10 hover:to-purple-500/10'
+        className='hover:bg-gradient-to-r hover:from-blue-500/8 hover:via-sky-500/8 hover:to-blue-500/8'
         render={<Link to={item.url} onClick={() => setOpenMobile(false)} />}
       >
         {item.icon && <item.icon />}
@@ -180,10 +180,10 @@ function SidebarMenuCollapsible({
       <CollapsibleContent className='CollapsibleContent'>
         <SidebarMenuSub>
           {item.items.map((subItem) => (
-            <SidebarMenuSubItem key={subItem.title} className={checkIsActive(href, subItem) ? 'sidebar-item-glow relative before:absolute before:left-0 before:inset-y-1 before:w-[3px] before:rounded-full before:bg-gradient-to-b before:from-blue-400 before:via-violet-500 before:to-fuchsia-400' : ''}>
+            <SidebarMenuSubItem key={subItem.title} className={checkIsActive(href, subItem) ? 'sidebar-item-glow relative before:absolute before:left-0 before:inset-y-1 before:w-[3px] before:rounded-full before:bg-gradient-to-b before:from-blue-500 before:via-blue-600 before:to-sky-500' : ''}>
               <SidebarMenuSubButton
                 isActive={checkIsActive(href, subItem)}
-                className='hover:bg-gradient-to-r hover:from-purple-500/10 hover:via-fuchsia-500/10 hover:to-purple-500/10'
+                className='hover:bg-gradient-to-r hover:from-blue-500/8 hover:via-sky-500/8 hover:to-blue-500/8'
                 render={
                   <Link to={subItem.url} onClick={() => setOpenMobile(false)} />
                 }
