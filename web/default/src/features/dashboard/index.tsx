@@ -209,6 +209,15 @@ export function Dashboard() {
   )
   const showSectionTabs =
     activeSection !== 'overview' && visibleSections.length > 1
+  const sectionFocusLabel = useMemo(() => {
+    if (activeSection === 'overview') {
+      return t('Workspace overview')
+    }
+    if (activeSection === 'models') {
+      return t('Model operations analytics')
+    }
+    return t('User consumption analytics')
+  }, [activeSection, t])
   const modelActions =
     activeSection === 'models' ? (
       <>
@@ -226,41 +235,47 @@ export function Dashboard() {
 
   return (
     <SectionPageLayout>
-      <div className='mb-4 rounded-[28px] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.045),rgba(255,255,255,0.02)),rgba(8,12,20,0.92)] px-5 py-6 shadow-[0_20px_60px_rgba(0,0,0,0.28)] sm:px-6 sm:py-7'>
+      <div className='relative mb-4 overflow-hidden rounded-[30px] border border-slate-200/80 bg-[linear-gradient(135deg,rgba(255,255,255,0.98)_0%,rgba(248,250,252,0.98)_42%,rgba(241,245,249,0.95)_100%)] px-5 py-6 shadow-[0_18px_48px_rgba(15,23,42,0.08)] sm:px-6 sm:py-7'>
+        <div
+          className='pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-sky-300/80 to-transparent'
+          aria-hidden='true'
+        />
         <div className='flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between'>
           <div className='max-w-3xl'>
-            <div className='inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-[11px] font-medium tracking-[0.18em] text-white/56 uppercase'>
-              <span className='h-2 w-2 rounded-full bg-blue-400 shadow-[0_0_12px_rgba(96,165,250,0.9)]' />
-              {t('Enterprise Operations Console')}
+            <div className='inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50/80 px-3 py-1 text-[11px] font-medium tracking-[0.18em] text-sky-700 uppercase'>
+              <span className='h-2 w-2 rounded-full bg-sky-500 shadow-[0_0_12px_rgba(14,165,233,0.35)]' />
+              {t('Enterprise AI operations center')}
             </div>
             <SectionPageLayout.Title>{t(meta.titleKey)}</SectionPageLayout.Title>
             <SectionPageLayout.Description>
-              {t(meta.descriptionKey)}
+              <span className='text-sm leading-7 text-slate-600 sm:text-[15px]'>
+                {t(meta.descriptionKey)}
+              </span>
             </SectionPageLayout.Description>
           </div>
           <div className='grid gap-3 sm:grid-cols-3 lg:min-w-[420px]'>
-            <div className='rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3'>
-              <div className='text-[11px] tracking-[0.18em] text-white/34 uppercase'>
-                {t('Focus')}
+            <div className='rounded-2xl border border-slate-200/85 bg-white/88 px-4 py-3 shadow-[0_8px_24px_rgba(15,23,42,0.05)]'>
+              <div className='text-[11px] tracking-[0.18em] text-slate-400 uppercase'>
+                {t('Current focus')}
               </div>
-              <div className='mt-2 text-sm font-medium text-white'>
-                {t(activeSection === 'overview' ? 'Platform overview' : activeSection === 'models' ? 'Model analytics' : 'User analytics')}
-              </div>
-            </div>
-            <div className='rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3'>
-              <div className='text-[11px] tracking-[0.18em] text-white/34 uppercase'>
-                {t('Access')}
-              </div>
-              <div className='mt-2 text-sm font-medium text-white'>
-                {t(isAdmin ? 'Administrator' : 'Workspace user')}
+              <div className='mt-2 text-sm font-medium text-slate-900'>
+                {sectionFocusLabel}
               </div>
             </div>
-            <div className='rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3'>
-              <div className='text-[11px] tracking-[0.18em] text-white/34 uppercase'>
-                {t('Status')}
+            <div className='rounded-2xl border border-slate-200/85 bg-white/88 px-4 py-3 shadow-[0_8px_24px_rgba(15,23,42,0.05)]'>
+              <div className='text-[11px] tracking-[0.18em] text-slate-400 uppercase'>
+                {t('Current access')}
               </div>
-              <div className='mt-2 text-sm font-medium text-white'>
-                {t('Live dashboard')}
+              <div className='mt-2 text-sm font-medium text-slate-900'>
+                {t(isAdmin ? 'Administrator account' : 'Workspace member account')}
+              </div>
+            </div>
+            <div className='rounded-2xl border border-slate-200/85 bg-white/88 px-4 py-3 shadow-[0_8px_24px_rgba(15,23,42,0.05)]'>
+              <div className='text-[11px] tracking-[0.18em] text-slate-400 uppercase'>
+                {t('Workspace status')}
+              </div>
+              <div className='mt-2 text-sm font-medium text-slate-900'>
+                {t('Operational dashboard online')}
               </div>
             </div>
           </div>

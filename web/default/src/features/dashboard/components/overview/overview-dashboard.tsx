@@ -946,12 +946,12 @@ export function OverviewDashboard() {
                         <ListChecks className='size-3.5' aria-hidden='true' />
                         {t('Get started')}
                       </div>
-                      <h3 className='gradient-text text-xl font-semibold tracking-tight sm:text-2xl'>
-                        {t('Build on your API gateway in minutes')}
+                      <h3 className='text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl'>
+                        {t('Complete the core launch setup in one screen')}
                       </h3>
-                      <p className='text-muted-foreground max-w-xl text-sm leading-relaxed'>
+                      <p className='max-w-xl text-sm leading-relaxed text-slate-600'>
                         {t(
-                          'A focused home for keys, balance, routing, and service health.'
+                          'Unify key issuance, balance readiness, route verification, and service status into the same operational starting point.'
                         )}
                       </p>
                     </div>
@@ -997,8 +997,8 @@ export function OverviewDashboard() {
                 <div className='text-muted-foreground text-xs font-medium tracking-wider uppercase'>
                   {t('Recommended actions')}
                 </div>
-                <h3 className='gradient-text text-lg font-semibold tracking-tight'>
-                  {t('Keep the platform ready')}
+                <h3 className='text-lg font-semibold tracking-tight text-slate-900'>
+                  {t('Keep the platform in delivery-ready state')}
                 </h3>
               </div>
               <div className='grid gap-2'>
