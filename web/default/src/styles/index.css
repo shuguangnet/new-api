@@ -1889,6 +1889,34 @@ For commercial licensing, please contact support@quantumnous.com
     gap: 0.9rem;
   }
 
+  .app-header-brand-link {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .app-header-brand-link::after {
+    content: '';
+    position: absolute;
+    inset: auto 1rem 0.55rem 1rem;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(59,130,246,0), rgba(59,130,246,0.32), rgba(14,165,233,0));
+    pointer-events: none;
+  }
+
+  .app-header-brand-mark {
+    display: flex;
+    width: 2.7rem;
+    height: 2.7rem;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 1.1rem;
+    border: 1px solid oklch(0.9 0.018 250);
+    background: linear-gradient(180deg, oklch(0.995 0.01 250), oklch(0.96 0.018 250));
+    box-shadow: 0 12px 26px rgba(59,130,246,0.12);
+  }
+
   .app-header-brand-copy {
     min-width: 0;
     flex-direction: column;
@@ -1977,6 +2005,36 @@ For commercial licensing, please contact support@quantumnous.com
     font-size: 0.76rem;
     line-height: 1;
     white-space: nowrap;
+  }
+
+  .app-header-search-shell {
+    display: flex;
+    min-width: 18rem;
+    flex-direction: column;
+    gap: 0.38rem;
+    border-radius: 1rem;
+    border: 1px solid oklch(0.92 0.015 250);
+    background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,250,252,0.94));
+    padding: 0.55rem 0.7rem;
+    box-shadow: 0 12px 28px rgba(15,23,42,0.05);
+  }
+
+  .app-header-search-kicker {
+    color: oklch(0.52 0.03 245);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .app-header-search {
+    width: 18.5rem;
+  }
+
+  .app-header-search [data-slot='input'] {
+    border-color: transparent;
+    background: rgba(255,255,255,0.86);
+    box-shadow: none;
   }
 
   .app-header-action-button {

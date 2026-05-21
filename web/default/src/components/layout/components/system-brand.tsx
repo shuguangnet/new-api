@@ -58,27 +58,27 @@ export function SystemBrand(props: SystemBrandProps) {
     return (
       <Link
         to='/'
-        aria-label={t('Go to home')}
+        aria-label={t('返回首页')}
         className={cn(
-          'text-foreground inline-flex min-w-0 items-center gap-3 rounded-2xl border border-border/70 bg-background px-2.5 py-2 shadow-xs transition-colors outline-none select-none hover:bg-accent/35 focus-visible:ring-ring/40 focus-visible:ring-2'
+          'app-header-brand-link text-foreground inline-flex min-w-0 items-center gap-3 rounded-[1.45rem] border border-border/60 bg-white/92 px-3 py-2 shadow-[0_18px_36px_rgba(15,23,42,0.08)] transition-all outline-none select-none hover:-translate-y-0.5 hover:shadow-[0_20px_40px_rgba(15,23,42,0.1)] focus-visible:ring-ring/40 focus-visible:ring-2'
         )}
       >
-        <div className='flex size-10 items-center justify-center overflow-hidden rounded-xl border border-border/70 bg-muted/40'>
+        <div className='app-header-brand-mark'>
           <img
             src={logo}
             alt={t('Logo')}
-            className='size-full rounded-xl object-cover'
+            className='size-full rounded-[1.05rem] object-cover'
           />
         </div>
         <div className='hidden min-w-0 md:block'>
-          <div className='text-muted-foreground text-[0.68rem] font-medium tracking-[0.2em] uppercase'>
-            {t('Enterprise AI workspace')}
+          <div className='text-muted-foreground text-[0.68rem] font-semibold tracking-[0.2em] uppercase'>
+            {t('企业级 AI 平台')}
           </div>
           <div className='mt-0.5 flex min-w-0 items-center gap-2'>
             <span className='max-w-[11rem] truncate text-sm font-semibold tracking-tight'>
               {name}
             </span>
-            <span className='rounded-full bg-muted px-2 py-0.5 text-[0.68rem] text-muted-foreground'>
+            <span className='rounded-full border border-border/60 bg-muted/50 px-2 py-0.5 text-[0.68rem] text-muted-foreground'>
               v{version}
             </span>
           </div>

@@ -112,7 +112,7 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
 
       <nav
         className={cn(
-          'hidden min-w-0 items-center gap-1 rounded-2xl border border-border/70 bg-muted/25 p-1 lg:flex',
+          'hidden min-w-0 items-center gap-1 rounded-[1.35rem] border border-border/60 bg-white/82 p-1.5 shadow-[0_14px_32px_rgba(15,23,42,0.06)] backdrop-blur-xl lg:flex',
           className
         )}
         {...props}
@@ -121,8 +121,8 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
           const linkClassName = cn(
             'inline-flex h-10 items-center justify-center rounded-xl px-3.5 text-sm font-medium transition-all duration-200',
             isActive
-              ? 'bg-background text-foreground shadow-xs'
-              : 'text-muted-foreground hover:bg-background/80 hover:text-foreground',
+              ? 'border border-border/70 bg-white text-foreground shadow-[0_8px_18px_rgba(15,23,42,0.07)]'
+              : 'text-muted-foreground hover:bg-white hover:text-foreground hover:shadow-[0_8px_18px_rgba(15,23,42,0.05)]',
             disabled && 'pointer-events-none opacity-45'
           )
 

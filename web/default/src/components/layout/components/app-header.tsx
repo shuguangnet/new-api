@@ -122,9 +122,9 @@ export function AppHeader({
 
   const quickSignals = useMemo(
     () => [
-      t('Overview'),
-      showSearch ? t('Search') : null,
-      showNotifications ? t('Notifications') : null,
+      t('总览舱'),
+      showSearch ? t('全局检索') : null,
+      showNotifications ? t('消息中心') : null,
     ].filter((item): item is string => Boolean(item)),
     [showNotifications, showSearch, t]
   )
@@ -135,13 +135,13 @@ export function AppHeader({
         <div className='flex min-w-0 flex-1 items-center gap-3 lg:gap-4'>
           <div className='app-header-brand-shell'>
             <SystemBrand variant='inline' />
-            <div className='app-header-brand-copy hidden xl:flex'>
-              <span className='app-header-eyebrow'>{t('Management console')}</span>
+            <div className='app-header-brand-copy hidden 2xl:flex'>
+              <span className='app-header-eyebrow'>{t('平台指挥台')}</span>
               <div className='app-header-brand-line'>
-                <span className='truncate'>{t('Enterprise control center')}</span>
+                <span className='truncate'>{t('统一路由、结算与运营编排中心')}</span>
                 <span className='app-header-dot' aria-hidden='true' />
                 <span className='truncate text-muted-foreground'>
-                  {t('Version')} {version}
+                  {t('版本')} {version}
                 </span>
               </div>
             </div>
@@ -159,10 +159,10 @@ export function AppHeader({
         </div>
 
         {rightContent ?? (
-          <div className='ml-auto flex min-w-0 items-center gap-2'>
+          <div className='ml-auto flex min-w-0 items-center gap-2 lg:gap-2.5'>
             <div className='hidden items-center gap-2 xl:flex'>
               <div className='app-header-status-card'>
-                <div className='app-header-eyebrow'>{t('Workspace ready')}</div>
+                <div className='app-header-eyebrow'>{t('当前席位')}</div>
                 <div className='app-header-status-line'>
                   <span className='truncate font-medium text-foreground'>
                     {userName}
@@ -179,10 +179,15 @@ export function AppHeader({
               </div>
             </div>
             {showSearch ? (
-              <Search
-                className='hidden lg:flex lg:w-64 xl:w-72'
-                placeholder={t('Search models, channels, logs')}
-              />
+              <div className='hidden xl:block'>
+                <div className='app-header-search-shell'>
+                  <span className='app-header-search-kicker'>{t('工作台检索')}</span>
+                  <Search
+                    className='app-header-search'
+                    placeholder={t('搜索模型、渠道、日志与用户')}
+                  />
+                </div>
+              </div>
             ) : null}
             {showNotifications ? (
               <NotificationButton
