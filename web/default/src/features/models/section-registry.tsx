@@ -24,14 +24,14 @@ import { createSectionRegistry } from '@/features/system-settings/utils/section-
 const MODELS_SECTIONS = [
   {
     id: 'metadata',
-    titleKey: 'Metadata',
-    descriptionKey: 'Manage model metadata and configuration',
+    titleKey: '模型元数据',
+    descriptionKey: '管理模型元数据与配置信息',
     build: () => null, // Content is rendered directly in the page component
   },
   {
     id: 'deployments',
-    titleKey: 'Deployments',
-    descriptionKey: 'Manage model deployments',
+    titleKey: '模型部署',
+    descriptionKey: '管理模型部署与分发',
     build: () => null, // Content is rendered directly in the page component
   },
 ] as const

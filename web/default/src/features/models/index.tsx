@@ -19,7 +19,7 @@ For commercial licensing, please contact support@quantumnous.com
 import { useCallback, useEffect, useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import { getRouteApi, useNavigate } from '@tanstack/react-router'
-import { Plus } from 'lucide-react'
+import { Boxes, CloudUpload, Plus, Tags } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -47,12 +47,12 @@ const SECTION_META: Record<
   { titleKey: string; descriptionKey: string }
 > = {
   metadata: {
-    titleKey: 'Metadata',
-    descriptionKey: 'Manage model metadata and configuration',
+    titleKey: '模型元数据',
+    descriptionKey: '管理模型元数据与配置信息',
   },
   deployments: {
-    titleKey: 'Deployments',
-    descriptionKey: 'Manage model deployments',
+    titleKey: '模型部署',
+    descriptionKey: '管理模型部署与分发',
   },
 }
 
@@ -94,7 +94,6 @@ function ModelsContent() {
   }, [activeSection, refreshDeploymentSettings])
 
   // Prefetch deployments list while connection check is in progress
-  // This allows the data to be ready as soon as the guard passes
   useEffect(() => {
     if (
       activeSection === 'deployments' &&
@@ -135,11 +134,71 @@ function ModelsContent() {
           ) : (
             <Button onClick={() => setCreateDeploymentOpen(true)} size='sm'>
               <Plus className='h-4 w-4' />
-              {t('Create deployment')}
+              {t('创建部署')}
             </Button>
           )}
         </SectionPageLayout.Actions>
         <SectionPageLayout.Content>
+          {/* Enterprise model workspace header */}
+          <div className='relative mb-5 overflow-hidden rounded-[28px] border border-slate-200/85 bg-[linear-gradient(135deg,rgba(255,255,255,0.98)_0%,rgba(248,250,252,0.96)_42%,rgba(250,245,255,0.65)_100%)] px-5 py-5 shadow-[0_14px_40px_rgba(15,23,42,0.06)] sm:px-6 sm:py-6'>
+            <div
+              className='pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-purple-400/60 to-transparent'
+              aria-hidden='true'
+            />
+            <div className='flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between'>
+              <div className='max-w-3xl space-y-3'>
+                <div className='inline-flex items-center gap-2 rounded-full border border-purple-200 bg-purple-50/85 px-3 py-1 text-[11px] font-medium tracking-[0.18em] text-purple-700 uppercase'>
+                  <span className='h-2 w-2 rounded-full bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.35)]' />
+                  {t('模型管理中心')}
+                </div>
+                <h2 className='text-xl font-semibold tracking-tight text-slate-950 sm:text-2xl'>
+                  {t('模型资产与部署治理')}
+                </h2>
+                <p className='text-sm leading-7 text-slate-600 sm:text-[15px]'>
+                  {t('在此维护平台可用的模型目录，配置模型元数据、价格比率、分组归属与供应商映射，并管理模型在 io.net 等去中心化网络上的部署分发。模型元数据的准确性直接影响路由决策与成本核算。')}
+                </p>
+              </div>
+              <div className='grid gap-3 sm:grid-cols-3 lg:min-w-[420px]'>
+                <div className='rounded-2xl border border-slate-200/85 bg-white/88 px-4 py-3 shadow-[0_8px_22px_rgba(15,23,42,0.04)]'>
+                  <div className='flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase'>
+                    <Tags className='size-3.5 text-purple-600' aria-hidden='true' />
+                    {t('元数据')}
+                  </div>
+                  <div className='mt-2 text-sm font-semibold text-slate-900'>
+                    {t('模型信息维护')}
+                  </div>
+                  <p className='mt-1 text-xs leading-5 text-slate-500'>
+                    {t('名称、类型、供应商映射')}
+                  </p>
+                </div>
+                <div className='rounded-2xl border border-slate-200/85 bg-white/88 px-4 py-3 shadow-[0_8px_22px_rgba(15,23,42,0.04)]'>
+                  <div className='flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase'>
+                    <Boxes className='size-3.5 text-purple-600' aria-hidden='true' />
+                    {t('分组归属')}
+                  </div>
+                  <div className='mt-2 text-sm font-semibold text-slate-900'>
+                    {t('按组管理配额')}
+                  </div>
+                  <p className='mt-1 text-xs leading-5 text-slate-500'>
+                    {t('精细化的访问控制策略')}
+                  </p>
+                </div>
+                <div className='rounded-2xl border border-slate-200/85 bg-white/88 px-4 py-3 shadow-[0_8px_22px_rgba(15,23,42,0.04)]'>
+                  <div className='flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase'>
+                    <CloudUpload className='size-3.5 text-purple-600' aria-hidden='true' />
+                    {t('部署分发')}
+                  </div>
+                  <div className='mt-2 text-sm font-semibold text-slate-900'>
+                    {t('io.net 网络部署')}
+                  </div>
+                  <p className='mt-1 text-xs leading-5 text-slate-500'>
+                    {t('去中心化模型托管与交付')}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className='space-y-4'>
             <Tabs value={activeSection} onValueChange={handleSectionChange}>
               <TabsList className='group-data-horizontal/tabs:h-auto max-w-full flex-wrap justify-start'>
