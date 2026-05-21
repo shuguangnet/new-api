@@ -115,26 +115,26 @@ export function Stats() {
     {
       end: 50,
       suffix: '+',
-      label: t('Integrated providers'),
-      desc: t('Aggregate major LLM ecosystems into one stable enterprise delivery surface.'),
+      label: t('已接入模型与服务商'),
+      desc: t('聚合主流大模型生态，形成统一交付出口，降低企业集成与切换成本。'),
     },
     {
       end: 100,
       suffix: '+',
-      label: t('Commercial pricing support'),
-      desc: t('Flexible pricing, recharge and monetization capability for platform operators.'),
+      label: t('商业化计费能力'),
+      desc: t('支持充值、套餐、价格策略与多层计费模型，服务平台运营与变现。'),
     },
     {
       end: 50,
       suffix: '+',
-      label: t('Compatible API routes'),
-      desc: t('Connect products quickly through standardized developer-facing APIs and gateway semantics.'),
+      label: t('兼容接口路由'),
+      desc: t('面向研发团队提供稳定统一的接入方式，便于快速完成业务系统对接。'),
     },
     {
       end: 10,
       suffix: '+',
-      label: t('Governance controls'),
-      desc: t('Quota, policy and traffic orchestration aligned to real production operations.'),
+      label: t('治理与控制能力'),
+      desc: t('围绕配额、策略、流量分发与权限管理，支撑生产级运营要求。'),
     },
   ]
 
@@ -143,15 +143,15 @@ export function Stats() {
       <div className='mx-auto max-w-6xl'>
         <div className='mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between'>
           <div>
-            <div className='text-[11px] tracking-[0.18em] text-white/34 uppercase'>
-              {t('Platform Snapshot')}
+            <div className='text-[11px] tracking-[0.16em] text-slate-400'>
+              {t('平台能力概览')}
             </div>
-            <h2 className='mt-2 text-2xl font-semibold tracking-tight text-white md:text-3xl'>
-              {t('Position your AI gateway like a real business platform')}
+            <h2 className='mt-2 text-2xl font-semibold tracking-tight text-slate-950 md:text-3xl'>
+              {t('用清晰可量化的能力，建立企业级平台信任感')}
             </h2>
           </div>
-          <p className='max-w-2xl text-sm leading-7 text-white/45'>
-            {t('Use concrete delivery, monetization and governance metrics to present a more convincing enterprise-grade product narrative.')}
+          <p className='max-w-2xl text-sm leading-7 text-slate-600'>
+            {t('把模型接入、商业化、治理与交付能力转化为可理解的产品表达，让首页不再像模板展示页，而像可采购、可落地的平台入口。')}
           </p>
         </div>
         <div className='grid gap-4 md:grid-cols-2 xl:grid-cols-4'>
@@ -161,7 +161,7 @@ export function Stats() {
               <div className='mt-3 tech-stat text-3xl font-bold tracking-tight md:text-4xl'>
                 <Counter end={item.end} suffix={item.suffix} decimals={item.decimals} />
               </div>
-              <p className='mt-3 text-sm leading-7 text-white/45'>{item.desc}</p>
+              <p className='mt-3 text-sm leading-7 text-slate-600'>{item.desc}</p>
             </div>
           ))}
         </div>

@@ -72,7 +72,7 @@ export function Home() {
 
   return (
     <PublicLayout showMainContainer={false}>
-      <main className='enterprise-home-shell overflow-x-hidden bg-[#05070c]'>
+      <main className='enterprise-home-shell overflow-x-hidden bg-[#f6f8fc] text-slate-950'>
         <Hero isAuthenticated={isAuthenticated} />
         <Stats />
         <PlatformShowcase />

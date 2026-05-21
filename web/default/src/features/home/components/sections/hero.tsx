@@ -16,7 +16,6 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 For commercial licensing, please contact support@quantumnous.com
 */
-import { useMemo } from 'react'
 import { Link } from '@tanstack/react-router'
 import { ArrowRight, BarChart3, Cpu, ShieldCheck } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
@@ -27,92 +26,68 @@ interface HeroProps {
   isAuthenticated?: boolean
 }
 
-function TechParticles() {
-  const particles = useMemo(() => {
-    return Array.from({ length: 10 }, () => ({
-      left: `${4 + Math.random() * 92}%`,
-      top: `${8 + Math.random() * 84}%`,
-      delay: `${Math.random() * 5}s`,
-      duration: `${4 + Math.random() * 4}s`,
-      '--tx': `${(Math.random() - 0.5) * 70}px`,
-      '--ty': `${(Math.random() - 0.5) * 45}px`,
-    })) as React.CSSProperties[]
-  }, [])
-
-  return (
-    <>
-      {particles.map((style, index) => (
-        <div key={index} className='tech-particle' style={style} />
-      ))}
-    </>
-  )
-}
-
 export function Hero(props: HeroProps) {
   const { t } = useTranslation()
 
   return (
-    <section className='relative z-10 overflow-hidden px-4 pt-28 pb-20 md:px-6 md:pt-34 md:pb-26'>
-      <div aria-hidden className='tech-grid pointer-events-none absolute inset-0 -z-10 opacity-70' />
-      <div aria-hidden className='tech-scan-line' />
-      <div aria-hidden className='tech-glow-orb tech-glow-orb-1 z-0' />
-      <div aria-hidden className='tech-glow-orb tech-glow-orb-2 z-0' />
-      <TechParticles />
-
-      <div className='mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]'>
+    <section className='relative z-10 overflow-hidden px-4 pt-24 pb-18 md:px-6 md:pt-28 md:pb-24'>
+      <div aria-hidden className='tech-grid pointer-events-none absolute inset-0 -z-10 opacity-60' />
+      <div className='mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]'>
         <div className='relative z-10'>
           <div className='enterprise-badge'>
             <span className='enterprise-badge-dot' />
-            <span className='text-xs font-medium tracking-[0.18em] uppercase'>
-              {t('Enterprise AI Infrastructure')}
+            <span className='text-xs font-semibold tracking-[0.16em]'>
+              {t('企业级大模型平台底座')}
             </span>
           </div>
 
-          <h1 className='mt-7 max-w-4xl text-5xl font-semibold tracking-tight text-white md:text-6xl xl:text-7xl'>
-            <span className='tech-gradient-text'>{t('Build your own')}</span>
+          <h1 className='mt-7 max-w-4xl text-4xl font-semibold tracking-tight text-slate-950 md:text-6xl'>
+            <span className='tech-gradient-text'>{t('为企业构建可运营的')}</span>
             <br />
-            <span className='text-white'>{t('Big Model Platform')}</span>
+            <span className='text-slate-950'>{t('大模型接入与商业化平台')}</span>
           </h1>
 
-          <p className='mt-6 max-w-2xl text-base leading-8 text-white/46 md:text-lg'>
-            {t('Create an enterprise-grade large model gateway with unified model access, channel routing, billing governance and operational analytics.')}
+          <p className='mt-6 max-w-2xl text-base leading-8 text-slate-600 md:text-lg'>
+            {t(
+              '统一模型接入、渠道路由、配额治理、计费运营与平台监控，帮助团队从演示型系统升级为真正可交付、可上线、可持续运营的企业级 AI 平台。'
+            )}
           </p>
 
-          <div className='mt-8 flex flex-wrap items-center gap-3 text-sm text-white/56'>
-            <div className='rounded-full border border-white/8 bg-white/[0.03] px-3 py-1.5'>
-              {t('Unified model routing')}
+          <div className='mt-8 flex flex-wrap items-center gap-3 text-sm text-slate-600'>
+            <div className='rounded-full border border-slate-200 bg-white px-3 py-1.5 shadow-sm'>
+              {t('统一模型路由')}
             </div>
-            <div className='rounded-full border border-white/8 bg-white/[0.03] px-3 py-1.5'>
-              {t('Enterprise-grade governance')}
+            <div className='rounded-full border border-slate-200 bg-white px-3 py-1.5 shadow-sm'>
+              {t('企业级权限与治理')}
             </div>
-            <div className='rounded-full border border-white/8 bg-white/[0.03] px-3 py-1.5'>
-              {t('Private deployment ready')}
+            <div className='rounded-full border border-slate-200 bg-white px-3 py-1.5 shadow-sm'>
+              {t('支持私有化部署')}
             </div>
           </div>
 
           <div className='mt-8 grid max-w-3xl gap-4 sm:grid-cols-3'>
-            <div className='rounded-[22px] border border-white/8 bg-white/[0.03] px-4 py-4'>
-              <div className='text-[11px] tracking-[0.18em] text-white/34 uppercase'>
-                {t('Launch Scope')}
+            <div className='rounded-[22px] border border-slate-200 bg-white px-4 py-4 shadow-sm'>
+              <div className='text-[11px] tracking-[0.16em] text-slate-400'>
+                {t('适用形态')}
               </div>
-              <div className='mt-2 text-lg font-semibold text-white'>
-                {t('Self-hosted / SaaS / Enterprise')}
-              </div>
-            </div>
-            <div className='rounded-[22px] border border-white/8 bg-white/[0.03] px-4 py-4'>
-              <div className='text-[11px] tracking-[0.18em] text-white/34 uppercase'>
-                {t('Core Value')}
-              </div>
-              <div className='mt-2 text-lg font-semibold text-white'>
-                {t('Gateway + Billing + Governance')}
+              <div className='mt-2 text-lg font-semibold text-slate-900'>
+                {t('私有化 / 托管 / 企业交付')}
               </div>
             </div>
-            <div className='rounded-[22px] border border-white/8 bg-white/[0.03] px-4 py-4'>
-              <div className='text-[11px] tracking-[0.18em] text-white/34 uppercase'>
-                {t('Delivery Mode')}
+            <div className='rounded-[22px] border border-slate-200 bg-white px-4 py-4 shadow-sm'>
+              <div className='text-[11px] tracking-[0.16em] text-slate-400'>
+                {t('核心能力')}
               </div>
-              <div className='mt-2 text-lg font-semibold text-white'>
-                {t('OpenAI-compatible API')}
+              <div className='mt-2 text-lg font-semibold text-slate-900'>
+                {t('网关、计费、治理一体化')}
+              </div>
+            </div>
+            <div className='rounded-[22px] border border-slate-200 bg-white px-4 py-4 shadow-sm'>
+              <div className='text-[11px] tracking-[0.16em] text-slate-400'>
+                {t('接入方式')}
+              </div>
+              <div className='mt-2 text-lg font-semibold text-slate-900'>
+                {t('兼容 OpenAI API 接口')}
               </div>
             </div>
           </div>
@@ -120,27 +95,27 @@ export function Hero(props: HeroProps) {
           <div className='mt-10 flex flex-wrap items-center gap-4'>
             {props.isAuthenticated ? (
               <Button
-                className='group h-12 rounded-xl bg-blue-600 px-6 text-sm font-medium shadow-lg shadow-blue-600/20 transition-all duration-300 hover:bg-blue-500 hover:shadow-blue-500/30'
+                className='group h-12 rounded-xl bg-blue-600 px-6 text-sm font-medium text-white shadow-lg shadow-blue-600/15 transition-all duration-300 hover:bg-blue-500'
                 render={<Link to='/dashboard' />}
               >
-                {t('Go to Dashboard')}
+                {t('进入控制台')}
                 <ArrowRight className='ml-1.5 size-4 transition-transform duration-200 group-hover:translate-x-0.5' />
               </Button>
             ) : (
               <>
                 <Button
-                  className='group h-12 rounded-xl bg-blue-600 px-6 text-sm font-medium shadow-lg shadow-blue-600/20 transition-all duration-300 hover:bg-blue-500 hover:shadow-blue-500/30'
+                  className='group h-12 rounded-xl bg-blue-600 px-6 text-sm font-medium text-white shadow-lg shadow-blue-600/15 transition-all duration-300 hover:bg-blue-500'
                   render={<Link to='/sign-up' />}
                 >
-                  {t('Start Building')}
+                  {t('立即开始部署')}
                   <ArrowRight className='ml-1.5 size-4 transition-transform duration-200 group-hover:translate-x-0.5' />
                 </Button>
                 <Button
                   variant='outline'
-                  className='h-12 rounded-xl border border-white/10 bg-white/[0.03] px-6 text-sm text-white/72 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06] hover:text-white'
+                  className='h-12 rounded-xl border border-slate-200 bg-white px-6 text-sm text-slate-700 transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-950'
                   render={<Link to='/pricing' />}
                 >
-                  {t('Explore Pricing')}
+                  {t('查看方案与定价')}
                 </Button>
               </>
             )}
@@ -148,50 +123,56 @@ export function Hero(props: HeroProps) {
 
           <div className='mt-12 enterprise-kpi-grid'>
             <div className='enterprise-kpi-card'>
-              <div className='enterprise-kpi-label'>{t('Providers')}</div>
+              <div className='enterprise-kpi-label'>{t('模型生态')}</div>
               <div className='enterprise-kpi-value'>40+</div>
-              <div className='enterprise-kpi-desc'>{t('Access major model ecosystems through one control plane.')}</div>
+              <div className='enterprise-kpi-desc'>
+                {t('统一接入主流模型厂商，减少多套 API 和多套鉴权的集成成本。')}
+              </div>
             </div>
             <div className='enterprise-kpi-card'>
-              <div className='enterprise-kpi-label'>{t('Channels')}</div>
+              <div className='enterprise-kpi-label'>{t('渠道能力')}</div>
               <div className='enterprise-kpi-value'>100+</div>
-              <div className='enterprise-kpi-desc'>{t('Design flexible routing and business-ready quota strategies.')}</div>
+              <div className='enterprise-kpi-desc'>
+                {t('按业务线、租户与成本目标灵活设计路由、配额和价格策略。')}
+              </div>
             </div>
             <div className='enterprise-kpi-card'>
-              <div className='enterprise-kpi-label'>{t('Operations')}</div>
+              <div className='enterprise-kpi-label'>{t('运维视角')}</div>
               <div className='enterprise-kpi-value'>24/7</div>
-              <div className='enterprise-kpi-desc'>{t('Observe cost, stability and growth in one unified platform view.')}</div>
+              <div className='enterprise-kpi-desc'>
+                {t('从稳定性、调用成本到增长数据，形成统一的运营监控视图。')}
+              </div>
             </div>
           </div>
         </div>
 
         <div className='relative z-10'>
           <div className='tech-card rounded-[30px] p-5 md:p-6'>
-            <div className='enterprise-terminal-shell rounded-[24px] border border-white/6 bg-[#060a12] p-5 md:p-6'>
+            <div className='enterprise-terminal-shell rounded-[24px] border border-slate-200 bg-slate-50 p-5 md:p-6'>
               <div className='mb-5 flex items-center justify-between gap-3'>
                 <div className='flex items-center gap-2'>
-                  <span className='size-2.5 rounded-full bg-[#ff5f57]' />
-                  <span className='size-2.5 rounded-full bg-[#febc2e]' />
-                  <span className='size-2.5 rounded-full bg-[#28c840]' />
-                  <span className='ml-2 text-xs tracking-wide text-white/35'>enterprise-control-center</span>
+                  <span className='size-2.5 rounded-full bg-[#ef4444]' />
+                  <span className='size-2.5 rounded-full bg-[#f59e0b]' />
+                  <span className='size-2.5 rounded-full bg-[#22c55e]' />
+                  <span className='ml-2 text-xs tracking-wide text-slate-400'>企业平台总览</span>
                 </div>
-                <div className='rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-medium tracking-[0.16em] text-emerald-300 uppercase'>
-                  {t('system online')}
+                <div className='rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] font-medium tracking-[0.14em] text-emerald-600'>
+                  {t('系统运行正常')}
                 </div>
               </div>
 
               <div className='mb-4 grid gap-3 md:grid-cols-3'>
-                <div className='rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-3'>
-                  <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>{t('Gateway')}</div>
-                  <div className='mt-2 text-sm font-semibold text-white'>{t('Multi-provider live')}</div>
+                <div className='rounded-2xl border border-slate-200 bg-white px-4 py-3'>
+                  <div className='text-[11px] tracking-[0.16em] text-slate-400'>{t('网关')}</div>
+                  <div className='mt-2 text-sm font-semibold text-slate-900'>{t('多模型接入在线')}</div>
                 </div>
-                <div className='rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-3'>
-                  <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>{t('Policies')}</div>
-                  <div className='mt-2 text-sm font-semibold text-white'>{t('Quota & routing active')}</div>
+                <div className='rounded-2xl border border-slate-200 bg-white px-4 py-3'>
+                  <div className='text-[11px] tracking-[0.16em] text-slate-400'>{t('策略')}</div>
+                  <div className='mt-2 text-sm font-semibold text-slate-900'>{t('配额与路由已生效')}</div>
                 </div>
-                <div className='rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-3'>
-                  <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>{t('Analytics')}</div>
-                  <div className='mt-2 text-sm font-semibold text-white'>{t('Operational insights ready')}</div>
+                <div className='rounded-2xl border border-slate-200 bg-white px-4 py-3'>
+                  <div className='text-[11px] tracking-[0.16em] text-slate-400'>{t('分析')}</div>
+                  <div className='mt-2 text-sm font-semibold text-slate-900'>{t('运营数据已可视化')}</div>
                 </div>
               </div>
 
@@ -200,30 +181,38 @@ export function Hero(props: HeroProps) {
                   <div className='tech-icon-box mb-4'>
                     <Cpu className='size-4' strokeWidth={1.8} />
                   </div>
-                  <div className='enterprise-node-label'>{t('Model Access')}</div>
-                  <div className='enterprise-node-title'>{t('Multi-provider model aggregation')}</div>
-                  <div className='enterprise-node-desc'>{t('OpenAI, Claude, Gemini, Qwen, GLM and other model ecosystems with a unified access layer.')}</div>
+                  <div className='enterprise-node-label'>{t('模型接入')}</div>
+                  <div className='enterprise-node-title'>{t('统一聚合多家模型能力')}</div>
+                  <div className='enterprise-node-desc'>
+                    {t('覆盖 OpenAI、Claude、Gemini、Qwen、GLM 等模型生态，保持统一接入标准。')}
+                  </div>
                 </div>
                 <div className='enterprise-node-card'>
                   <div className='tech-icon-box mb-4'>
                     <ShieldCheck className='size-4' strokeWidth={1.8} />
                   </div>
-                  <div className='enterprise-node-label'>{t('Governance')}</div>
-                  <div className='enterprise-node-title'>{t('Permission, quota and tenant isolation')}</div>
-                  <div className='enterprise-node-desc'>{t('Meet enterprise operational needs for account management, billing control and secure API delivery.')}</div>
+                  <div className='enterprise-node-label'>{t('治理能力')}</div>
+                  <div className='enterprise-node-title'>{t('权限、配额与租户隔离')}</div>
+                  <div className='enterprise-node-desc'>
+                    {t('满足企业在账号体系、计费控制、访问安全与分租户交付上的治理诉求。')}
+                  </div>
                 </div>
                 <div className='enterprise-node-card'>
                   <div className='tech-icon-box mb-4'>
                     <BarChart3 className='size-4' strokeWidth={1.8} />
                   </div>
-                  <div className='enterprise-node-label'>{t('Analytics')}</div>
-                  <div className='enterprise-node-title'>{t('Usage insights and cost observability')}</div>
-                  <div className='enterprise-node-desc'>{t('Track request trends, provider performance and monetization efficiency in real time.')}</div>
+                  <div className='enterprise-node-label'>{t('运营分析')}</div>
+                  <div className='enterprise-node-title'>{t('调用洞察与成本可观测')}</div>
+                  <div className='enterprise-node-desc'>
+                    {t('实时追踪请求趋势、模型表现、渠道质量与商业化效率。')}
+                  </div>
                 </div>
                 <div className='enterprise-node-card'>
-                  <div className='enterprise-node-label'>{t('Open Interface')}</div>
-                  <div className='enterprise-node-title'>{t('OpenAI-compatible API gateway')}</div>
-                  <div className='enterprise-node-desc'>{t('Keep application integration simple while your platform evolves behind the scenes.')}</div>
+                  <div className='enterprise-node-label'>{t('开放接口')}</div>
+                  <div className='enterprise-node-title'>{t('兼容 OpenAI 的网关出口')}</div>
+                  <div className='enterprise-node-desc'>
+                    {t('前端应用与业务系统保持稳定接入方式，后端平台可持续演进而不破坏集成。')}
+                  </div>
                 </div>
               </div>
             </div>
