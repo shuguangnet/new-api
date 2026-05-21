@@ -187,7 +187,7 @@ export function PublicHeader(props: PublicHeaderProps) {
 
   return (
     <>
-      <header className='nav-blur pointer-events-none fixed inset-x-0 top-0 z-50 border-b border-white/6'>
+      <header className='nav-blur pointer-events-none fixed inset-x-0 top-0 z-50 border-b border-slate-200/80'>
         <div
           className={cn(
             'pointer-events-auto mx-auto transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]',
@@ -228,7 +228,7 @@ export function PublicHeader(props: PublicHeaderProps) {
                     {t('Enterprise AI Workspace')}
                   </div>
                   <div className='mt-1 flex min-w-0 items-center gap-2'>
-                    <span className='truncate text-sm font-semibold tracking-tight text-white'>
+                    <span className='truncate text-sm font-semibold tracking-tight text-slate-950'>
                       {loading ? (
                         <Skeleton className='h-4 w-20' />
                       ) : (
@@ -249,8 +249,8 @@ export function PublicHeader(props: PublicHeaderProps) {
                 </div>
                 <div className='public-header-command-body'>
                   <span className='truncate'>{platformSignal}</span>
-                  <span className='text-white/18'>/</span>
-                  <span className='truncate text-white/44'>
+                  <span className='text-slate-300'>/</span>
+                  <span className='truncate text-slate-400'>
                     {t('Navigation, pricing and access paths aligned')}
                   </span>
                 </div>
@@ -326,7 +326,7 @@ export function PublicHeader(props: PublicHeaderProps) {
                       <Button
                         variant='ghost'
                         size='sm'
-                        className='h-10 rounded-full px-4 text-xs font-medium text-white/68 transition-colors hover:bg-white/[0.05] hover:text-white'
+                        className='h-10 rounded-full px-4 text-xs font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-950'
                         render={<Link to='/pricing' />}
                       >
                         {t('Explore pricing')}
@@ -353,7 +353,7 @@ export function PublicHeader(props: PublicHeaderProps) {
                 type='button'
                 variant='ghost'
                 size='icon'
-                className='size-10 rounded-full border border-white/10 bg-white/[0.03]'
+                className='size-10 rounded-full border border-slate-200 bg-slate-50 text-slate-600'
                 onClick={() => setMobileOpen((v) => !v)}
                 aria-label={t('Toggle navigation menu')}
               >

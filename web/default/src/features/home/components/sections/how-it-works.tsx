@@ -26,24 +26,20 @@ export function HowItWorks() {
   const steps = [
     {
       num: '1',
-      title: t('Configure'),
-      desc: t(
-        'Add your API keys, set up channels and configure access permissions'
-      ),
+      title: t('配置接入'),
+      desc: t('添加 API 密钥、设置渠道并配置访问权限'),
       icon: <Settings className='size-6' strokeWidth={1.5} />,
     },
     {
       num: '2',
-      title: t('Connect'),
-      desc: t(
-        'Connect through OpenAI, Claude, Gemini, and other compatible API routes'
-      ),
+      title: t('建立连接'),
+      desc: t('通过兼容 OpenAI 等接口格式的统一路由进行连接'),
       icon: <Zap className='size-6' strokeWidth={1.5} />,
     },
     {
       num: '3',
-      title: t('Monitor'),
-      desc: t('Track usage, costs and performance with real-time analytics'),
+      title: t('监控运营'),
+      desc: t('通过实时分析追踪用量、成本与性能表现'),
       icon: <BarChart3 className='size-6' strokeWidth={1.5} />,
     },
   ]
@@ -52,11 +48,11 @@ export function HowItWorks() {
     <section className='relative z-10 px-6 py-24 md:py-32'>
       <div className='mx-auto max-w-6xl'>
         <AnimateInView className='mb-16 text-center md:mb-20'>
-          <p className='tech-gradient-text mb-3 text-xs font-medium tracking-widest uppercase'>
-            {t('How It Works')}
+          <p className='mb-3 text-xs font-medium tracking-[0.16em] text-slate-400'>
+            {t('快速上手')}
           </p>
-          <h2 className='text-2xl font-bold tracking-tight md:text-3xl'>
-            {t('Three steps to get started')}
+          <h2 className='text-2xl font-bold tracking-tight text-slate-950 md:text-3xl'>
+            {t('三步即可启动')}
           </h2>
         </AnimateInView>
 
@@ -69,20 +65,19 @@ export function HowItWorks() {
               className='tech-card group relative flex flex-col items-center text-center p-6 rounded-2xl'
             >
               <div className='relative mb-6'>
-                <div className='flex size-16 items-center justify-center rounded-2xl border border-blue-500/15 bg-blue-500/5 text-blue-400 transition-all duration-300 group-hover:border-blue-500/25 group-hover:bg-blue-500/10 group-hover:shadow-lg group-hover:shadow-blue-500/10'>
+                <div className='flex size-16 items-center justify-center rounded-2xl border border-blue-200 bg-blue-50 text-blue-600 transition-all duration-300 group-hover:border-blue-300 group-hover:bg-blue-100 group-hover:shadow-md group-hover:shadow-blue-200/50'>
                   {step.icon}
                 </div>
-                <div className='flex size-8 items-center justify-center rounded-full bg-blue-600 shadow-lg shadow-blue-500/20 text-white text-xs font-bold absolute -top-1 -right-1'>
+                <div className='flex size-8 items-center justify-center rounded-full bg-blue-600 shadow-md shadow-blue-300/40 text-white text-xs font-bold absolute -top-1 -right-1'>
                   {step.num}
                 </div>
               </div>
-              <h3 className='mb-2 text-base font-semibold'>{step.title}</h3>
-              <p className='text-muted-foreground max-w-[240px] text-sm leading-relaxed'>
+              <h3 className='mb-2 text-base font-semibold text-slate-900'>{step.title}</h3>
+              <p className='max-w-[240px] text-sm leading-relaxed text-slate-500'>
                 {step.desc}
               </p>
-              {/* Connection line between steps on desktop */}
               {i < steps.length - 1 && (
-                <div className='hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-12 h-px bg-gradient-to-r from-blue-500/20 to-transparent' />
+                <div className='hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-12 h-px bg-gradient-to-r from-blue-300/40 to-transparent' />
               )}
             </AnimateInView>
           ))}
