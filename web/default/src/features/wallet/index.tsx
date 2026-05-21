@@ -21,6 +21,7 @@ import { useTranslation } from 'react-i18next'
 import { getSelf } from '@/lib/api'
 import { useStatus } from '@/hooks/use-status'
 import { useSystemConfig } from '@/hooks/use-system-config'
+import { CreditCard, Receipt, WalletCards } from 'lucide-react'
 import { SectionPageLayout } from '@/components/layout'
 import { AffiliateRewardsCard } from './components/affiliate-rewards-card'
 import { BillingHistoryDialog } from './components/dialogs/billing-history-dialog'
@@ -260,11 +261,71 @@ export function Wallet(props: WalletProps) {
   return (
     <>
       <SectionPageLayout>
-        <SectionPageLayout.Title>{t('Wallet')}</SectionPageLayout.Title>
+        <SectionPageLayout.Title>{t('钱包')}</SectionPageLayout.Title>
         <SectionPageLayout.Description>
-          {t('Manage your balance and payment methods')}
+          {t('管理账户余额、充值支付与账单记录')}
         </SectionPageLayout.Description>
         <SectionPageLayout.Content>
+          {/* Enterprise wallet header */}
+          <div className='relative mb-5 overflow-hidden rounded-[28px] border border-slate-200/85 bg-[linear-gradient(135deg,rgba(255,255,255,0.98)_0%,rgba(248,250,252,0.96)_42%,rgba(236,253,243,0.78)_100%)] px-5 py-5 shadow-[0_14px_40px_rgba(15,23,42,0.06)] sm:px-6 sm:py-6'>
+            <div
+              className='pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-teal-400/60 to-transparent'
+              aria-hidden='true'
+            />
+            <div className='flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between'>
+              <div className='max-w-3xl space-y-3'>
+                <div className='inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50/85 px-3 py-1 text-[11px] font-medium tracking-[0.18em] text-teal-700 uppercase'>
+                  <span className='h-2 w-2 rounded-full bg-teal-500 shadow-[0_0_10px_rgba(20,184,166,0.35)]' />
+                  {t('账户与计费中心')}
+                </div>
+                <h2 className='text-xl font-semibold tracking-tight text-slate-950 sm:text-2xl'>
+                  {t('余额管理与支付充值')}
+                </h2>
+                <p className='text-sm leading-7 text-slate-600 sm:text-[15px]'>
+                  {t('在此管理您的平台账户余额、查看充值方案与优惠、完成支付操作，并追踪历史账单与配额转移记录。您的余额用于支付 API 调用的 Token 消耗，保持充足余额是服务连续性的基础。')}
+                </p>
+              </div>
+              <div className='grid gap-3 sm:grid-cols-3 lg:min-w-[420px]'>
+                <div className='rounded-2xl border border-slate-200/85 bg-white/88 px-4 py-3 shadow-[0_8px_22px_rgba(15,23,42,0.04)]'>
+                  <div className='flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase'>
+                    <WalletCards className='size-3.5 text-teal-600' aria-hidden='true' />
+                    {t('余额消费')}
+                  </div>
+                  <div className='mt-2 text-sm font-semibold text-slate-900'>
+                    {t('按量计费扣减')}
+                  </div>
+                  <p className='mt-1 text-xs leading-5 text-slate-500'>
+                    {t('Token 消耗实时结算')}
+                  </p>
+                </div>
+                <div className='rounded-2xl border border-slate-200/85 bg-white/88 px-4 py-3 shadow-[0_8px_22px_rgba(15,23,42,0.04)]'>
+                  <div className='flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase'>
+                    <CreditCard className='size-3.5 text-teal-600' aria-hidden='true' />
+                    {t('充值方式')}
+                  </div>
+                  <div className='mt-2 text-sm font-semibold text-slate-900'>
+                    {t('多渠道支付')}
+                  </div>
+                  <p className='mt-1 text-xs leading-5 text-slate-500'>
+                    {t('灵活选择支付通道')}
+                  </p>
+                </div>
+                <div className='rounded-2xl border border-slate-200/85 bg-white/88 px-4 py-3 shadow-[0_8px_22px_rgba(15,23,42,0.04)]'>
+                  <div className='flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase'>
+                    <Receipt className='size-3.5 text-teal-600' aria-hidden='true' />
+                    {t('账单透明')}
+                  </div>
+                  <div className='mt-2 text-sm font-semibold text-slate-900'>
+                    {t('完整消费记录')}
+                  </div>
+                  <p className='mt-1 text-xs leading-5 text-slate-500'>
+                    {t('每笔消耗可追溯审计')}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className='mx-auto flex w-full max-w-7xl flex-col gap-4 sm:gap-5'>
             <WalletStatsCard user={user} loading={userLoading} />
 
