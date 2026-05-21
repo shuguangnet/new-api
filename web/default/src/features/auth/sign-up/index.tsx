@@ -30,51 +30,51 @@ export function SignUp() {
 
   return (
     <AuthLayout>
-      <div className='tech-card w-full rounded-[32px] p-6 sm:p-8 md:p-9'>
+      <div className='auth-form-card w-full rounded-[32px] p-6 sm:p-8 md:p-9'>
         <div className='mb-8 flex flex-col gap-5'>
           <div className='flex items-start justify-between gap-4'>
             <div className='space-y-3'>
-              <div className='text-xs font-medium tracking-[0.2em] text-white/38 uppercase'>
-                {t('Enterprise Registration')}
+              <div className='text-xs font-medium tracking-[0.2em] text-slate-400 uppercase'>
+                {t('企业账号注册')}
               </div>
-              <h2 className='text-3xl font-semibold tracking-tight text-white'>
-                {t('Create your platform workspace')}
+              <h2 className='text-3xl font-semibold tracking-tight text-slate-900'>
+                {t('创建你的平台工作空间')}
               </h2>
-              <p className='max-w-xl text-left text-sm leading-7 text-white/45 sm:text-base'>
-                {t('Set up your access credentials and enter the workspace for model operations, pricing workflows and enterprise delivery.')}
+              <p className='max-w-xl text-left text-sm leading-7 text-slate-600 sm:text-base'>
+                {t('完成访问凭证初始化后，即可进入平台开展模型运营、定价流程与企业交付管理。')}
               </p>
             </div>
-            <div className='hidden rounded-2xl border border-white/6 bg-white/[0.03] p-3 sm:block'>
-              <Building2 className='size-5 text-blue-300' strokeWidth={1.8} />
+            <div className='hidden rounded-2xl border border-slate-200 bg-slate-50 p-3 sm:block'>
+              <Building2 className='size-5 text-sky-600' strokeWidth={1.8} />
             </div>
           </div>
 
           <div className='grid gap-3 sm:grid-cols-2'>
-            <div className='rounded-[22px] border border-white/6 bg-white/[0.03] px-4 py-4'>
-              <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>
-                {t('Access setup')}
+            <div className='auth-highlight-card px-4 py-4'>
+              <div className='text-[11px] tracking-[0.18em] text-slate-400 uppercase'>
+                {t('接入准备')}
               </div>
-              <div className='mt-2 text-sm font-semibold text-white'>
-                {t('Create an enterprise-ready workspace identity')}
+              <div className='mt-2 text-sm font-semibold text-slate-900'>
+                {t('创建可交付的企业级工作空间身份')}
               </div>
             </div>
-            <div className='rounded-[22px] border border-white/6 bg-white/[0.03] px-4 py-4'>
-              <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>
-                {t('Onboarding')}
+            <div className='auth-highlight-card px-4 py-4'>
+              <div className='text-[11px] tracking-[0.18em] text-slate-400 uppercase'>
+                {t('开通流程')}
               </div>
-              <div className='mt-2 text-sm font-semibold text-white'>
-                {t('Email verification, OAuth and protected registration flow')}
+              <div className='mt-2 text-sm font-semibold text-slate-900'>
+                {t('支持邮箱验证、OAuth 与受保护注册流程')}
               </div>
             </div>
           </div>
 
-          <p className='text-left text-sm leading-7 text-white/45 sm:text-base'>
-            {t('Already have an account?')}{' '}
+          <p className='text-left text-sm leading-7 text-slate-600 sm:text-base'>
+            {t('已有账号？')}{' '}
             <Link
               to='/sign-in'
-              className='font-medium text-blue-400 underline underline-offset-4 transition-colors hover:text-blue-300'
+              className='font-medium text-sky-700 underline underline-offset-4 transition-colors hover:text-sky-600'
             >
-              {t('Sign in')}
+              {t('直接登录')}
             </Link>
             。
           </p>
@@ -85,7 +85,7 @@ export function SignUp() {
         <TermsFooter
           variant='sign-up'
           status={status}
-          className='mt-7 text-center text-white/35'
+          className='mt-7 text-center text-slate-500'
         />
       </div>
     </AuthLayout>

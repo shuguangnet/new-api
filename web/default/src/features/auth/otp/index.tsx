@@ -25,23 +25,26 @@ export function Otp() {
   const { t } = useTranslation()
   return (
     <AuthLayout>
-      <div className='glass-panel rounded-2xl w-full space-y-8 p-6 sm:p-8'>
+      <div className='auth-form-card w-full space-y-8 rounded-[30px] p-6 sm:p-8'>
         <div className='space-y-3'>
-          <h2 className='text-center text-2xl font-semibold tracking-tight sm:text-left'>
-            {t('Two-factor Authentication')}
+          <div className='text-xs font-medium tracking-[0.2em] text-slate-400 uppercase'>
+            {t('安全验证')}
+          </div>
+          <h2 className='text-center text-2xl font-semibold tracking-tight text-slate-900 sm:text-left'>
+            {t('完成双重身份校验')}
           </h2>
-          <p className='text-muted-foreground text-left text-sm sm:text-base'>
-            {t('Please enter the authentication code.')}
+          <p className='text-left text-sm text-slate-600 sm:text-base'>
+            {t('请输入动态验证码或备用恢复码，以继续进入平台工作台。')}
           </p>
-          <p className='text-muted-foreground text-left text-sm sm:text-base'>
-            {t('Session expired?')}{' '}
+          <p className='text-left text-sm text-slate-600 sm:text-base'>
+            {t('会话已失效？')}{' '}
             <Link
               to='/sign-in'
-              className='hover:text-primary font-medium underline underline-offset-4'
+              className='font-medium text-sky-700 underline underline-offset-4 transition-colors hover:text-sky-600'
             >
-              {t('Re-login')}
+              {t('重新登录')}
             </Link>
-            .
+            。
           </p>
         </div>
 

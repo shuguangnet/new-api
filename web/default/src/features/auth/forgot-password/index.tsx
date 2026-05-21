@@ -25,25 +25,28 @@ export function ForgotPassword() {
   const { t } = useTranslation()
   return (
     <AuthLayout>
-      <div className='glass-panel rounded-2xl w-full space-y-8 p-6 sm:p-8'>
+      <div className='auth-form-card w-full space-y-8 rounded-[30px] p-6 sm:p-8'>
         <div className='space-y-3'>
-          <h2 className='text-center text-2xl font-semibold tracking-tight sm:text-left'>
-            {t('Forgot password')}
+          <div className='text-xs font-medium tracking-[0.2em] text-slate-400 uppercase'>
+            {t('账号找回')}
+          </div>
+          <h2 className='text-center text-2xl font-semibold tracking-tight text-slate-900 sm:text-left'>
+            {t('重置登录密码')}
           </h2>
-          <p className='text-muted-foreground text-left text-sm sm:text-base'>
+          <p className='text-left text-sm text-slate-600 sm:text-base'>
             {t(
-              'Enter your registered email and we will send you a link to reset your password.'
+              '输入已绑定邮箱后，系统将向你发送密码重置邮件，帮助你安全恢复访问。'
             )}
           </p>
-          <p className='text-muted-foreground text-left text-sm sm:text-base'>
-            {t("Don't have an account?")}{' '}
+          <p className='text-left text-sm text-slate-600 sm:text-base'>
+            {t('还没有账号？')}{' '}
             <Link
               to='/sign-up'
-              className='hover:text-primary font-medium underline underline-offset-4'
+              className='font-medium text-sky-700 underline underline-offset-4 transition-colors hover:text-sky-600'
             >
-              {t('Sign up')}
+              {t('立即注册')}
             </Link>
-            .
+            。
           </p>
         </div>
 

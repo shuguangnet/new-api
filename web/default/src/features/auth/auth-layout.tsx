@@ -17,7 +17,13 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 For commercial licensing, please contact support@quantumnous.com
 */
 import { Link } from '@tanstack/react-router'
-import { ArrowRight, BarChart3, Building2, Cpu, ShieldCheck } from 'lucide-react'
+import {
+  ArrowRight,
+  BarChart3,
+  Building2,
+  Cpu,
+  ShieldCheck,
+} from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { useSystemConfig } from '@/hooks/use-system-config'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -32,93 +38,99 @@ export function AuthLayout(props: AuthLayoutProps) {
 
   const platformStats = [
     {
-      label: t('Access'),
-      value: t('Multi-provider gateway'),
+      label: t('接入能力'),
+      value: t('多模型统一接入网关'),
     },
     {
-      label: t('Governance'),
-      value: t('Quota / auth / billing'),
+      label: t('治理能力'),
+      value: t('额度 / 认证 / 计费一体化'),
     },
     {
-      label: t('Operations'),
-      value: t('Insights / health / analytics'),
+      label: t('运营能力'),
+      value: t('监控洞察 / 健康状态 / 数据分析'),
     },
   ]
 
   const featureCards = [
     {
       icon: <Cpu className='size-4' strokeWidth={1.8} />,
-      title: t('Unified model access'),
-      desc: t('Aggregate multiple providers with one enterprise gateway and consistent integration surface.'),
+      title: t('统一模型接入'),
+      desc: t('通过一个企业级网关聚合多个上游模型服务，统一接口、鉴权与调用规范。'),
     },
     {
       icon: <ShieldCheck className='size-4' strokeWidth={1.8} />,
-      title: t('Governance by design'),
-      desc: t('Role-based permissions, key isolation and policy controls for secure enterprise operations.'),
+      title: t('内建治理机制'),
+      desc: t('支持角色权限、密钥隔离与策略控制，满足企业级安全与合规要求。'),
     },
     {
       icon: <BarChart3 className='size-4' strokeWidth={1.8} />,
-      title: t('Operational analytics'),
-      desc: t('Track usage, performance and commercial growth from a single operations center.'),
+      title: t('运营分析中枢'),
+      desc: t('在统一工作台中追踪调用量、性能表现与业务增长趋势。'),
     },
     {
       icon: <Building2 className='size-4' strokeWidth={1.8} />,
-      title: t('Production-ready deployment'),
-      desc: t('Support self-hosted and enterprise delivery scenarios with a platform-grade experience.'),
+      title: t('可交付部署'),
+      desc: t('兼顾自部署与企业交付场景，让平台上线、运维与扩展更从容。'),
     },
   ]
 
   return (
-    <div className='relative min-h-svh overflow-hidden bg-[#05070c]'>
-      <div className='pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_center,rgba(37,99,235,0.16),transparent_30%),radial-gradient(circle_at_16%_24%,rgba(59,130,246,0.10),transparent_24%),radial-gradient(circle_at_84%_18%,rgba(14,165,233,0.09),transparent_24%)]' />
-      <div className='pointer-events-none absolute inset-0 opacity-[0.12]' style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)', backgroundSize: '72px 72px' }} />
-      <div className='pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-[radial-gradient(ellipse_60%_60%_at_50%_0%,rgba(37,99,235,0.15),transparent_72%)]' />
+    <div className='auth-shell'>
+      <div className='auth-shell__grid' />
+      <div className='auth-shell__glow auth-shell__glow--left' />
+      <div className='auth-shell__glow auth-shell__glow--right' />
 
       <div className='relative z-10 grid min-h-svh grid-cols-1 lg:grid-cols-[1.06fr_0.94fr]'>
-        <div className='hidden lg:flex lg:flex-col lg:justify-between lg:border-r lg:border-white/8 lg:px-12 lg:py-10'>
+        <div className='hidden lg:flex lg:flex-col lg:justify-between lg:border-r lg:border-slate-200/80 lg:px-12 lg:py-10'>
           <div className='space-y-8'>
             <Link to='/' className='inline-flex items-center gap-3 transition-opacity hover:opacity-85'>
               {loading ? (
                 <Skeleton className='size-12 rounded-2xl' />
               ) : (
-                <img src={logo} alt={t('Logo')} className='size-12 rounded-2xl border border-white/10 object-cover shadow-[0_0_28px_rgba(37,99,235,0.18)]' />
+                <img
+                  src={logo}
+                  alt={t('Logo')}
+                  className='size-12 rounded-2xl border border-slate-200 bg-white object-cover shadow-[0_18px_50px_rgba(15,23,42,0.08)]'
+                />
               )}
               <div>
-                <div className='text-xs tracking-[0.22em] text-white/40 uppercase'>
-                  {t('Enterprise AI Platform')}
+                <div className='text-xs tracking-[0.22em] text-slate-400 uppercase'>
+                  {t('企业级大模型平台')}
                 </div>
                 {loading ? (
                   <Skeleton className='mt-2 h-7 w-36' />
                 ) : (
-                  <div className='mt-1 text-xl font-semibold text-white'>{systemName}</div>
+                  <div className='mt-1 text-xl font-semibold text-slate-900'>
+                    {systemName}
+                  </div>
                 )}
               </div>
             </Link>
 
             <div className='max-w-xl'>
-              <div className='enterprise-badge'>
-                <span className='enterprise-badge-dot' />
+              <div className='auth-badge'>
+                <span className='auth-badge__dot' />
                 <span className='text-xs font-medium tracking-[0.18em] uppercase'>
-                  {t('Secure Access Portal')}
+                  {t('平台安全接入门户')}
                 </span>
               </div>
-              <h1 className='mt-8 text-5xl leading-[1.04] font-semibold tracking-tight text-white'>
-                <span>{t('Access the')}</span>
+              <h1 className='mt-8 text-5xl leading-[1.04] font-semibold tracking-tight text-slate-900'>
+                <span>{t('登录并进入')}</span>
                 <br />
-                <span className='tech-gradient-text'>{t('platform control plane')}</span>
+                <span className='auth-gradient-text'>{t('平台运营控制台')}</span>
               </h1>
-              <p className='mt-6 max-w-lg text-base leading-8 text-white/46'>
-                {t('Sign in to manage model routing, quota governance, billing operations, provider delivery and production analytics from one enterprise workspace.')}
+              <p className='mt-6 max-w-lg text-base leading-8 text-slate-600'>
+                {t('在统一企业工作台中管理模型路由、额度治理、计费运营、渠道交付与生产分析，让平台接入与商业化协同推进。')}
               </p>
             </div>
 
             <div className='grid gap-3 md:grid-cols-3'>
               {platformStats.map((item) => (
-                <div key={item.label} className='rounded-[22px] border border-white/6 bg-white/[0.03] p-4'>
-                  <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>
+                <div key={item.label} className='auth-metric-card'>
+                  <div className='text-[11px] tracking-[0.18em] text-slate-400 uppercase'>
                     {item.label}
                   </div>
-                  <div className='mt-2 text-sm font-semibold leading-6 text-white'>
+                  <div className='mt-2 text-sm font-semibold leading-6 text-slate-900'>
                     {item.value}
                   </div>
                 </div>
@@ -128,12 +140,12 @@ export function AuthLayout(props: AuthLayoutProps) {
 
           <div className='grid gap-4 xl:grid-cols-2'>
             {featureCards.map((item) => (
-              <div key={item.title} className='tech-card rounded-[24px] p-5'>
-                <div className='tech-icon-box mb-4'>
+              <div key={item.title} className='auth-feature-card rounded-[24px] p-5'>
+                <div className='auth-feature-card__icon mb-4'>
                   {item.icon}
                 </div>
-                <div className='text-sm font-medium text-white'>{item.title}</div>
-                <div className='mt-2 text-sm leading-7 text-white/45'>
+                <div className='text-sm font-medium text-slate-900'>{item.title}</div>
+                <div className='mt-2 text-sm leading-7 text-slate-600'>
                   {item.desc}
                 </div>
               </div>
@@ -147,19 +159,23 @@ export function AuthLayout(props: AuthLayoutProps) {
               {loading ? (
                 <Skeleton className='size-9 rounded-xl' />
               ) : (
-                <img src={logo} alt={t('Logo')} className='size-9 rounded-xl border border-white/10 object-cover' />
+                <img
+                  src={logo}
+                  alt={t('Logo')}
+                  className='size-9 rounded-xl border border-slate-200 bg-white object-cover'
+                />
               )}
               {loading ? (
                 <Skeleton className='h-6 w-28' />
               ) : (
-                <div className='text-base font-medium text-white'>{systemName}</div>
+                <div className='text-base font-medium text-slate-900'>{systemName}</div>
               )}
             </Link>
             <Link
               to='/'
-              className='inline-flex items-center gap-1 text-sm font-medium text-white/58 transition-colors hover:text-white'
+              className='inline-flex items-center gap-1 text-sm font-medium text-slate-500 transition-colors hover:text-slate-900'
             >
-              {t('Back to site')}
+              {t('返回官网')}
               <ArrowRight className='size-3.5' />
             </Link>
           </div>
@@ -170,7 +186,7 @@ export function AuthLayout(props: AuthLayoutProps) {
             </div>
           </div>
 
-          <div className='px-4 pb-6 text-center text-xs text-white/28 sm:px-6'>
+          <div className='px-4 pb-6 text-center text-xs text-slate-400 sm:px-6'>
             © {new Date().getFullYear()} QuantumNous. All rights reserved.
           </div>
         </div>

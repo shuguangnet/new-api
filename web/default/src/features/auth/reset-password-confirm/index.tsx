@@ -105,15 +105,18 @@ export function ResetPasswordConfirm({
 
   return (
     <AuthLayout>
-      <div className='w-full space-y-8'>
+      <div className='auth-form-card w-full space-y-8 rounded-[30px] p-6 sm:p-8'>
         <div className='space-y-2'>
-          <h2 className='text-center text-2xl font-semibold tracking-tight sm:text-left'>
-            {t('Reset password')}
+          <div className='text-xs font-medium tracking-[0.2em] text-slate-400 uppercase'>
+            {t('密码重置')}
+          </div>
+          <h2 className='text-center text-2xl font-semibold tracking-tight text-slate-900 sm:text-left'>
+            {t('确认并获取新密码')}
           </h2>
-          <p className='text-muted-foreground text-left text-sm sm:text-base'>
+          <p className='text-left text-sm text-slate-600 sm:text-base'>
             {newPassword
-              ? t('auth.resetPasswordConfirm.success')
-              : t('auth.resetPasswordConfirm.description')}
+              ? t('新的登录密码已生成，请立即保存并返回登录。')
+              : t('确认重置链接后，系统将为你生成新的登录密码。')}
           </p>
         </div>
 
