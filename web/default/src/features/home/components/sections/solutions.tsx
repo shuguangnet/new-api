@@ -33,39 +33,39 @@ export function Solutions() {
   const items = [
     {
       icon: <Cpu className='size-5' strokeWidth={1.8} />,
-      title: t('Model Gateway'),
-      desc: t('Unified routing across OpenAI, Claude, Gemini, Qwen and more with one platform entry.'),
-      tag: t('Core infrastructure'),
+      title: t('模型网关'),
+      desc: t('统一接入 OpenAI、Claude、Gemini、Qwen 等主流模型，一个平台入口覆盖全部。'),
+      tag: t('核心基础设施'),
     },
     {
       icon: <Workflow className='size-5' strokeWidth={1.8} />,
-      title: t('Enterprise Orchestration'),
-      desc: t('Centralized model distribution, channel governance and cost-aware traffic scheduling.'),
-      tag: t('Operational control'),
+      title: t('企业级编排'),
+      desc: t('集中式模型分发、渠道路由治理与成本敏感的流量调度。'),
+      tag: t('运营管控'),
     },
     {
       icon: <ShieldCheck className='size-5' strokeWidth={1.8} />,
-      title: t('Security & Compliance'),
-      desc: t('Permission control, quota policies, API isolation and operational governance for teams.'),
-      tag: t('Risk governance'),
+      title: t('安全合规'),
+      desc: t('权限控制、配额策略、API 隔离与团队级运营治理。'),
+      tag: t('风险治理'),
     },
     {
       icon: <Globe2 className='size-5' strokeWidth={1.8} />,
-      title: t('Global Availability'),
-      desc: t('Build a resilient large-model access layer with multi-provider fallback and stable delivery.'),
-      tag: t('Service resilience'),
+      title: t('全域可用'),
+      desc: t('多厂商故障切换与稳定交付，构建高可用大模型接入层。'),
+      tag: t('服务韧性'),
     },
     {
       icon: <BriefcaseBusiness className='size-5' strokeWidth={1.8} />,
-      title: t('Business-ready Billing'),
-      desc: t('Usage metering, recharge workflows, model-level pricing and customer account operations.'),
-      tag: t('Commercialization'),
+      title: t('商业计费就绪'),
+      desc: t('用量计量、充值流程、模型级定价与客户账户运营一体化。'),
+      tag: t('商业化'),
     },
     {
       icon: <Building2 className='size-5' strokeWidth={1.8} />,
-      title: t('Private Deployment'),
-      desc: t('Deploy your own enterprise-grade big model platform in internal or dedicated environments.'),
-      tag: t('Enterprise delivery'),
+      title: t('私有化部署'),
+      desc: t('在内网或专有环境中部署自有企业级大模型平台。'),
+      tag: t('企业交付'),
     },
   ]
 
@@ -74,22 +74,22 @@ export function Solutions() {
       <div className='mx-auto max-w-6xl'>
         <AnimateInView className='mb-14 grid gap-5 lg:grid-cols-[1fr_auto] lg:items-end'>
           <div className='max-w-3xl'>
-            <p className='mb-3 text-xs font-medium tracking-[0.24em] text-white/38 uppercase'>
-              {t('Platform Solutions')}
+            <p className='mb-3 text-xs font-medium tracking-[0.24em] text-slate-400 uppercase'>
+              {t('平台解决方案')}
             </p>
-            <h2 className='text-3xl font-semibold tracking-tight text-white md:text-4xl'>
-              {t('Built for the next generation of enterprise AI infrastructure')}
+            <h2 className='text-3xl font-semibold tracking-tight text-slate-950 md:text-4xl'>
+              {t('为下一代企业级 AI 基础设施而构建')}
             </h2>
-            <p className='mt-4 max-w-2xl text-sm leading-7 text-white/45 md:text-base'>
-              {t('From model access and governance to billing and team collaboration, create a unified platform experience for every large-model application scenario.')}
+            <p className='mt-4 max-w-2xl text-sm leading-7 text-slate-600 md:text-base'>
+              {t('从模型接入、治理管控到计费运营与团队协作，为每一个大模型应用场景打造统一的平台体验。')}
             </p>
           </div>
-          <div className='rounded-[24px] border border-white/6 bg-white/[0.03] px-5 py-4 lg:w-[320px]'>
-            <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>
-              {t('Best fit')}
+          <div className='rounded-[24px] border border-slate-200 bg-white px-5 py-4 shadow-sm lg:w-[320px]'>
+            <div className='text-[11px] tracking-[0.18em] text-slate-400 uppercase'>
+              {t('适用场景')}
             </div>
-            <div className='mt-2 text-sm font-semibold text-white'>
-              {t('API service platform / internal AI hub / enterprise model marketplace')}
+            <div className='mt-2 text-sm font-semibold text-slate-900'>
+              {t('API 服务平台 / 内部 AI 中台 / 企业模型市场')}
             </div>
           </div>
         </AnimateInView>
@@ -102,12 +102,12 @@ export function Solutions() {
               animation='fade-up'
               className='tech-card rounded-3xl p-6'
             >
-              <div className='mb-4 inline-flex rounded-full border border-white/8 bg-white/[0.03] px-3 py-1 text-[11px] font-medium tracking-[0.16em] text-white/42 uppercase'>
+              <div className='mb-4 inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-[11px] font-medium tracking-[0.16em] text-blue-600 uppercase'>
                 {item.tag}
               </div>
               <div className='tech-icon-box mb-5'>{item.icon}</div>
-              <h3 className='text-lg font-semibold text-white'>{item.title}</h3>
-              <p className='mt-3 text-sm leading-7 text-white/45'>{item.desc}</p>
+              <h3 className='text-lg font-semibold text-slate-900'>{item.title}</h3>
+              <p className='mt-3 text-sm leading-7 text-slate-600'>{item.desc}</p>
             </AnimateInView>
           ))}
         </div>

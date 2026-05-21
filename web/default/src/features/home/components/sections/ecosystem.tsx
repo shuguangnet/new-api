@@ -28,11 +28,11 @@ export function Ecosystem() {
     <section className='relative z-10 px-4 py-24 md:py-28'>
       <div className='mx-auto max-w-6xl'>
         <AnimateInView className='mb-10 text-center'>
-          <p className='tech-gradient-text mb-3 text-xs font-medium tracking-[0.24em] uppercase'>
-            {t('Model Ecosystem')}
+          <p className='mb-3 text-xs font-medium tracking-[0.24em] text-slate-400 uppercase'>
+            {t('模型生态')}
           </p>
-          <h2 className='text-3xl font-semibold tracking-tight text-white md:text-4xl'>
-            {t('Connect the world’s major model ecosystems in one platform')}
+          <h2 className='text-3xl font-semibold tracking-tight text-slate-950 md:text-4xl'>
+            {t('一站接入全球主流模型生态')}
           </h2>
         </AnimateInView>
 
@@ -41,12 +41,12 @@ export function Ecosystem() {
             {providers.map((item, index) => (
               <div
                 key={item}
-                className='enterprise-provider-chip rounded-2xl border border-white/6 bg-white/[0.02] px-4 py-4 text-center'
+                className='enterprise-provider-chip rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 text-center'
                 style={{ animationDelay: `${index * 80}ms` }}
               >
-                <div className='text-sm font-medium tracking-wide text-white/78'>{item}</div>
-                <div className='mt-1 text-[11px] uppercase tracking-[0.18em] text-white/28'>
-                  {t('Provider')}
+                <div className='text-sm font-medium tracking-wide text-slate-800'>{item}</div>
+                <div className='mt-1 text-[11px] uppercase tracking-[0.18em] text-slate-400'>
+                  {t('厂商')}
                 </div>
               </div>
             ))}

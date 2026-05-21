@@ -24,29 +24,29 @@ export function PlatformShowcase() {
   const { t } = useTranslation()
 
   const capabilities = [
-    t('Multi-provider aggregation'),
-    t('Unified authentication and permissions'),
-    t('Tenant-level usage control'),
-    t('Real-time monitoring and analytics'),
-    t('Flexible model pricing strategies'),
-    t('Enterprise operations console'),
+    t('多厂商聚合'),
+    t('统一认证与权限'),
+    t('租户级用量控制'),
+    t('实时监控与分析'),
+    t('灵活的模型定价策略'),
+    t('企业运营控制台'),
   ]
 
   const stages = [
     {
-      label: t('Stage 01'),
-      title: t('Centralize model access'),
-      desc: t('Unify upstream providers, compatibility layers and endpoint semantics into one stable access surface.'),
+      label: t('阶段一'),
+      title: t('集中管理模型接入'),
+      desc: t('统一上游厂商、兼容层与端点语义，形成单一稳定的接入面。'),
     },
     {
-      label: t('Stage 02'),
-      title: t('Add governance and monetization'),
-      desc: t('Introduce account permissions, tenant quota control, pricing policies and commercial workflows.'),
+      label: t('阶段二'),
+      title: t('引入治理与变现'),
+      desc: t('引入账号权限、租户配额控制、定价策略与商业工作流。'),
     },
     {
-      label: t('Stage 03'),
-      title: t('Run as an operations platform'),
-      desc: t('Track reliability, consumption, provider health and business metrics from one command layer.'),
+      label: t('阶段三'),
+      title: t('以运营平台方式运行'),
+      desc: t('从统一指挥层跟踪可靠性、消耗量、厂商健康度与业务指标。'),
     },
   ]
 
@@ -55,15 +55,15 @@ export function PlatformShowcase() {
       <div className='mx-auto max-w-6xl'>
         <AnimateInView className='mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between'>
           <div className='max-w-3xl'>
-            <p className='mb-3 text-xs font-medium tracking-[0.24em] text-white/38 uppercase'>
-              {t('Platform Architecture')}
+            <p className='mb-3 text-xs font-medium tracking-[0.24em] text-slate-400 uppercase'>
+              {t('平台架构')}
             </p>
-            <h2 className='text-3xl font-semibold tracking-tight text-white md:text-4xl'>
-              {t('A complete Big Model Platform, not just another proxy layer')}
+            <h2 className='text-3xl font-semibold tracking-tight text-slate-950 md:text-4xl'>
+              {t('完整的大模型平台，而非又一层代理')}
             </h2>
           </div>
-          <p className='max-w-2xl text-sm leading-7 text-white/45 md:text-base'>
-            {t('Structure the product as an enterprise platform with access, governance, monetization and operations instead of stopping at raw request forwarding.')}
+          <p className='max-w-2xl text-sm leading-7 text-slate-600 md:text-base'>
+            {t('将产品构建为企业级平台，涵盖接入、治理、变现与运营，而不止于原始请求转发。')}
           </p>
         </AnimateInView>
 
@@ -71,75 +71,75 @@ export function PlatformShowcase() {
           <AnimateInView className='tech-card rounded-[30px] p-8 md:p-10' animation='fade-right'>
             <div className='grid gap-4 md:grid-cols-3'>
               {stages.map((item) => (
-                <div key={item.label} className='rounded-[22px] border border-white/6 bg-white/[0.03] p-4'>
-                  <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>
+                <div key={item.label} className='rounded-[22px] border border-slate-200 bg-white p-4 shadow-sm'>
+                  <div className='text-[11px] tracking-[0.18em] text-slate-400 uppercase'>
                     {item.label}
                   </div>
-                  <div className='mt-2 text-base font-semibold text-white'>{item.title}</div>
-                  <div className='mt-2 text-sm leading-6 text-white/45'>{item.desc}</div>
+                  <div className='mt-2 text-base font-semibold text-slate-900'>{item.title}</div>
+                  <div className='mt-2 text-sm leading-6 text-slate-600'>{item.desc}</div>
                 </div>
               ))}
             </div>
 
             <div className='mt-8 grid gap-4 sm:grid-cols-2'>
               {capabilities.map((item) => (
-                <div key={item} className='flex items-start gap-3 rounded-2xl border border-white/6 bg-white/[0.02] px-4 py-4'>
-                  <CheckCircle2 className='mt-0.5 size-4 shrink-0 text-blue-400' strokeWidth={2.2} />
-                  <span className='text-sm leading-6 text-white/68'>{item}</span>
+                <div key={item} className='flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4'>
+                  <CheckCircle2 className='mt-0.5 size-4 shrink-0 text-blue-600' strokeWidth={2.2} />
+                  <span className='text-sm leading-6 text-slate-700'>{item}</span>
                 </div>
               ))}
             </div>
           </AnimateInView>
 
           <AnimateInView className='tech-card rounded-[30px] p-6 md:p-8' animation='fade-left'>
-            <div className='enterprise-terminal-shell h-full min-h-[460px] rounded-[24px] border border-white/6 bg-[#080b12] p-5'>
+            <div className='enterprise-terminal-shell h-full min-h-[460px] rounded-[24px] border border-slate-200 bg-slate-50 p-5'>
               <div className='mb-5 flex items-center justify-between gap-3'>
                 <div className='flex items-center gap-2'>
-                  <span className='size-2.5 rounded-full bg-[#ff5f57]' />
-                  <span className='size-2.5 rounded-full bg-[#febc2e]' />
-                  <span className='size-2.5 rounded-full bg-[#28c840]' />
-                  <span className='ml-2 text-xs tracking-wide text-white/35'>platform.overview</span>
+                  <span className='size-2.5 rounded-full bg-[#ef4444]' />
+                  <span className='size-2.5 rounded-full bg-[#f59e0b]' />
+                  <span className='size-2.5 rounded-full bg-[#22c55e]' />
+                  <span className='ml-2 text-xs tracking-wide text-slate-400'>平台总览</span>
                 </div>
-                <div className='rounded-full border border-blue-500/20 bg-blue-500/10 px-2.5 py-1 text-[11px] font-medium tracking-[0.18em] text-blue-300 uppercase'>
-                  {t('enterprise mode')}
+                <div className='rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] font-medium tracking-[0.14em] text-emerald-600 uppercase'>
+                  {t('企业模式')}
                 </div>
               </div>
 
               <div className='mb-4 grid gap-3 md:grid-cols-3'>
-                <div className='rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-3'>
-                  <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>{t('Access')}</div>
-                  <div className='mt-2 text-sm font-semibold text-white'>{t('OpenAI-compatible')}</div>
+                <div className='rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm'>
+                  <div className='text-[11px] tracking-[0.18em] text-slate-400 uppercase'>{t('接入')}</div>
+                  <div className='mt-2 text-sm font-semibold text-slate-900'>{t('兼容 OpenAI')}</div>
                 </div>
-                <div className='rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-3'>
-                  <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>{t('Governance')}</div>
-                  <div className='mt-2 text-sm font-semibold text-white'>{t('Quota / auth / billing')}</div>
+                <div className='rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm'>
+                  <div className='text-[11px] tracking-[0.18em] text-slate-400 uppercase'>{t('治理')}</div>
+                  <div className='mt-2 text-sm font-semibold text-slate-900'>{t('配额 / 鉴权 / 计费')}</div>
                 </div>
-                <div className='rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-3'>
-                  <div className='text-[11px] tracking-[0.18em] text-white/32 uppercase'>{t('Operations')}</div>
-                  <div className='mt-2 text-sm font-semibold text-white'>{t('Insights / health / trends')}</div>
+                <div className='rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm'>
+                  <div className='text-[11px] tracking-[0.18em] text-slate-400 uppercase'>{t('运营')}</div>
+                  <div className='mt-2 text-sm font-semibold text-slate-900'>{t('洞察 / 健康度 / 趋势')}</div>
                 </div>
               </div>
 
               <div className='grid gap-4 md:grid-cols-2'>
                 <div className='enterprise-node-card'>
-                  <div className='enterprise-node-label'>{t('Access Layer')}</div>
-                  <div className='enterprise-node-title'>{t('OpenAI-compatible API')}</div>
-                  <div className='enterprise-node-desc'>{t('One endpoint for models, embeddings, images and multimodal workloads.')}</div>
+                  <div className='enterprise-node-label'>{t('接入层')}</div>
+                  <div className='enterprise-node-title'>{t('兼容 OpenAI 的 API')}</div>
+                  <div className='enterprise-node-desc'>{t('统一承载模型、嵌入、图像与多模态工作负载。')}</div>
                 </div>
                 <div className='enterprise-node-card'>
-                  <div className='enterprise-node-label'>{t('Routing Layer')}</div>
-                  <div className='enterprise-node-title'>{t('Provider & Channel Dispatch')}</div>
-                  <div className='enterprise-node-desc'>{t('Flexible model mapping, fallback policy and quota scheduling.')}</div>
+                  <div className='enterprise-node-label'>{t('路由层')}</div>
+                  <div className='enterprise-node-title'>{t('厂商与渠道调度')}</div>
+                  <div className='enterprise-node-desc'>{t('灵活的模型映射、故障切换策略与配额调度。')}</div>
                 </div>
                 <div className='enterprise-node-card'>
-                  <div className='enterprise-node-label'>{t('Governance')}</div>
-                  <div className='enterprise-node-title'>{t('Permissions, Billing, Quotas')}</div>
-                  <div className='enterprise-node-desc'>{t('Design enterprise-ready controls for teams, tenants and customers.')}</div>
+                  <div className='enterprise-node-label'>{t('治理')}</div>
+                  <div className='enterprise-node-title'>{t('权限、计费、配额')}</div>
+                  <div className='enterprise-node-desc'>{t('为团队、租户与客户设计企业级管控体系。')}</div>
                 </div>
                 <div className='enterprise-node-card'>
-                  <div className='enterprise-node-label'>{t('Operations')}</div>
-                  <div className='enterprise-node-title'>{t('Observability & Insights')}</div>
-                  <div className='enterprise-node-desc'>{t('Track cost, latency, usage and business growth in one control center.')}</div>
+                  <div className='enterprise-node-label'>{t('运营')}</div>
+                  <div className='enterprise-node-title'>{t('可观测性与洞察')}</div>
+                  <div className='enterprise-node-desc'>{t('在一处控制中心追踪成本、延迟、用量与业务增长。')}</div>
                 </div>
               </div>
             </div>

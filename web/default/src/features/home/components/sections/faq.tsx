@@ -25,16 +25,16 @@ export function Faq() {
 
   const items = [
     {
-      q: t('What kind of product is this platform suitable for?'),
-      a: t('It is suitable for enterprise AI portals, SaaS products, internal AI platforms, API resale platforms and unified LLM operations systems.'),
+      q: t('本平台适合什么产品形态？'),
+      a: t('适用于企业 AI 门户、SaaS 产品、内部 AI 平台、API 转售平台及统一大模型运营系统。'),
     },
     {
-      q: t('Can I manage multiple providers with different billing strategies?'),
-      a: t('Yes. The platform supports multi-provider routing, different channels, model-level pricing and quota management for enterprise scenarios.'),
+      q: t('是否能同时管理多个厂商并采用不同计费策略？'),
+      a: t('可以。平台支持多厂商路由、多渠道、模型级定价与配额管理，适合企业级场景。'),
     },
     {
-      q: t('Can it be deployed privately?'),
-      a: t('Yes. You can deploy it in private cloud, dedicated servers or internal environments to create your own enterprise big model platform.'),
+      q: t('支持私有化部署吗？'),
+      a: t('支持。可部署在私有云、专有服务器或内网环境，打造自有企业级大模型平台。'),
     },
   ]
 
@@ -42,11 +42,11 @@ export function Faq() {
     <section className='relative z-10 px-4 py-24 md:py-28'>
       <div className='mx-auto max-w-4xl'>
         <AnimateInView className='mb-10 text-center'>
-          <p className='tech-gradient-text mb-3 text-xs font-medium tracking-[0.24em] uppercase'>
-            {t('FAQ')}
+          <p className='mb-3 text-xs font-medium tracking-[0.24em] text-slate-400 uppercase'>
+            {t('常见问题')}
           </p>
-          <h2 className='text-3xl font-semibold tracking-tight text-white md:text-4xl'>
-            {t('Frequently asked questions for enterprise deployment')}
+          <h2 className='text-3xl font-semibold tracking-tight text-slate-950 md:text-4xl'>
+            {t('企业部署常见问题')}
           </h2>
         </AnimateInView>
 
@@ -60,10 +60,10 @@ export function Faq() {
             >
               <div className='flex items-start justify-between gap-4'>
                 <div>
-                  <h3 className='text-base font-medium text-white'>{item.q}</h3>
-                  <p className='mt-3 text-sm leading-7 text-white/45'>{item.a}</p>
+                  <h3 className='text-base font-medium text-slate-900'>{item.q}</h3>
+                  <p className='mt-3 text-sm leading-7 text-slate-600'>{item.a}</p>
                 </div>
-                <ChevronDown className='mt-1 size-4 shrink-0 text-white/28' />
+                <ChevronDown className='mt-1 size-4 shrink-0 text-slate-300' />
               </div>
             </AnimateInView>
           ))}
