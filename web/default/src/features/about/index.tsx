@@ -45,76 +45,74 @@ function EmptyAboutState() {
     <div className='flex min-h-[60vh] items-center justify-center p-8'>
       <div className='max-w-2xl space-y-6 text-center'>
         <div className='flex justify-center'>
-          <Construction className='text-muted-foreground h-24 w-24' />
+          <Construction className='h-24 w-24 text-slate-300' />
         </div>
         <div className='space-y-2'>
-          <h2 className='gradient-text text-2xl font-bold'>{t('No About Content Set')}</h2>
-          <p className='text-muted-foreground'>
-            {t(
-              'The administrator has not configured any about content yet. You can set it in the settings page, supporting HTML or URL.'
-            )}
+          <h2 className='text-2xl font-bold text-slate-800'>{t('暂无关于内容')}</h2>
+          <p className='text-slate-500'>
+            {t('管理员尚未配置关于页面的内容，可在系统设置中进行配置，支持 HTML 或 URL 两种格式。')}
           </p>
         </div>
-        <div className='space-y-4 text-sm'>
+        <div className='space-y-4 text-sm text-slate-500'>
           <p>
-            {t('New API Project Repository:')}{' '}
+            {t('项目仓库')}:{' '}
             <a
               href='https://github.com/QuantumNous/new-api'
               target='_blank'
               rel='noopener noreferrer'
-              className='text-primary hover:underline'
+              className='text-sky-600 hover:underline'
             >
               {t('https://github.com/QuantumNous/new-api')}
             </a>
           </p>
-          <p className='text-muted-foreground'>
+          <p>
             <a
               href='https://github.com/QuantumNous/new-api'
               target='_blank'
               rel='noopener noreferrer'
-              className='text-primary hover:underline'
+              className='text-sky-600 hover:underline'
             >
-              {t('NewAPI')}
+              New API
             </a>{' '}
             © {currentYear}{' '}
             <a
               href='https://github.com/QuantumNous'
               target='_blank'
               rel='noopener noreferrer'
-              className='text-primary hover:underline'
+              className='text-sky-600 hover:underline'
             >
-              {t('QuantumNous')}
+              QuantumNous
             </a>{' '}
-            {t('| Based on')}{' '}
+            {t('| 基于')}{' '}
             <a
               href='https://github.com/songquanpeng/one-api'
               target='_blank'
               rel='noopener noreferrer'
-              className='text-primary hover:underline'
+              className='text-sky-600 hover:underline'
             >
-              {t('One API')}
+              One API
             </a>{' '}
             © 2023{' '}
             <a
               href='https://github.com/songquanpeng'
               target='_blank'
               rel='noopener noreferrer'
-              className='text-primary hover:underline'
+              className='text-sky-600 hover:underline'
             >
-              {t('JustSong')}
+              JustSong
             </a>
           </p>
-          <p className='text-muted-foreground'>
-            {t('This project must be used in compliance with the')}{' '}
+          <p>
+            {t('本项目需遵守')}{' '}
             <a
               href='https://github.com/QuantumNous/new-api/blob/main/LICENSE'
               target='_blank'
               rel='noopener noreferrer'
-              className='text-primary hover:underline'
+              className='text-sky-600 hover:underline'
             >
-              {t('AGPL v3.0 License')}
-            </a>
-            .
+              AGPL v3.0
+            </a>{' '}
+            {t('开源许可协议。')}
           </p>
         </div>
       </div>
@@ -172,12 +170,12 @@ export function About() {
       <div className='mx-auto max-w-6xl px-4 py-8'>
         {isHtml ? (
           <div
-            className='glass-panel card-float prose prose-neutral dark:prose-invert max-w-none rounded-2xl p-6'
+            className='prose prose-neutral max-w-none rounded-2xl border border-slate-200 bg-white p-6 shadow-sm'
             dangerouslySetInnerHTML={{ __html: rawContent }}
           />
         ) : (
-          <div className='glass-panel card-float rounded-2xl p-6'>
-            <Markdown className='prose-neutral dark:prose-invert max-w-none'>
+          <div className='rounded-2xl border border-slate-200 bg-white p-6 shadow-sm'>
+            <Markdown className='prose-neutral max-w-none'>
               {rawContent}
             </Markdown>
           </div>
